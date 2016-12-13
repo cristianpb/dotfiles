@@ -1,0 +1,168 @@
+# Sidebar Patch --------------------------------------
+#set sidebar_delim   = '  │'
+set sidebar_visible = yes
+set sidebar_width   = 24
+color sidebar_new color221 color233
+
+# Sidebar Navigation ---------------------------------
+bind index,pager <down>   sidebar-next
+bind index,pager <up>     sidebar-prev
+bind index,pager <right>  sidebar-open
+# b toggles sidebar visibility
+bind index,pager b sidebar-toggle-visible
+
+
+# Status Bar -----------------------------------------
+set status_chars  = " *%A"
+set status_format = "───[ Folder: %f ]───[%r%m messages%?n? (%n new)?%?d? (%d to delete)?%?t? (%t tagged)? ]───%>─%?p?( %p postponed )?───"
+
+# Header Options -------------------------------------
+ignore *                                # ignore all headers
+unignore from: to: cc: date: subject:   # show only these
+unhdr_order *                           # some distros order things by default
+hdr_order from: to: cc: date: subject:  # and in this order
+
+# Account Settings -----------------------------------
+
+#set wait_key = no        # shut up, mutt
+#set timeout = 3          # idle time before scanning
+#set mail_check = 0       # minimum time between scans
+#unset move               # gmail does that
+set beep_new             # bell on new mails
+#set pipe_decode          # strip headers and eval mimes when piping
+#set thorough_search      # strip headers and eval mimes before searching
+
+
+
+## Speed up folder switch
+set sleep_time = 0
+set mbox_type=Maildir
+#set imap_check_subscribed
+
+set folder = "~/Mail"
+set spoolfile = "+Gmail/INBOX"
+source ~/.mutt/mailboxes
+
+# # Default account
+## Here we use the $folder variable that has just been set in the sourced file.
+## We must set it right now otherwise the 'folder' variable will change in the next sourced file.
+folder-hook 'Chimie/*' 'source ~/.mutt/account_chimie'
+#
+### ACCOUNT2
+folder-hook 'Gmail/*' 'source ~/.mutt/account_gmail'
+
+macro index <F4> '<sync-mailbox><enter-command>source ~/.mutt/account_chimie<enter><change-folder>!<enter>'
+macro index <F3> '<sync-mailbox><enter-command>source ~/.mutt/account_gmail<enter><change-folder>!<enter>'
+
+#account-hook Gmail "set imap_user=felipebrokate@gmail.com imap_pass=my_PWgmail"
+#account-hook Chimie "set imap_user=cristian.perez-brokate@chimie-paristech.fr imap_pass=my_PWchimie"
+
+# efault account
+source "~/.mutt/account_gmail"
+#source "~/.mutt/account_chimie"
+
+set mailcap_path	= ~/.mutt/mailcap
+alternative_order text/plain text/html
+auto_view text/html
+auto_view text/calendar application/ics
+set markers=no # Delete the + sign on new lines
+
+## Sorting index by thread
+#set sort=threads #sort by threads
+#set sort_aux = last-date-received
+
+# Fetch mail shortcut
+bind index G imap-fetch-mail
+
+set print_command="~/Documents/Script/mutt_print.sh"
+
+
+#Notmuch
+
+macro index <F8> \
+     "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>" \
+     "notmuch: search mail"
+macro index <F9> \
+     "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt thread<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter><enter-command>set wait_key<enter>" \
+     "notmuch: reconstruct thread"
+macro index <F6> \
+     "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" \
+     "notmuch: remove message from inbox"
+
+### Keep IMAP connection alive by polling intermittently (time in seconds)
+#set imap_keepalive=60
+### Allow Mutt to open new imap connection automatically.
+#set imap_passive=no
+#set imap_check_subscribed=yes
+#set imap_idle=yes
+### How often to check for new mail (time in seconds).
+#set mail_check=60
+#
+#
+## unset ssl_ca_certificates_file
+# unset ssl_usesystemcerts
+#
+## SSL hardening
+# set ssl_force_tls=yes
+# set ssl_starttls=yes
+# set ssl_use_sslv2=no
+# set ssl_use_sslv3=no
+# set ssl_use_tlsv1=no
+# set ssl_use_tlsv1_1=no
+# set ssl_use_tlsv1_2=yes
+# set ssl_verify_dates=yes
+# set ssl_verify_host=yes
+
+# security
+
+source /usr/share/doc/mutt/samples/gpg.rc
+#set pgp_use_gpg_agent = yes
+set pgp_timeout = 3600       # how long to cache the pass-phrase
+set crypt_autosign = yes     # automatically sign all outgoing mail
+set crypt_replyencrypt = yes # automatically encrypt replies to  encrypted messages
+set pgp_sign_as ="B212E65B"   # my Key ID
+
+
+source ~/.mutt/mutt-colors-solarized-dark-256.muttrc
+
+alias cristianfelipe.perezbrokate PEREZ BROKATE Cristian Felipe <cristianfelipe.perezbrokate@cea.fr>
+alias Elisabeth Dias <elisabeth@adomik.com>
+alias amin <amin@adomik.com>
+alias Mary Zn <zenkri.mariem.14.10@gmail.com>
+alias Philippe Clauss <philippe.clauss@inria.fr>
+alias Tk Asme   <tkasme@yahoo.es>
+alias JacquesDeLamare Jacques de Lamare <jacdelam@yahoo.fr>
+alias JacquesDL Jacques DE LAMARE <Jacques.DE-LAMARE@cea.fr>
+alias Lucia Lucia Cardenas <lucia.cardenas.mel@gmail.com>
+alias Javier Acevedo <jr.acevedo@protonmail.ch>
+alias Javier Acevedo <jracevedob@gmail.com>
+alias Recrutement Temelio <recrutement@temelio.com>
+alias Hourida Manessier <hourida.manessier@alyotech.fr>
+alias Arturo Brokate <abrokate@yahoo.com>
+alias Felipe Brokate <felipebrokate@gmail.com>
+alias Author Queries TandF <authorqueries@tandf.co.uk>
+alias Crispiniano Perez <pinianoperez@yahoo.es>
+alias Maria Assuncao <m.campos-assuncao@chimie-paristech.fr>
+alias Stephanie da Costa <stephanie.da-costa@sogeti.com>
+alias Fabrice LEGENDRE <Fabrice.LEGENDRE@cea.fr>
+alias Marion LE FLEM <marion.leflem@cea.fr>
+alias Roger Newman <roger.newman@utoronto.ca>
+alias Secretariat ED388 <secretariat-ed388@upmc.fr>
+alias Koonavadee Soobrayen <koonavadee.soobrayen@upmc.fr>
+alias Carlos Andres Salazar Guzman <carlos.andsala@gmail.com>
+alias Françoise ROUX <Francoise.ROUX@cea.fr>
+alias AnnieChausse Annie CHAUSSE <annie.chausse@univ-evry.fr>
+alias DamienFeron Damien FERON <Damien.FERON@cea.fr>
+alias Dung Dung di Caprio <dung.di-caprio@chimie-paristech.fr>
+alias jpellegrino Joseph PELLEGRINO <jpellegrino@kernix.com>
+alias lthienot Laurent Thienot <lthienot@clementine.jobs>
+alias MGalimberti Massimo GALIMBERTI <massimo.galimberti@optopartner.com> # PhDTalent Optopartner.Com DevInformatique
+alias YamamotoMasahiro Yamamoto <MASAHIRO75@jaea.go.jp> # Eurocorr Japonais CA Deputy Director General
+alias TakahoriIGARASHI Takahiro IGARASHI <igarashi.takahiro@jaea.go.jp> # Eurocorr Japonais CA Dr Sci
+alias FumiyoshiUeno Fumoyoshi UENO <ueno.fumiyoshi@jaea.go.jp> # Eurocorr Japonais CA Group LEader Senior principal researcher
+alias BOJANZAJEC Bojan ZAJEC <bojan.zajec@zag.si> # Eurocorr Slovenia
+alias KazuhiroSuga Kazuhiro SUGA <ksuga@rs.tus.ac.jp> # Eurocorr Modelisation Corrosion
+alias wesleytaupin Wesley Taupin <wesleytaupin@harnham.com>
+alias Cecille LACHAUD Cecile <Cecile.LACHAUD@cea.fr>
+alias bprost Baptiste Prost <bprost@extia.fr>
+alias cmuzet Cynthia Muzet <cmuzet@extia.fr>
