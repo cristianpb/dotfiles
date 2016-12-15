@@ -123,46 +123,8 @@ set crypt_replyencrypt = yes # automatically encrypt replies to  encrypted messa
 set pgp_sign_as ="B212E65B"   # my Key ID
 
 
+# Paths
 source ~/.mutt/mutt-colors-solarized-dark-256.muttrc
+source ~/.mutt/alias
+set alias_file = ~/.mutt/alias # where to store aliases
 
-alias cristianfelipe.perezbrokate PEREZ BROKATE Cristian Felipe <cristianfelipe.perezbrokate@cea.fr>
-alias Elisabeth Dias <elisabeth@adomik.com>
-alias amin <amin@adomik.com>
-alias Mary Zn <zenkri.mariem.14.10@gmail.com>
-alias Philippe Clauss <philippe.clauss@inria.fr>
-alias Tk Asme   <tkasme@yahoo.es>
-alias JacquesDeLamare Jacques de Lamare <jacdelam@yahoo.fr>
-alias JacquesDL Jacques DE LAMARE <Jacques.DE-LAMARE@cea.fr>
-alias Lucia Lucia Cardenas <lucia.cardenas.mel@gmail.com>
-alias Javier Acevedo <jr.acevedo@protonmail.ch>
-alias Javier Acevedo <jracevedob@gmail.com>
-alias Recrutement Temelio <recrutement@temelio.com>
-alias Hourida Manessier <hourida.manessier@alyotech.fr>
-alias Arturo Brokate <abrokate@yahoo.com>
-alias Felipe Brokate <felipebrokate@gmail.com>
-alias Author Queries TandF <authorqueries@tandf.co.uk>
-alias Crispiniano Perez <pinianoperez@yahoo.es>
-alias Maria Assuncao <m.campos-assuncao@chimie-paristech.fr>
-alias Stephanie da Costa <stephanie.da-costa@sogeti.com>
-alias Fabrice LEGENDRE <Fabrice.LEGENDRE@cea.fr>
-alias Marion LE FLEM <marion.leflem@cea.fr>
-alias Roger Newman <roger.newman@utoronto.ca>
-alias Secretariat ED388 <secretariat-ed388@upmc.fr>
-alias Koonavadee Soobrayen <koonavadee.soobrayen@upmc.fr>
-alias Carlos Andres Salazar Guzman <carlos.andsala@gmail.com>
-alias Françoise ROUX <Francoise.ROUX@cea.fr>
-alias AnnieChausse Annie CHAUSSE <annie.chausse@univ-evry.fr>
-alias DamienFeron Damien FERON <Damien.FERON@cea.fr>
-alias Dung Dung di Caprio <dung.di-caprio@chimie-paristech.fr>
-alias jpellegrino Joseph PELLEGRINO <jpellegrino@kernix.com>
-alias lthienot Laurent Thienot <lthienot@clementine.jobs>
-alias MGalimberti Massimo GALIMBERTI <massimo.galimberti@optopartner.com> # PhDTalent Optopartner.Com DevInformatique
-alias YamamotoMasahiro Yamamoto <MASAHIRO75@jaea.go.jp> # Eurocorr Japonais CA Deputy Director General
-alias TakahoriIGARASHI Takahiro IGARASHI <igarashi.takahiro@jaea.go.jp> # Eurocorr Japonais CA Dr Sci
-alias FumiyoshiUeno Fumoyoshi UENO <ueno.fumiyoshi@jaea.go.jp> # Eurocorr Japonais CA Group LEader Senior principal researcher
-alias BOJANZAJEC Bojan ZAJEC <bojan.zajec@zag.si> # Eurocorr Slovenia
-alias KazuhiroSuga Kazuhiro SUGA <ksuga@rs.tus.ac.jp> # Eurocorr Modelisation Corrosion
-alias wesleytaupin Wesley Taupin <wesleytaupin@harnham.com>
-alias Cecille LACHAUD Cecile <Cecile.LACHAUD@cea.fr>
-alias bprost Baptiste Prost <bprost@extia.fr>
-alias cmuzet Cynthia Muzet <cmuzet@extia.fr>
