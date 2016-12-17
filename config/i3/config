@@ -26,6 +26,9 @@ font pango:Inconsolata 8
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 
+# Disable focus mouse, touchpad is annoying
+focus_follows_mouse no
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -35,8 +38,17 @@ bindsym $mod+Return exec i3-sensible-terminal
 # kill focused window
 bindsym $mod+Shift+A kill
 
+set $bg-color 	         #2f343f
+set $inactive-bg-color   #2f343f
+set $text-color          #f3f4f5
+set $inactive-text-color #676E7D
+set $urgent-bg-color     #E53935
+
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -tokenize'
+#bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 100 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -92,9 +104,21 @@ bindsym $mod+q focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# Custom workspaces names
+set $workspace1 "1 "
+set $workspace2 "2 "
+set $workspace3 "3 "
+set $workspace4 "4 "
+set $workspace5 "5 "
+set $workspace6 "6 "
+set $workspace7 "7 "
+set $workspace8 "8 "
+set $workspace9 "9 "
+set $workspace10 "10 "
+
 # switch to workspace
-bindsym $mod+ampersand workspace 1
-bindsym $mod+eacute workspace 2
+bindsym $mod+ampersand workspace $workspace1
+bindsym $mod+eacute workspace $workspace2
 bindsym $mod+quotedbl workspace 3
 bindsym $mod+apostrophe workspace 4
 bindsym $mod+parenleft workspace 5
@@ -102,11 +126,11 @@ bindsym $mod+minus workspace 6
 bindsym $mod+egrave workspace 7
 bindsym $mod+underscore workspace 8
 bindsym $mod+ccedilla workspace 9
-bindsym $mod+agrave workspace 10
+bindsym $mod+agrave workspace $workspace10
 
 # move focused container to workspace
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+eacute move container to workspace 2
+bindsym $mod+Shift+1 move container to workspace $workspace1
+bindsym $mod+Shift+eacute move container to workspace $workspace2
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
@@ -114,7 +138,11 @@ bindsym $mod+Shift+6 move container to workspace 6
 bindsym $mod+Shift+egrave move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+ccedilla move container to workspace 9
-bindsym $mod+Shift+agrave move container to workspace 10
+bindsym $mod+Shift+agrave move container to workspace $workspace10
+
+# Assign apps to workspaces
+assign [class="Rhythmbox"] $workspace10
+assign [class="Firefox"] $workspace2
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -123,7 +151,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
+# rejize window (you can also use the mouse for that)
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
 
@@ -131,10 +159,10 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym m resize grow width 10 px or 10 ppt
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
 
         # same bindings, but for the arrow keys
         bindsym Left resize shrink width 10 px or 10 ppt
@@ -156,11 +184,23 @@ bindsym $mod+r mode "resize"
 #}
 bar 
 {
+	position top
 	font pango:FontAwesome, Icons 8
+	colors {
+		background $bg-color
+	    	separator #757575
+		#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	}
 	status_command i3blocks -c ~/.config/i3/i3blocks.conf
 }
 
 ### Custom Keyboard Shortcuts ###
+
+# Disable title and border
+new_window 1pixel
 
 # Lock screen. --dpms option will turn off all displays right after locking.
 bindsym Mod4+Control+l exec i3-msg workspace "10: dev" && i3lock --tiling --dpms --color 000000
@@ -181,7 +221,20 @@ bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play
-bindsym XF86AudioPause exec playerctl pause
+#bindsym XF86AudioPause exec playerctl pause
+bindsym $mod+F10 exec playerctl pause
 #bindsym XF86AudioNext exec playerctl next
 bindsym $mod+F12 exec playerctl next
-bindsym XF86AudioPrev exec playerctl previous
+#bindsym XF86AudioPrev exec playerctl previous
+bindsym $mod+F11 exec playerctl previous
+
+# Keyboard Brightness
+bindsym XF86KbdBrightnessDown exec "~/.config/i3/leds_down.sh"
+bindsym XF86KbdBrightnessUp exec "~/.config/i3/leds_up.sh"
+
+# Display
+bindsym XF86Display exec "arandr"
+
+# Wallpaper!
+exec_always feh --bg-scale ~/Images/outer-space-wallpaper-4347-4401-hd-wallpapers.jpg
+
