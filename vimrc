@@ -192,6 +192,4 @@ let g:tmuxline_preset = {
       \'b'    : '#(~/Documents/Script/new_mail.sh)',
       \'win'  : ['#I #W'],
       \'cwin' : '#I #W',
-      \'x'    : '%a',
-      \'y'    : '%R',
-      \'z'    : '#H'}
+      \'z'    : '%R'}
