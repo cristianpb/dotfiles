@@ -143,3 +143,6 @@ alias toshiba2pcR='rsync -avzh --delete --progress        /run/media/arch/Toshib
 alias toshiba2pcScript='rsync -avzh --delete --progress   /run/media/arch/Toshiba2/Clases/Script/ /home/arch/Documents/Script/'
 alias toshiba2pcTotal='rsync -avzh --delete --progress    /run/media/arch/Toshiba2/Clases/        /home/arch/Documents'
 alias ddisk='udisksctl unmount -b /dev/sdc1;udisksctl unmount -b /dev/dm-0;udisksctl lock -b /dev/sdc2;udisksctl power-off -b /dev/sdc;'
+
+# Network Manager
+alias nm='nmtui-connect'

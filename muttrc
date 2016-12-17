@@ -114,13 +114,12 @@ macro index <F6> \
 # set ssl_verify_host=yes
 
 # security
-
 source /usr/share/doc/mutt/samples/gpg.rc
 #set pgp_use_gpg_agent = yes
-set pgp_timeout = 3600       # how long to cache the pass-phrase
-set crypt_autosign = yes     # automatically sign all outgoing mail
+set pgp_timeout        = 3600       # how long to cache the pass-phrase
+set crypt_autosign     = yes     # automatically sign all outgoing mail
 set crypt_replyencrypt = yes # automatically encrypt replies to  encrypted messages
-set pgp_sign_as ="B212E65B"   # my Key ID
+set pgp_sign_as        = "B212E65B"   # my Key ID
 
 
 # Paths

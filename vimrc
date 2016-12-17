@@ -184,3 +184,14 @@ Plugin 'Tabular'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+let g:airline#extensions#tmuxline#enabled = 1
+let g:airline_theme='dark'
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'b'    : '#(~/Documents/Script/new_mail.sh)',
+      \'win'  : ['#I #W'],
+      \'cwin' : '#I #W',
+      \'x'    : '%a',
+      \'y'    : '%R',
+      \'z'    : '#H'}
