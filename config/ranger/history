@@ -1,0 +1,50 @@
+mkdir boncoin
+rename Daguerre_Mail_Envoye.txt
+rename Appartement_Raspail_Mail_Envoye.txt
+rename Studio_Montsouris_Mail_Envoye.txt
+rename Studio_Vavin_Mail_Envoye.txt
+open_with loffice
+mkdir Docs
+rename PassportC.pdf
+rename 1PassportC.pdf
+rename 2Assurance_Logement_2017.pdf
+!
+rename 3PromesseEmbauche
+search Ads
+rename 3ContratAdsUp2015.pdf
+rename 4BDP_L.pdf
+!touch 4BDP_C
+shell touch BTP_C
+rename 4BTP_C
+shell touch 1CDS_L
+rename 1PassaporteL.pdf
+rename Studio_Alesia2_Rappeller.txt
+search ord
+shell 5AvisImposition
+shell touch 5AvisImposition
+rename AvisImpot2015.pdf
+
+bulkrename 
+rename 5AvisImposition_L
+search galve
+rename Fire.png
+search py
+rename bulletin_de_paie_CEA2.pdf
+rename bulletin_de_paie_CEA.pdf
+rename 4BTP_C.pdf
+search sh
+rename convertimages.sh
+rename TitreSejour_Lucia_12.pdf
+rename TitreSejour_Lucia_20170712.pdf
+search Té
+search la
+open_with 1
+open_with gedit
+rename AttestationDroits2016_11_20.pdf
+search T
+search cong
+search confi
+search i3
+open_with 4
+search mail
+delete
