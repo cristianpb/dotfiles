@@ -98,7 +98,7 @@ let g:tex_flavor = "pdflatex"
 let g:Tex_CompileRule_pdf = "pdflatex --src-specials --shell-escape --synctex=1 -interaction=nonstopmode $*"
 "let g:Tex_CompileRule_pdf = 'latexmk -pdf'
 let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_ViewRule_pdf = 'evince'
+let g:Tex_ViewRule_pdf = 'zathura'
 
 "indent
 filetype indent on
@@ -164,10 +164,12 @@ augroup vimrc_autocmds
     autocmd FileType python set nowrap
     augroup END
 
+" Jedi
+let g:jedi#completions_command = "<C-N>"
 let g:jedi#usages_command = "<leader>z"
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+"let g:jedi#popup_on_dot = 0
+"let g:jedi#popup_select_first = 0
+"map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Vundle 
 
@@ -179,9 +181,7 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'Tabular'
-
+Plugin 'vimux'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -193,3 +193,22 @@ let g:tmuxline_preset = {
       \'win'  : ['#I #W'],
       \'cwin' : '#I #W',
       \'z'    : '%R'}
+
+" Vimux Vslime
+
+let g:VimuxUseNearest = 1
+let g:VimuxHeight = "30"
+map <Leader>vp :VimuxPromptCommand<CR>
+" Run the current file with rspec
+map <Leader>rb :call VimuxRunCommand("")<CR>
+
+function! VimuxSlime()
+ call VimuxSendText(@v)
+ call VimuxSendKeys("Enter")
+endfunction
+
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+
+" Select current paragraph and send it to tmux
+nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
