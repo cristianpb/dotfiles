@@ -68,7 +68,8 @@ This script depends on:
   - rofi or zenity."
 
 # Check whether the user-defined launcher is valid
-launcher_list=(rofi zenity)
+launcher_list=(zenity)
+#launcher_list=(rofi zenity)
 function check_launcher() {
   if [[ ! "${launcher_list[@]}" =~ (^|[[:space:]])"$1"($|[[:space:]]) ]]; then
     echo "Supported launchers: ${launcher_list[*]}"
@@ -88,7 +89,7 @@ while getopts "hcp:" option; do
     h) echo "${usage}"
        exit 0
        ;;
-    c) enable_confirmation=true
+    c) enable_confirmation=false
        ;;
     p) preferred_launcher="${OPTARG}"
        check_launcher "${preferred_launcher}"
@@ -115,12 +116,12 @@ typeset -A menu
 menu=(
   [Shutdown]="systemctl poweroff"
   [Reboot]="systemctl reboot"
-  [Hibernate]="systemctl hibernate"
+  #[Hibernate]="systemctl hibernate"
   [Suspend]="systemctl suspend"
-  [Halt]="systemctl halt"
+  #[Halt]="systemctl halt"
   [Lock]="${LOCKSCRIPT:-i3lock --color=${BG_COLOR#"#"}}"
   [Logout]="i3-msg exit"
-  [Cancel]=""
+  #[Cancel]=""
 )
 menu_nrows=${#menu[@]}
 
