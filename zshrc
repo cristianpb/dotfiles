@@ -51,7 +51,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting)
 
 
 # User configuration
@@ -89,6 +89,7 @@ if [[ ! -d $ZSH_CACHE_DIR ]]; then
 fi
 
 source $ZSH/oh-my-zsh.sh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Editor
 export EDITOR=vim
@@ -125,6 +126,9 @@ alias enscp='  ssh  -X c.perez-brokate@193.51.253.15 -p 993'
 #alias enscp='  ssh  c.perez-broka@193.51.253.222 -Y'
 alias leri8='  ssh  -p 993 c.perez-brokate@193.51.253.15 -L 7777:10.0.1.122:22'
 
+function putssh() { scp -P 7777 -pr "${1%%/}" cristian@127.0.0.1:~/ ; }
+function getssh() { scp -P 7777 -pr cristian@127.0.0.1:/home/cristian/"${1%%/}" ./ ; }
+
 # Rsync backup
 alias pc2toshiba='rsync -avzh --delete --progress         /home/arch/Documents/UPMC               /run/media/arch/Toshiba'
 alias pc2toshibaCV='rsync -avzh --delete --progress       /home/arch/Documents/CVS/               /run/media/arch/Toshiba2/Clases/CVS/'
@@ -143,6 +147,7 @@ alias toshiba2pcR='rsync -avzh --delete --progress        /run/media/arch/Toshib
 alias toshiba2pcScript='rsync -avzh --delete --progress   /run/media/arch/Toshiba2/Clases/Script/ /home/arch/Documents/Script/'
 alias toshiba2pcTotal='rsync -avzh --delete --progress    /run/media/arch/Toshiba2/Clases/        /home/arch/Documents'
 alias ddisk='udisksctl unmount -b /dev/sdc1;udisksctl unmount -b /dev/dm-0;udisksctl lock -b /dev/sdc2;udisksctl power-off -b /dev/sdc;'
+alias ddiskup='udisksctl mount -b /dev/sdc1;udisksctl unlock -b /dev/sdc2;udisksctl mount -b /dev/dm-0;'
 
 alias nm='nmtui-connect' # Network Manager
 alias ledu='sudo ~/.config/i3/leds_up.sh' # keyboardlight

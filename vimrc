@@ -179,9 +179,9 @@ filetype off                  " required
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
+"let Vundle "manage Vundle, required
 Plugin 'vimux'
+Plugin 'itchyny/calendar.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 

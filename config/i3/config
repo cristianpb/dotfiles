@@ -46,7 +46,7 @@ set $urgent-bg-color     #E53935
 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
-bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -tokenize'
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -tokenize -color-enabled'
 #bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 100 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
@@ -208,8 +208,8 @@ new_window 1pixel
 bindsym Mod4+Control+l exec i3-msg workspace $workspace10 && i3lock -i ~/Images/Wallpaper/wallpaper.png --tiling --dpms --color 000000
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec amixer sset Master 2%+ && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer sset Master 2%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioLowerVolume exec amixer sset Master 5%- && pkill -RTMIN+1 i3blocks
 #bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 #bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
@@ -238,10 +238,12 @@ bindsym XF86KbdBrightnessUp exec "~/.config/i3/leds_up.sh"
 bindsym XF86Display exec "arandr"
 
 # Wallpaper!
-exec_always feh --randomize --bg-scale ~/Images/Wallpaper/*
+#exec_always feh --randomize --bg-scale ~/Images/Wallpaper/*
+exec_always feh --bg-scale ~/Images/Wallpaper/wallpaper.jpg
 
 # Startup programs
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id unclutter
-exec --no-startup-id ~/Documents/Script/BingDownloadImage.sh
+exec --no-startup-id udiskie 
+exec "sh -c 'sleep 300; exec ~/Documents/Script/BingDownloadImage.sh'"

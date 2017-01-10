@@ -11,6 +11,8 @@ bind index,pager <right>  sidebar-open
 # b toggles sidebar visibility
 bind index,pager b sidebar-toggle-visible
 
+set index_format="%4C %Z %?X?A&-? %{%d/%b/%y} %-12.12L %?M?(#%03M)&(%4c)? %?y?(%.20Y) ?%s"
+
 
 # Status Bar -----------------------------------------
 set status_chars  = " *%A"
@@ -51,8 +53,8 @@ folder-hook 'Chimie/*' 'source ~/.mutt/account_chimie'
 ### ACCOUNT2
 folder-hook 'Gmail/*' 'source ~/.mutt/account_gmail'
 
-macro index <F4> '<sync-mailbox><enter-command>source ~/.mutt/account_chimie<enter><change-folder>!<enter>'
-macro index <F3> '<sync-mailbox><enter-command>source ~/.mutt/account_gmail<enter><change-folder>!<enter>'
+macro index <F4> '<sync-mailbox><enter-command>source +Gmail/* <enter><change-folder>!<enter>'
+macro index <F3> '<sync-mailbox><enter-command>source +Chimie/* <enter><change-folder>!<enter>'
 
 #account-hook Gmail "set imap_user=felipebrokate@gmail.com imap_pass=my_PWgmail"
 #account-hook Chimie "set imap_user=cristian.perez-brokate@chimie-paristech.fr imap_pass=my_PWchimie"
