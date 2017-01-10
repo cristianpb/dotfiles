@@ -1,50 +1,50 @@
-search galve
-rename Fire.png
-search py
-rename bulletin_de_paie_CEA2.pdf
-rename bulletin_de_paie_CEA.pdf
-rename 4BTP_C.pdf
-search sh
-rename convertimages.sh
-rename TitreSejour_Lucia_12.pdf
-rename TitreSejour_Lucia_20170712.pdf
-search Té
-search la
-open_with gedit
-rename AttestationDroits2016_11_20.pdf
-search cong
-search confi
-search i3
-open_with 4
-search mail
-shell touch 2QuittanceLoyer
-mkdir Agences
-mkdir Orpi
-open_with loffice
-open_with 
-search offli
-rename Cristian Perez.asc
+rename 2QuittanceLoyer.pdf
+rename convertimagesHL.sh
+search Ima
+search t
+bulkrename 
 search fe
-open_with 2
-mkdir Wallpaper
-search vim
-mkdir geojson
-open_with 
-mkdir kaggle
-rename app.py
-search v
-search png
-rename Madeira.png
-search pittin
-search tex
-search he
-search He
-search pit
-search jj
-
+search W
 search bin
-search wa
-delete
+open_with vim
+search D
+rename Exe1
+search Wa
+search pole
+search Balvin
+search balvin
+search malu
 open_with 1
-open_with 0
+rename xlrd.py
+rename xlrd_exercise.py
+search tex
+search pdf
+rename Packt.Mastering.Aug.2015.ISBN.1784390151.pdf
+search I
+search wal
+open_with 4
 search T
+
+mkdir DataWrangling
+open_with ipython
+rename ipython_log.py
+rename ipython_logbbb.pyf
+search run
+search med
+search Pi
+open_with 
+rename myfile.tgz
+rename ArticleECST30122016.tgz
+mkdir Kernix
+rename 3PromesseEmabuche.pdf
+delete
+rename compresspdf.pdf
+rename compresspdf.sh
+shell 
+shell compresspdf.sh
+search file
+search png
+search totla
+search total
+open_with 2
+search 
