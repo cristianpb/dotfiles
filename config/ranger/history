@@ -1,4 +1,3 @@
-rename 2QuittanceLoyer.pdf
 rename convertimagesHL.sh
 search Ima
 search t
@@ -37,7 +36,6 @@ rename myfile.tgz
 rename ArticleECST30122016.tgz
 mkdir Kernix
 rename 3PromesseEmabuche.pdf
-delete
 rename compresspdf.pdf
 rename compresspdf.sh
 shell 
@@ -48,3 +46,5 @@ search totla
 search total
 open_with 2
 search 
+delete
+rename Mail
