@@ -56,7 +56,7 @@ remoteuser = felipebrokate@gmail.com
 remotepasseval = get_pass("Gmail")
 folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
 nametrans = lambda folder: {'[Gmail]/Drafts':    'Drafts',
-                            '[Gmail]/Sent': 'Sent',
+                            '[Gmail]/Sent Mail': 'Sent',
                             '[Gmail]/Important':   'Important',
                             '[Gmail]/Spam':   'Spam',
                             '[Gmail]/Starred':   'Starred',
