@@ -8,11 +8,8 @@ color sidebar_new color221 color233
 bind index,pager <down>   sidebar-next
 bind index,pager <up>     sidebar-prev
 bind index,pager <right>  sidebar-open
-# b toggles sidebar visibility
-bind index,pager b sidebar-toggle-visible
-
+bind index,pager b sidebar-toggle-visible # b toggles sidebar visibility
 set index_format="%4C %Z %?X?A&-? %{%d/%b/%y} %-12.12L %?M?(#%03M)&(%4c)? %?y?(%.20Y) ?%s"
-
 
 # Status Bar -----------------------------------------
 set status_chars  = " *%A"
@@ -30,11 +27,9 @@ hdr_order from: to: cc: date: subject:  # and in this order
 #set timeout = 3          # idle time before scanning
 #set mail_check = 0       # minimum time between scans
 #unset move               # gmail does that
-set beep_new             # bell on new mails
+set beep_new              # bell on new mails
 #set pipe_decode          # strip headers and eval mimes when piping
 #set thorough_search      # strip headers and eval mimes before searching
-
-
 
 ## Speed up folder switch
 set sleep_time = 0
@@ -45,41 +40,10 @@ set folder = "~/Mail"
 set spoolfile = "+Gmail/INBOX"
 source ~/.mutt/mailboxes
 
-# # Default account
-## Here we use the $folder variable that has just been set in the sourced file.
-## We must set it right now otherwise the 'folder' variable will change in the next sourced file.
-folder-hook 'Chimie/*' 'source ~/.mutt/account_chimie'
-#
-### ACCOUNT2
-folder-hook 'Gmail/*' 'source ~/.mutt/account_gmail'
-
-macro index <F4> '<sync-mailbox><enter-command>source +Gmail/* <enter><change-folder>!<enter>'
-macro index <F3> '<sync-mailbox><enter-command>source +Chimie/* <enter><change-folder>!<enter>'
-
-#account-hook Gmail "set imap_user=felipebrokate@gmail.com imap_pass=my_PWgmail"
-#account-hook Chimie "set imap_user=cristian.perez-brokate@chimie-paristech.fr imap_pass=my_PWchimie"
-
-# efault account
-source "~/.mutt/account_gmail"
-#source "~/.mutt/account_chimie"
-
-set mailcap_path	= ~/.mutt/mailcap
-alternative_order text/plain text/html
-auto_view text/html
-auto_view text/calendar application/ics
-set markers=no # Delete the + sign on new lines
-
-## Sorting index by thread
-#set sort=threads #sort by threads
-#set sort_aux = last-date-received
-
-# Fetch mail shortcut
-bind index G imap-fetch-mail
-
-set print_command="~/Documents/Script/mutt_print.sh"
-
-
-#Notmuch
+## Not much
+#set virtual_spoolfile=yes
+#set nm_default_uri="notmuch:///home/arch/Mail" # path to the maildir
+#source ~/.mutt/virtualmailboxes
 
 macro index <F8> \
      "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>" \
@@ -91,41 +55,48 @@ macro index <F6> \
      "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" \
      "notmuch: remove message from inbox"
 
-### Keep IMAP connection alive by polling intermittently (time in seconds)
-#set imap_keepalive=60
-### Allow Mutt to open new imap connection automatically.
-#set imap_passive=no
-#set imap_check_subscribed=yes
-#set imap_idle=yes
-### How often to check for new mail (time in seconds).
-#set mail_check=60
-#
-#
-## unset ssl_ca_certificates_file
-# unset ssl_usesystemcerts
-#
-## SSL hardening
-# set ssl_force_tls=yes
-# set ssl_starttls=yes
-# set ssl_use_sslv2=no
-# set ssl_use_sslv3=no
-# set ssl_use_tlsv1=no
-# set ssl_use_tlsv1_1=no
-# set ssl_use_tlsv1_2=yes
-# set ssl_verify_dates=yes
-# set ssl_verify_host=yes
+macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
+macro index c "<change-vfolder>?" "Change to vfolder overview"
+macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
-# security
+macro generic "<esc>1" ":set from=felipebrokate@gmail.com realname='Cristian'"
+macro generic "<esc>2" ":set from=cristian.perez-brokate@chimie-paristech.fr realname='Cristian PEREZ'"
+
+## Default account
+## Here we use the $folder variable that has just been set in the sourced file.
+## We must set it right now otherwise the 'folder' variable will change in the next sourced file.
+folder-hook 'Chimie/*' 'source ~/.mutt/account_chimie'
+folder-hook 'Gmail/*' 'source ~/.mutt/account_gmail'
+folder-hook 'Kernix/*' 'source ~/.mutt/account_kernix'
+
+macro index <F4> '<sync-mailbox><enter-command>source +Gmail/* <enter><change-folder>!<enter>'
+macro index <F3> '<sync-mailbox><enter-command>source +Chimie/* <enter><change-folder>!<enter>'
+
+# Default account
+source "~/.mutt/account_gmail"
+
+## Mailcap
+set mailcap_path	= ~/.mutt/mailcap
+alternative_order text/plain text/html
+auto_view text/html
+auto_view text/calendar application/ics
+set markers=no # Delete the + sign on new lines
+
+set print_command="~/Documents/Script/mutt_print.sh"
+
+## Sorting index by thread
+#set sort=threads #sort by threads
+#set sort_aux = last-date-received
+
+## Security
 source /usr/share/doc/mutt/samples/gpg.rc
 #set pgp_use_gpg_agent = yes
 set pgp_timeout        = 3600       # how long to cache the pass-phrase
-set crypt_autosign     = yes     # automatically sign all outgoing mail
-set crypt_replyencrypt = yes # automatically encrypt replies to  encrypted messages
+#set crypt_autosign     = yes     # automatically sign all outgoing mail
+#set crypt_replyencrypt = yes # automatically encrypt replies to  encrypted messages
 set pgp_sign_as        = "B212E65B"   # my Key ID
 
-
-# Paths
+## Paths
 source ~/.mutt/mutt-colors-solarized-dark-256.muttrc
 source ~/.mutt/alias
 set alias_file = ~/.mutt/alias # where to store aliases
-

@@ -17,6 +17,8 @@
 " " like <leader>w saves the current file
  let mapleader = ","
  let g:mapleader = ","
+ let maplocalleader = ";"
+ let g:maplocalleader = ";"
 
 " " Fast saving
  nmap <leader>w :w!<cr>
@@ -112,7 +114,9 @@ filetype indent on
 "compile gnuplot
 map <F8> : !w <bar> ./% <CR>
 "maximaxe window
-map <F5> <C-W>_<C-W><Bar>   
+nnoremap <F5> :w <CR> :!make <CR>
+"nnoremap <F5> :silent make <bar> copen<cr>
+
 "autocompile latex au save du buffer
 "au BufWritePost *.tex silent call Tex_RunLaTeX()
 ""au BufWritePost *.tex silent !pkill -USR1 xdvi.bin
@@ -138,7 +142,8 @@ let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_
 nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 "clipboard to use it exterior
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
+set clipboard=unnamed
 
 "crtlp directory 
 let g:ctrlp_working_path_mode = 'c'
@@ -167,8 +172,8 @@ augroup vimrc_autocmds
 " Jedi
 let g:jedi#completions_command = "<C-N>"
 let g:jedi#usages_command = "<leader>z"
-"let g:jedi#popup_on_dot = 0
-"let g:jedi#popup_select_first = 0
+let g:jedi#popup_on_dot = 0
+let g:jedi#popup_select_first = 0
 "map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Vundle 
@@ -182,6 +187,10 @@ call vundle#begin()
 "let Vundle "manage Vundle, required
 Plugin 'vimux'
 Plugin 'itchyny/calendar.vim'
+Plugin 'ivanov/vim-ipython'
+Plugin 'epeli/slimux'
+"Plugin 'johndgiese/vipy'
+"Plugin 'julienr/vim-cellmode'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -193,6 +202,12 @@ let g:tmuxline_preset = {
       \'win'  : ['#I #W'],
       \'cwin' : '#I #W',
       \'z'    : '%R'}
+
+" UltiSnips
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+set runtimepath+=~/.vim/my-snippets/
 
 " Vimux Vslime
 
@@ -207,8 +222,22 @@ function! VimuxSlime()
  call VimuxSendKeys("Enter")
 endfunction
 
+" Slimux
+
+let g:slimux_python_ipython = 1
+
+"nnoremap <C-c><C-c> :SlimuxREPLSendLine<CR>
+"vnoremap <C-c><C-c> :SlimuxREPLSendLine<CR>
+"nnoremap <C-c><C-v> :SlimuxREPLConfigure<CR>
+map <Leader>s :SlimuxREPLSendLine<CR>
+vmap <Leader>s :SlimuxREPLSendSelection<CR>
+"map <Leader>b :SlimuxREPLSendBuffer<CR>
+"map <Leader>a :SlimuxShellLast<CR>
+"map <Leader>k :SlimuxSendKeysLast<CR>
+
 " If text is selected, save it in the v buffer and send that buffer it to tmux
-vmap <LocalLeader>vs "vy :call VimuxSlime()<CR>
+vmap <LocalLeader><ENTER> "vy :call VimuxSlime()<CR>
 
 " Select current paragraph and send it to tmux
-nmap <LocalLeader>vs vip<LocalLeader>vs<CR>
+nmap <LocalLeader><ENTER> vip<LocalLeader>vs<CR>
+

@@ -123,6 +123,7 @@ function cowerup() { cower -df "${1%%/}" ; cd ~/.builds/"${1%%/}" ; makepkg -si 
 # SSH alias
 alias conssh=' ssh  -p 7777 cristian@127.0.0.1 -Y'
 alias enscp='  ssh  -X c.perez-brokate@193.51.253.15 -p 993'
+alias klab='ssh -p 2266 lab@hq.kernix.com'
 #alias enscp='  ssh  c.perez-broka@193.51.253.222 -Y'
 alias leri8='  ssh  -p 993 c.perez-brokate@193.51.253.15 -L 7777:10.0.1.122:22'
 

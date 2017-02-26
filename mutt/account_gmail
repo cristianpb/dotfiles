@@ -1,0 +1,31 @@
+color status cyan default
+
+#set folder="imaps://imap.gmail.com:993"
+set imap_user        = "felipebrokate@gmail.com"
+#set my_PWgmail       = `gnome-keyring-query get mutt_gmail`
+set my_PWgmail       = `pass Mail/Gmail`
+set imap_pass        = $my_PWgmail
+set postponed        = "+Gmail/Drafts"
+set header_cache     = ~/.mutt/accounts/gmail/headers
+set message_cachedir = ~/.mutt/accounts/gmail/bodies
+set certificate_file = ~/.mutt/accounts/gmail/certificates
+
+set mbox = "+Gmail/Archives"
+
+set realname      = "Cristian"
+set from          = "felipebrokate@gmail.com"
+# Conf msmtp
+set sendmail="/usr/bin/msmtp"
+set use_from=yes
+set envelope_from=yes
+
+# SMTP mutt
+#set ssl_force_tls    = yes
+#set smtp_url      = "smtp://$imap_user:$imap_pass@smtp.gmail.com:587/"
+#set ssl_force_tls = yes
+
+# looks like you must explicitly do this to make sure you
+# don't save local copies of sent mail >:(
+unset record
+
+#account-hook $folder "set imap_user=felipebrokate@gmail.com imap_pass=my_PWgmail"
