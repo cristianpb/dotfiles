@@ -49,7 +49,7 @@ other_email=cristian.perez-brokate@chimie-paristech.fr;
 #
 [new]
 tags=unread;inbox;
-ignore=
+ignore=spam;trash;
 
 # Search configuration
 #

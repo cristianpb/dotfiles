@@ -1,0 +1,32 @@
+color status yellow default
+
+#set folder="imaps://imap.gmail.com:993"
+set imap_user        = "cperez@kernix.com"
+#set my_PWgmail       = `gnome-keyring-query get mutt_gmail`
+set my_PWgmail       = `pass Mail/Kernix`
+set imap_pass        = $my_PWgmail
+set postponed        = "+Kernix/Drafts"
+set header_cache     = ~/.mutt/accounts/kernix/headers
+set message_cachedir = ~/.mutt/accounts/kernix/bodies
+set certificate_file = ~/.mutt/accounts/kernix/certificates
+
+set mbox = "+Kernix/Archives"
+
+set realname      = "Cristian PEREZ"
+set from          = "cperez@kernix.com"
+# Conf msmtp
+set sendmail="/usr/bin/msmtp"
+set use_from=yes
+set envelope_from=yes
+
+# SMTP mutt
+#set smtp_url      = "smtp://$imap_user:$imap_pass@smtp.gmail.com:587/"
+#set ssl_force_tls = yes
+#set ssl_starttls=yes
+#set smtp_authenticators = 'gssapi:login'
+
+# looks like you must explicitly do this to make sure you
+# don't save local copies of sent mail >:(
+unset record
+
+#account-hook $folder "set imap_user=felipebrokate@gmail.com imap_pass=my_PWgmail"

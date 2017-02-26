@@ -6,22 +6,26 @@ pythonfile = ~/.offlineimap2.py
 maxsyncaccounts = 1
 
 [Account Gmail]
+postsynchook = ~/Documents/Script/notmuch-hook.sh
 localrepository = Gmail-Local
 remoterepository = Gmail-Remote
 #autorefresh = 0.5
 #quick = 10
 
 [Account Chimie]
+postsynchook = ~/Documents/Script/notmuch-hook.sh
 localrepository = Chimie-Local
 remoterepository = Chimie-Remote
 #autorefresh = 0.5
 #quick = 10
 
 [Account Kernix]
+postsynchook = ~/Documents/Script/notmuch-hook.sh
 localrepository = Kernix-Local
 remoterepository = Kernix-Remote
 
 [Repository Gmail-Local]
+#'trash':    '[Gmail]/Trash',
 type = Maildir
 localfolders = ~/Mail/Gmail
 nametrans = lambda folder: {'Drafts':   '[Gmail]/Drafts',
@@ -29,7 +33,6 @@ nametrans = lambda folder: {'Drafts':   '[Gmail]/Drafts',
                             'Important':'[Gmail]/Important',
                             'Spam':     '[Gmail]/Spam',
                             'Starred':  '[Gmail]/Starred',
-                            'trash':    '[Gmail]/Trash',
                             'Archive':  '[Gmail]/All Mail',
                             }.get(folder, folder)
 
@@ -60,10 +63,10 @@ nametrans = lambda folder: {'[Gmail]/Drafts':    'Drafts',
                             '[Gmail]/Important':   'Important',
                             '[Gmail]/Spam':   'Spam',
                             '[Gmail]/Starred':   'Starred',
-                            '[Gmail]/Trash':     'trash',
                             '[Gmail]/All Mail':  'Archive',
                             }.get(folder, folder)
 # Necessary as of OfflineIMAP 6.5.4
+#'[Gmail]/Trash':     'trash',
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 #keepalive = 60
 #holdconnectionopen = yes

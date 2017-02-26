@@ -1,0 +1,14 @@
+#text/html; w3m -I %{charset} -T text/html; copiousoutput;
+#text/html; elinks -dump -dump-color-mode 3 \
+#    dump-charset utf-8 -default-mime-type text/htm %s; \
+#        copiousoutput
+text/html;  /usr/bin/firefox %s >/dev/null 2>&1; needsterminal
+text/html;  elinks -dump %s; nametemplate=%s.html; copiousoutput
+###text/html;                      ~/.mutt/tiny.pl %s ; copiousoutput ;  nametemplate=%s.html
+###text/plain;                      ~/.mutt/tiny.pl %s 't' ; copiousoutput ; nametemplate=%s.html
+image/*; sxiv %s 
+application/pdf; { set -m \; /bin/mv -T %s %s.mv \; ( zathura %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+audio/* ; /usr/bin/mplayer %s ; copiousoutput
+video/* ; /usr/bin/mplayer %s ; copiousoutput
+text/calendar; mutt-ics; copiousoutput
+application/ics; mutt-ics; copiousoutput 

@@ -110,6 +110,7 @@ function levantese() { sudo rtcwake -vm no -a -t $(date +%s -d "${1%%/}") ; }
 alias enscp='ssh -X c.perez-brokate@193.51.253.15 -p 993'
 #alias enscp='ssh c.perez-broka@193.51.253.222 -Y'
 alias conssh='ssh -p 7777 cristian@127.0.0.1 -Y'
+alias klab='ssh -p 2266 lab@hq.kernix.com'
 alias leri8='ssh -p 993 c.perez-brokate@193.51.253.15 -L 7777:10.0.1.122:22'
 alias leri2='ssh c.perez-brokate@193.51.253.15 -L 2222:10.0.1.120:993'
 alias leri5='ssh c.perez-brokate@193.51.253.15 -L 2222:10.0.1.121:993'
@@ -180,3 +181,5 @@ export EDITOR=vim
 # Java for neo4j
 #export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 #export JAVA_HOME= /usr/lib/jvm/java-7-openjdk/jre
+
+
