@@ -26,10 +26,22 @@ hdr_order from: to: cc: date: subject:  # and in this order
 #set wait_key = no        # shut up, mutt
 #set timeout = 3          # idle time before scanning
 #set mail_check = 0       # minimum time between scans
-#unset move               # gmail does that
 set beep_new              # bell on new mails
 #set pipe_decode          # strip headers and eval mimes when piping
 #set thorough_search      # strip headers and eval mimes before searching
+#unset move               # gmail does that
+set delete           # don't ask, just do
+unset confirmappend  # don't ask, just do!
+set quit             # don't ask, just do!!
+
+# look and feel
+set pager_index_lines = 8
+set pager_context     = 5
+set pager_stop
+set menu_scroll
+set smart_wrap
+set tilde
+unset markers
 
 ## Speed up folder switch
 set sleep_time = 0
