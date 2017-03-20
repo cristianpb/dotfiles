@@ -137,9 +137,6 @@ let g:airline#extensions#branch#enabled=1
 :nnoremap <C-n> :bnext<CR>
 :nnoremap <C-p> :bprevious<CR>
 
-"Syntastic
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-nnoremap <C-w>E :SyntasticCheck<CR> :SyntasticToggleMode<CR>
 
 "clipboard to use it exterior
 "set clipboard=unnamedplus
@@ -177,36 +174,31 @@ let g:jedi#popup_select_first = 0
 "map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Vundle 
-
 set nocompatible              " be iMproved, required
 filetype off                  " required
-
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-"let Vundle "manage Vundle, required
 Plugin 'vimux'
 Plugin 'itchyny/calendar.vim'
 Plugin 'ivanov/vim-ipython'
 Plugin 'epeli/slimux'
-"Plugin 'johndgiese/vipy'
-"Plugin 'julienr/vim-cellmode'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'altercation/vim-colors-solarized'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 let g:airline#extensions#tmuxline#enabled = 1
-let g:airline_theme='dark'
+let g:airline_theme='solarized'
 let g:tmuxline_preset = {
       \'a'    : '#S',
       \'b'    : '#(~/Documents/Script/new_mail.sh)',
-      \'win'  : ['#I #W'],
-      \'cwin' : '#I #W',
+      \'win'  : ['#W'],
+      \'cwin' : '#F #W',
       \'z'    : '%R'}
 
 " UltiSnips
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
 set runtimepath+=~/.vim/my-snippets/
 
 " Vimux Vslime
@@ -240,4 +232,22 @@ vmap <LocalLeader><ENTER> "vy :call VimuxSlime()<CR>
 
 " Select current paragraph and send it to tmux
 nmap <LocalLeader><ENTER> vip<LocalLeader>vs<CR>
+
+" Syntastic
+let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+nnoremap <leader>sc :SyntasticToggleMode<CR> 
+
+let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_auto_loc_list = 0 " No erros list
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_signs = 1 " No sign column
+let g:syntastic_enable_highlighting = 1 " Highligth
+
+" Tagbar
+nmap <F6> :TagbarToggle<CR>
+
+let g:solarized_termcolors = 16
+set background=dark                                                         
+colorscheme solarized
 
