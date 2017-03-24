@@ -10,7 +10,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-
 alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
@@ -69,42 +68,6 @@ function syn {
 sdcv "$1" -u "Moby Thesaurus II"
 }
 
-#Blockify raccousris Spotify
-bb() {
-    local signal
-    local cmd
-    [[ "$#" -lt 1 ]] && echo "Usage: bb ( b[lock] | u[nblock] | p[revious] | n[ext] | t[oggle] | t[oggle]b[lock] |...)"  && return 0
-    case "$1" in
-        '')  blockify-dbus get 2>/dev/null ;;
-        ex|exit)
-            signal='TERM';;       # Exit
-        b|block)
-            signal='USR1';;       # Block
-        u|unblock)
-            signal='USR2';;       # Unblock
-        p|previous)
-            signal='RTMIN';;      # Previous song
-        n|next)
-            signal='RTMIN+1';;    # Next song
-        t|toggle)
-            signal='RTMIN+2';;    # Toggle play song
-        tb|toggleblock)
-            signal='RTMIN+3';;    # Toggle block song
-        ip|iprevious)
-            signal='RTMIN+10';;   # Previous interlude song
-        in|inext)
-            signal='RTMIN+11';;   # Next interlude song
-        it|itoggle)
-            signal='RTMIN+12';;   # Toggle play interlude song
-        itr|itoggleresume)
-            signal='RTMIN+13';;   # Toggle interlude resume
-        *) echo "Bad option" && return 0;;
-    esac
-    pkill --signal "$signal" -f 'python.*blockify'
-}
-
-
-
 function levantese() { sudo rtcwake -vm no -a -t $(date +%s -d "${1%%/}") ; }
 
 alias enscp='ssh -X c.perez-brokate@193.51.253.15 -p 993'
@@ -162,9 +125,6 @@ rg() {
 
 alias ddisk='udisksctl unmount -b /dev/sdc1;udisksctl unmount -b /dev/dm-0;udisksctl lock -b /dev/sdc2;udisksctl power-off -b /dev/sdc;'
 
-export PATH="$HOME/.bin:$PATH"
-
-
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
 [[ -z "$TMUX" ]] && exec tmux
@@ -181,5 +141,3 @@ export EDITOR=vim
 # Java for neo4j
 #export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 #export JAVA_HOME= /usr/lib/jvm/java-7-openjdk/jre
-
-

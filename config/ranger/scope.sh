@@ -44,6 +44,11 @@ trim() { head -n "$maxln"; }
 # wraps highlight to treat exit code 141 (killed by SIGPIPE) as success
 highlight() { command highlight "$@"; test $? = 0 -o $? = 141; }
 
+case "$mimetype" in
+application/pdf)
+     pdftoppm -jpeg -singlefile "$path" "${cached//.jpg}" && exit 6;;
+esac
+
 case "$extension" in
     # Archive extensions:
     7z|a|ace|alz|arc|arj|bz|bz2|cab|cpio|deb|gz|jar|lha|lz|lzh|lzma|lzo|\
@@ -55,9 +60,9 @@ case "$extension" in
     rar)
         try unrar -p- lt "$path" && { dump | trim; exit 0; } || exit 1;;
     # PDF documents:
-    pdf)
-        try pdftotext -l 10 -nopgbrk -q "$path" - && \
-            { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
+    #pdf)
+    #    try pdftotext -l 10 -nopgbrk -q "$path" - && \
+    #        { dump | trim | fmt -s -w $width; exit 0; } || exit 1;;
     # BitTorrent Files
     torrent)
         try transmission-show "$path" && { dump | trim; exit 5; } || exit 1;;
@@ -85,5 +90,6 @@ case "$mimetype" in
         # Use sed to remove spaces so the output fits into the narrow window
         try mediainfo "$path" && { dump | trim | sed 's/  \+:/: /;';  exit 5; } || exit 1;;
 esac
+
 
 exit 1
