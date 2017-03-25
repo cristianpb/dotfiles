@@ -153,3 +153,6 @@ alias ddiskup='udisksctl mount -b /dev/sdc1;udisksctl unlock -b /dev/sdc2;udisks
 alias nm='nmtui-connect' # Network Manager
 alias ledu='sudo ~/.config/i3/leds_up.sh' # keyboardlight
 alias ledd='sudo ~/.config/i3/leds_down.sh' # keyboardlight
+
+# Ranger
+export RANGER_LOAD_DEFAULT_RC=FALSE

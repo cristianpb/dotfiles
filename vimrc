@@ -105,14 +105,17 @@ nmap <Leader>se :setlocal spell! spelllang=en_gb<CR>
 map <F8> : !w <bar> ./% <CR> " Compile
 nnoremap <F5> :w <CR> :!make <CR> " Makefile
 
-" Vundle 
+"" Vundle 
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'vimux'
 Plugin 'itchyny/calendar.vim'
 Plugin 'ivanov/vim-ipython'
 Plugin 'epeli/slimux'
+Plugin 'edkolev/tmuxline.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Vimjas/vim-python-pep8-indent'
