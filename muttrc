@@ -56,6 +56,9 @@ source ~/.mutt/mailboxes
 #set virtual_spoolfile=yes
 #set nm_default_uri="notmuch:///home/arch/Mail" # path to the maildir
 #source ~/.mutt/virtualmailboxes
+#macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
+#macro index c "<change-vfolder>?" "Change to vfolder overview"
+#macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
 macro index <F8> \
      "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>" \
@@ -67,22 +70,18 @@ macro index <F6> \
      "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" \
      "notmuch: remove message from inbox"
 
-macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
-macro index c "<change-vfolder>?" "Change to vfolder overview"
-macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
 macro generic "<esc>1" ":set from=felipebrokate@gmail.com realname='Cristian'"
 macro generic "<esc>2" ":set from=cristian.perez-brokate@chimie-paristech.fr realname='Cristian PEREZ'"
+macro generic "<esc>3" ":set from=cperez@kernix.com realname='Cristian PEREZ'"
 
-## Default account
-## Here we use the $folder variable that has just been set in the sourced file.
-## We must set it right now otherwise the 'folder' variable will change in the next sourced file.
 folder-hook 'Chimie/*' 'source ~/.mutt/account_chimie'
 folder-hook 'Gmail/*' 'source ~/.mutt/account_gmail'
 folder-hook 'Kernix/*' 'source ~/.mutt/account_kernix'
 
-macro index <F4> '<sync-mailbox><enter-command>source +Gmail/* <enter><change-folder>!<enter>'
-macro index <F3> '<sync-mailbox><enter-command>source +Chimie/* <enter><change-folder>!<enter>'
+macro index <F3>  "<change-folder> =Chimie/INBOX<enter>"  "go Chimie"
+macro index <F4>  "<change-folder> =Gmail/INBOX<enter>"  "go Gmail"
+macro index <F5>  "<change-folder> =Kernix/INBOX<enter>"  "go Kernix"
 
 # Default account
 source "~/.mutt/account_gmail"
