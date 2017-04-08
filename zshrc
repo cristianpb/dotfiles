@@ -129,6 +129,8 @@ alias leri8='  ssh  -p 993 c.perez-brokate@193.51.253.15 -L 7777:10.0.1.122:22'
 
 function putssh() { scp -P 7777 -pr "${1%%/}" cristian@127.0.0.1:~/ ; }
 function getssh() { scp -P 7777 -pr cristian@127.0.0.1:/home/cristian/"${1%%/}" ./ ; }
+function getklab() { scp -P 2266 -pr lab@hq.kernix.com:/Users/lab/Cristian/"${1%%/}" ./ ; }
+alias klab='ssh -p 2266 lab@hq.kernix.com'
 
 # Rsync backup
 alias pc2toshiba='rsync -avzh --delete --progress         /home/arch/Documents/UPMC               /run/media/arch/Toshiba'

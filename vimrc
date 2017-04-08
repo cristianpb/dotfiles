@@ -110,16 +110,18 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'vimux'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'epeli/slimux'
 Plugin 'itchyny/calendar.vim'
 Plugin 'ivanov/vim-ipython'
-Plugin 'epeli/slimux'
-Plugin 'edkolev/tmuxline.vim'
+Plugin 'roxma/vim-paste-easy'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Vimjas/vim-python-pep8-indent'
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'vimux'
 "Plugin 'Yggdroot/indentLine'
 call vundle#end()            " required
 filetype plugin indent on    " required
