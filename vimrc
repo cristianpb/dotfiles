@@ -110,19 +110,30 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'Vimjas/vim-python-pep8-indent'
-Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'benmills/vimux'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'edkolev/promptline.vim'
 Plugin 'edkolev/tmuxline.vim'
 Plugin 'epeli/slimux'
+Plugin 'honza/vim-snippets'
 Plugin 'itchyny/calendar.vim'
 Plugin 'ivanov/vim-ipython'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'lervag/vimtex' "Latex suite that replace gerw/vim-latex-suite
+Plugin 'majutsushi/tagbar'
 Plugin 'roxma/vim-paste-easy'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
+Plugin 'sirver/ultisnips'
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'vimux'
-"Plugin 'Yggdroot/indentLine'
+Plugin 'Vimjas/vim-python-pep8-indent'
+Plugin 'VundleVim/Vundle.vim'
+"Plugin '"Plugin 'Yggdroot/indentLine'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -158,6 +169,15 @@ let g:tmuxline_preset = {
       \'y'    : '#(~/Documents/Script/tmux-slack-notifier.sh)',
       \'z'    : '%R'}
 
+" Promptline
+"":PromptlineSnapshot! .shell_prompt.sh airline
+let g:promptline_preset = {
+        \'a'    : [ promptline#slices#host() ],
+        \'b'    : [ promptline#slices#cwd() ],
+        \'c'    : [ promptline#slices#vcs_branch() ],
+        \'warn' : [ promptline#slices#last_exit_code() ],
+        \'z'    : [ promptline#slices#python_virtualenv() ]}
+
 " Crtlp directory 
 let g:ctrlp_working_path_mode = 'c'
 
@@ -172,13 +192,13 @@ let R_hl_term = 1 " need of colorout
 autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
 
 " Python IDE
-"augroup vimrc_autocmds
-"    autocmd!
-"    " highlight characters past column 120
-"    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-"    autocmd FileType python match Excess /\%120v.*/
-"    autocmd FileType python set nowrap
-"    augroup END
+augroup vimrc_autocmds
+    autocmd!
+    " highlight characters past column 120
+    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
+    autocmd FileType python match Excess /\%120v.*/
+    autocmd FileType python set nowrap
+    augroup END
 
 " Jedi
 let python_highlight_all = 1
@@ -192,6 +212,10 @@ let g:jedi#smart_auto_mappings = 0 " no automatic import after from
 
 " UltiSnips
 let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-b>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 set runtimepath+=~/.vim/my-snippets/
 
 " Vimux Vslime
@@ -223,13 +247,13 @@ nmap <LocalLeader><ENTER> vip<LocalLeader>vs<CR>
 
 " Syntastic
 nnoremap <leader>sc :SyntasticToggleMode<CR> 
-let g:syntastic_mode_map = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
+let g:syntastic_mode_map                 = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
 let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_enable_highlighting = 1 " Highlight
-let g:syntastic_auto_loc_list = 1 " No erros list
-let g:syntastic_enable_signs = 1 " No sign column
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_enable_highlighting      = 1 " Highlight
+let g:syntastic_auto_loc_list            = 1 " No erros list
+let g:syntastic_enable_signs             = 1 " No sign column
+let g:syntastic_check_on_open            = 1
+let g:syntastic_check_on_wq              = 0
 
 " Tagbar
 nmap <F6> :TagbarToggle<CR>
@@ -246,7 +270,7 @@ let g:indentLine_char = '┆'
 set diffopt+=vertical "Vertical split by default
 
 " Easy Align
-" " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-" vmap <Enter> <Plug>(EasyAlign)
-" " Start interactive EasyAlign for a motion/text object (e.g. gaip)
-" nmap ga <Plug>(EasyAlign)
+"" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+"" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
