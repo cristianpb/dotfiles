@@ -47,7 +47,6 @@ filetype indent on
 " Read modelines at the end and begging
 set modeline
 
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -79,6 +78,9 @@ set viminfo^=%
 " Clipboard to use it exterior
 "set clipboard=unnamedplus
 "set clipboard=unnamed
+
+" Format-Flowed text
+setlocal fo+=aw
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -137,16 +139,6 @@ Plugin 'VundleVim/Vundle.vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
-" Latex-suite
-let g:Tex_CompileRule_pdf = "pdflatex --src-specials --shell-escape --synctex=1 -interaction=nonstopmode $*"
-"let g:Tex_CompileRule_pdf = 'latexmk -pdf'
-"au BufWritePost *.tex silent call Tex_RunLaTeX() " Autocompile latex au save du buffer
-"let g:LatexBox_latexmk_options = "-pvc -pdfps"
-let g:Tex_DefaultTargetFormat='pdf'
-let g:Tex_ViewRule_pdf = 'zathura'
-let g:tex_flavor = "pdflatex"
-set grepprg=grep\ -nH\ $*
-
 " NerdTreeToogle
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 nmap <silent> <F3> :NERDTreeToggle<CR>
@@ -177,9 +169,6 @@ let g:promptline_preset = {
         \'c'    : [ promptline#slices#vcs_branch() ],
         \'warn' : [ promptline#slices#last_exit_code() ],
         \'z'    : [ promptline#slices#python_virtualenv() ]}
-
-" Crtlp directory 
-let g:ctrlp_working_path_mode = 'c'
 
 " Nvim-R options
 let R_pdfviewer = "evince"
@@ -268,6 +257,10 @@ let g:indentLine_char = '┆'
 
 " Fugitive
 set diffopt+=vertical "Vertical split by default
+
+" Git gutter (Git diff)
+let g:gitgutter_enabled=0
+nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
 " Easy Align
 "" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
