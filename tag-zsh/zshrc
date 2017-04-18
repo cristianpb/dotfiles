@@ -124,14 +124,18 @@ alias ltx="grep -l '\\documentclass' *tex | xargs latexmk -pdf -pvc -silent > /d
 function cowerup() { cower -df "${1%%/}" ; cd ~/.builds/"${1%%/}" ; makepkg -si ; cd ~ ; }
 
 # SSH alias
-alias conssh=' ssh  -p 7777 cristian@127.0.0.1 -Y'
+alias conleri8=' ssh  -p 7777 cristian@127.0.0.1 -Y'
+alias conleri5=' ssh  -p 7775 cristian@127.0.0.1 -Y'
 alias enscp='  ssh  -X c.perez-brokate@193.51.253.15 -p 993'
 alias klab='ssh -p 2266 lab@hq.kernix.com'
 #alias enscp='  ssh  c.perez-broka@193.51.253.222 -Y'
 alias leri8='  ssh  -p 993 c.perez-brokate@193.51.253.15 -L 7777:10.0.1.122:22'
+alias leri5='  ssh  -p 993 c.perez-brokate@193.51.253.15 -L 7775:10.0.1.121:22'
 
 function putssh() { scp -P 7777 -pr "${1%%/}" cristian@127.0.0.1:~/ ; }
 function getssh() { scp -P 7777 -pr cristian@127.0.0.1:/home/cristian/"${1%%/}" ./ ; }
+function getleri5() { scp -P 7775 -pr cristian@127.0.0.1:/home/cristian/"${1%%/}" ./ ; }
+function putleri5() { scp -P 7775 -pr "${1%%/}" cristian@127.0.0.1:~/ ; }
 function getklab() { scp -P 2266 -pr lab@hq.kernix.com:/Users/lab/Cristian/"${1%%/}" ./ ; }
 alias klab='ssh -p 2266 lab@hq.kernix.com'
 
@@ -161,3 +165,6 @@ alias ledd='sudo ~/.config/i3/leds_down.sh' # keyboardlight
 
 # Ranger
 export RANGER_LOAD_DEFAULT_RC=FALSE
+
+# Ruby gems
+PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
