@@ -168,3 +168,7 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 
 # Ruby gems
 PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+
+# Termite change conf
+alias tdark='cp ~/.config/termite/configDark ~/.config/termite/config' # keyboardlight
+alias tlight='cp ~/.config/termite/configLigth ~/.config/termite/config' # keyboardlight

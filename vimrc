@@ -122,10 +122,13 @@ Plugin 'epeli/slimux'
 Plugin 'honza/vim-snippets'
 Plugin 'itchyny/calendar.vim'
 Plugin 'ivanov/vim-ipython'
+Plugin 'jalvesaq/Nvim-R'
 Plugin 'junegunn/vim-easy-align'
+Plugin 'junegunn/vim-emoji'
 Plugin 'lervag/vimtex' "Latex suite that replace gerw/vim-latex-suite
 Plugin 'majutsushi/tagbar'
 Plugin 'roxma/vim-paste-easy'
+Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'sirver/ultisnips'
@@ -135,6 +138,7 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Vimjas/vim-python-pep8-indent'
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'greyblake/vim-preview'
 "Plugin '"Plugin 'Yggdroot/indentLine'
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -205,7 +209,8 @@ let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your w
 let g:UltiSnipsExpandTrigger="<tab>"
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-set runtimepath+=~/.vim/my-snippets/
+set runtimepath+=~/.vim/my-snippets
+let g:UltiSnipsSnippetsDir="~/.vim/my-snippets"
 
 " Vimux Vslime
 let g:VimuxUseNearest = 1
@@ -267,3 +272,6 @@ nnoremap <silent> <leader>d :GitGutterToggle<cr>
 vmap <Enter> <Plug>(EasyAlign)
 "" Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
+
+" Emoji
+set completefunc=emoji#complete
