@@ -48,6 +48,7 @@ unset markers
 set sleep_time = 0
 set mbox_type=Maildir
 #set imap_check_subscribed
+macro pager \cu <pipe-entry>'urlview'<enter> 'Follow links with urlview' 
 
 
 set folder = "~/Mail"
