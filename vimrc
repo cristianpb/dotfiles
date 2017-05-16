@@ -44,6 +44,11 @@ set showmatch
 " Indent
 filetype indent on
 
+" Insert space characters whenever the tab key is pressed
+set tabstop=4
+set shiftwidth=4
+set expandtab
+
 " Read modelines at the end and begging
 set modeline
 
@@ -95,7 +100,6 @@ map <leader>sa zg
 map <leader>s? z=
 
 " Set local language (en_us, en_gb, fr, es)
-"setlocal spell spelllang=en_us
 nmap <Leader>sf :setlocal spell! spelllang=fr<CR>
 nmap <Leader>se :setlocal spell! spelllang=en_gb<CR>
 
@@ -121,14 +125,13 @@ Plugin 'edkolev/tmuxline.vim'
 Plugin 'epeli/slimux'
 Plugin 'honza/vim-snippets'
 Plugin 'itchyny/calendar.vim'
-Plugin 'ivanov/vim-ipython'
 Plugin 'jalvesaq/Nvim-R'
+"Plugin 'jgors/vimux-ipy'
 Plugin 'junegunn/vim-easy-align'
-Plugin 'junegunn/vim-emoji'
 Plugin 'lervag/vimtex' "Latex suite that replace gerw/vim-latex-suite
 Plugin 'majutsushi/tagbar'
+Plugin 'pangloss/vim-javascript'
 Plugin 'roxma/vim-paste-easy'
-Plugin 'ryanoasis/vim-devicons'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'sirver/ultisnips'
@@ -137,9 +140,10 @@ Plugin 'tpope/vim-surround'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Vimjas/vim-python-pep8-indent'
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'greyblake/vim-preview'
-"Plugin '"Plugin 'Yggdroot/indentLine'
+Plugin 'ryanoasis/vim-devicons'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'junegunn/vim-emoji'
+Plugin 'christoomey/vim-tmux-navigator'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -153,10 +157,10 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#hunks#enabled=0
 let g:airline_powerline_fonts = 1
+let g:airline_theme='solarized'
 
 " Tmuxline
 let g:airline#extensions#tmuxline#enabled = 1
-let g:airline_theme='solarized'
 let g:tmuxline_preset = {
       \'a'    : '#S',
       \'b'    : '#(~/Documents/Script/new_mail.sh)',
@@ -173,6 +177,8 @@ let g:promptline_preset = {
         \'c'    : [ promptline#slices#vcs_branch() ],
         \'warn' : [ promptline#slices#last_exit_code() ],
         \'z'    : [ promptline#slices#python_virtualenv() ]}
+
+
 
 " Nvim-R options
 let R_pdfviewer = "evince"
@@ -239,6 +245,12 @@ vmap <LocalLeader><ENTER> "vy :call VimuxSlime()<CR>
 " Select current paragraph and send it to tmux
 nmap <LocalLeader><ENTER> vip<LocalLeader>vs<CR>
 
+" Easy Align
+"" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+"" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
 " Syntastic
 nnoremap <leader>sc :SyntasticToggleMode<CR> 
 let g:syntastic_mode_map                 = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
@@ -254,24 +266,30 @@ nmap <F6> :TagbarToggle<CR>
 
 " Solarized
 let g:solarized_termcolors = 16
-set background=dark                                                         
+set background=dark
 colorscheme solarized
+"let g:solarized_termtrans = 1
+"syntax enable
 
-" Indent line
-let g:indentLine_char = '┆'
 
 " Fugitive
 set diffopt+=vertical "Vertical split by default
+
+" Folding
+"set foldmethod=indent
+"set foldnestmax=2
 
 " Git gutter (Git diff)
 let g:gitgutter_enabled=0
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
-" Easy Align
-"" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-"" Start interactive EasyAlign for a motion/text object (e.g. gaip)
-nmap ga <Plug>(EasyAlign)
+" Calendar
+"let g:calendar_google_calendar = 1
 
-" Emoji
-set completefunc=emoji#complete
+" Emoji completion for md files (:app<CTRL-X><CTRL-U> to find :apple:)
+setlocal completefunc=emoji#complete
+
+" JavaScript vim
+let g:javascript_plugin_jsdoc = 1
+let g:javascript_plugin_ngdoc = 1
+let g:javascript_plugin_flow = 1
