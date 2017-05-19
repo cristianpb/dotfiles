@@ -110,6 +110,7 @@ map <leader>s? z=
 
 " Set local language (en_us, en_gb, fr, es)
 nmap <Leader>sf :setlocal spell! spelllang=fr<CR>
+nmap <Leader>sl :setlocal spell! spelllang=es<CR>
 nmap <Leader>se :setlocal spell! spelllang=en_gb<CR>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
