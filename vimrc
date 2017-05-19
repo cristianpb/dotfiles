@@ -15,10 +15,10 @@ set autoread
 
 " With a map leader it's possible to do extra key combinations like <leader>w
 " saves the current file
-let mapleader = ","
-let g:mapleader = ","
-let maplocalleader = ";"
-let g:maplocalleader = ";"
+let mapleader = ','
+let g:mapleader = ','
+let maplocalleader = ';'
+let g:maplocalleader = ';'
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -51,6 +51,15 @@ set expandtab
 
 " Read modelines at the end and begging
 set modeline
+
+" Vim insert delete over line breaks, or automatically-inserted indentation
+"set backspace=indent,eol,start
+
+" Set relative numbers
+"set relativenumber
+
+" Position of cursor
+"set ruler
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -260,6 +269,9 @@ let g:syntastic_auto_loc_list            = 1 " No erros list
 let g:syntastic_enable_signs             = 1 " No sign column
 let g:syntastic_check_on_open            = 1
 let g:syntastic_check_on_wq              = 0
+
+" Use vint for vim style
+let g:syntastic_vim_checkers=['vint'] " requires vint: pip install vim-vint
 
 " Tagbar
 nmap <F6> :TagbarToggle<CR>
