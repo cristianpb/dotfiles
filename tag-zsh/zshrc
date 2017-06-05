@@ -52,7 +52,7 @@ DISABLE_AUTO_UPDATE="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting virtualenvwrapper)
+plugins=(git zsh-autosuggestions zsh-syntax-highlighting virtualenvwrapper python bundler common-aliases wd)
 
 
 # User configuration
@@ -137,6 +137,7 @@ function getssh() { scp -P 7777 -pr cristian@127.0.0.1:/home/cristian/"${1%%/}" 
 function getleri5() { scp -P 7775 -pr cristian@127.0.0.1:/home/cristian/"${1%%/}" ./ ; }
 function putleri5() { scp -P 7775 -pr "${1%%/}" cristian@127.0.0.1:~/ ; }
 function getklab() { scp -P 2266 -pr lab@hq.kernix.com:/Users/lab/Cristian/"${1%%/}" ./ ; }
+function putklab() { scp -P 2266 -pr "${1%%/}" lab@hq.kernix.com:/Users/lab/Cristian/  ; }
 alias klab='ssh -p 2266 lab@hq.kernix.com'
 
 # Rsync backup
