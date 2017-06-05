@@ -122,10 +122,12 @@ map <F8> : !w <bar> ./% <CR> " Compile
 nnoremap <F5> :w <CR> :!make <CR> " Makefile
 
 "" Vundle 
+" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 set nocompatible              " be iMproved, required
 filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
@@ -154,6 +156,8 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'junegunn/vim-emoji'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'maralla/completor.vim'
+Plugin 'vimwiki/vimwiki'
 call vundle#end()            " required
 filetype plugin indent on    " required
 
@@ -191,7 +195,7 @@ let g:promptline_preset = {
 
 
 " Nvim-R options
-let R_pdfviewer = "evince"
+let R_pdfviewer = 'zathura'
 let R_in_buffer = 0 " tmux and R
 let R_applescript = 0
 let R_tmux_split = 1
@@ -211,8 +215,8 @@ augroup vimrc_autocmds
 
 " Jedi
 let python_highlight_all = 1
-let g:jedi#completions_command = "<C-N>"
-let g:jedi#usages_command = "<leader>z"
+let g:jedi#completions_command = '<C-N>'
+let g:jedi#usages_command = '<leader>z'
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 let g:jedi#max_doc_height = 30
@@ -220,22 +224,22 @@ let g:jedi#smart_auto_mappings = 0 " no automatic import after from
 "map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " UltiSnips
-let g:UltiSnipsEditSplit="vertical" " If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit='vertical' " If you want :UltiSnipsEdit to split your window.
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsExpandTrigger='<tab>'
 "let g:UltiSnipsJumpForwardTrigger="<c-b>"
 "let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 set runtimepath+=~/.vim/my-snippets
-let g:UltiSnipsSnippetsDir="~/.vim/my-snippets"
+let g:UltiSnipsSnippetsDir='~/.vim/my-snippets'
 
 " Vimux Vslime
 let g:VimuxUseNearest = 1
-let g:VimuxHeight = "30"
+let g:VimuxHeight = '30'
 map <Leader>vp :VimuxPromptCommand<CR> 
 map <Leader>rb :call VimuxRunCommand("")<CR> " Run the current file with rspec
 function! VimuxSlime()
  call VimuxSendText(@v)
- call VimuxSendKeys("Enter")
+ call VimuxSendKeys('Enter')
 endfunction
 
 " Slimux
@@ -281,8 +285,8 @@ nmap <F6> :TagbarToggle<CR>
 let g:solarized_termcolors = 16
 set background=dark
 colorscheme solarized
-"let g:solarized_termtrans = 1
-"syntax enable
+let g:solarized_termtrans = 1
+syntax enable
 
 
 " Fugitive
@@ -306,3 +310,16 @@ setlocal completefunc=emoji#complete
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
+
+" Vimwiki
+"let g:vimwiki_list = [{'path': '~/vimwiki', 'template_path': '~/vimwiki/templates/',
+"          \ 'template_default': 'default', 
+"          \ 'path_html': '~/vimwiki/site_html/', 
+"          \ 'template_ext': '.tpl'}]
+
+let g:vimwiki_list = [{'path': '~/vimwiki', 'template_path': '~/vimwiki/templates/',
+          \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.wiki',
+          \ 'path_html': '~/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
+          \ 'template_ext': '.tpl'}]
+
+nmap <silent> <leader>wah :VimwikiAll2HTML<cr>
