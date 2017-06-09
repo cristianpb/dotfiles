@@ -22,7 +22,6 @@ unhdr_order *                           # some distros order things by default
 hdr_order from: to: cc: date: subject:  # and in this order
 
 # Account Settings -----------------------------------
-
 #set wait_key = no        # shut up, mutt
 #set timeout = 3          # idle time before scanning
 #set mail_check = 0       # minimum time between scans
@@ -48,8 +47,10 @@ unset markers
 set sleep_time = 0
 set mbox_type=Maildir
 #set imap_check_subscribed
-macro pager \cu <pipe-entry>'urlview'<enter> 'Follow links with urlview' 
 
+## url view
+#macro pager \cu <pipe-entry>'urlview'<enter> 'Follow links with urlview' 
+macro pager \Cu "|urlview<enter>" "call urlview to open links"
 
 set folder = "~/Mail"
 set spoolfile = "+Gmail/INBOX"
@@ -74,10 +75,6 @@ macro index <F6> \
      "notmuch: remove message from inbox"
 
 
-macro generic "<esc>1" ":set from=felipebrokate@gmail.com realname='Cristian'"
-macro generic "<esc>2" ":set from=cristian.perez-brokate@chimie-paristech.fr realname='Cristian PEREZ'"
-macro generic "<esc>3" ":set from=cperez@kernix.com realname='Cristian PEREZ'"
-
 folder-hook 'Chimie/*' 'source ~/.mutt/account_chimie'
 folder-hook 'Gmail/*' 'source ~/.mutt/account_gmail'
 folder-hook 'Kernix/*' 'source ~/.mutt/account_kernix'
@@ -86,7 +83,7 @@ macro index,pager <F3>  "<change-folder> =Chimie/INBOX<enter>"  "go Chimie"
 macro index,pager <F4>  "<change-folder> =Gmail/INBOX<enter>"  "go Gmail"
 macro index,pager <F5>  "<change-folder> =Kernix/INBOX<enter>"  "go Kernix"
 
-# Default account
+## Default account
 source "~/.mutt/account_gmail"
 
 ## Mailcap
@@ -96,11 +93,20 @@ auto_view text/html
 auto_view text/calendar application/ics
 set markers=no # Delete the + sign on new lines
 
-set print_command="~/Documents/Script/mutt_print.sh"
-
 ## Sorting index by thread
-#set sort=threads #sort by threads
-#set sort_aux = last-date-received
+set sort=threads #sort by threads
+set sort_aux = last-date-received
+
+# Fetch mail shortcut
+set print_command="~/Documents/Script/mutt_print.sh"
+bind index,pager u bounce-message
+
+# Pre-fills the "From" address when replying to emails, based on the email a account that received the original mail
+set reverse_name 
+set envelope_from
+
+# Signature
+#set signature="~/.mutt/signature"
 
 ## Security
 source /usr/share/doc/mutt/samples/gpg.rc
