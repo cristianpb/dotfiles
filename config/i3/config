@@ -184,20 +184,24 @@ bindsym $mod+r mode "resize"
 #bar {
 #        status_command i3status
 #}
-bar 
-{
-	position top
-	font pango:FontAwesome, Icons 8
-	colors {
-		background $bg-color
-	    	separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-	}
-	status_command i3blocks -c ~/.config/i3/i3blocks.conf
-}
+#
+##iblocks
+#
+#bar 
+#{
+#	position top
+#	font pango:FontAwesome, Icons 8
+#	colors {
+#		background $bg-color
+#	    	separator #757575
+#		#                  border             background         text
+#		focused_workspace  $bg-color          $bg-color          $text-color
+#		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+#	}
+#	status_command i3blocks -c ~/.config/i3/i3blocks.conf
+#}
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
 ### Custom Keyboard Shortcuts ###
 
