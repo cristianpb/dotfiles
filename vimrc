@@ -64,9 +64,9 @@ set modeline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
+" Save movements larger than 5 lines to the jumplist.
+nnoremap <expr> j v:count ? (v:count > 5 ? "m'" . v:count : '') . 'j' : 'gj'
+nnoremap <expr> k v:count ? (v:count > 5 ? "m'" . v:count : '') . 'k' : 'gk'
 
 " Buffer movement
 :nnoremap <C-n> :bnext<CR>
@@ -156,6 +156,8 @@ Plugin 'ryanoasis/vim-devicons'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'junegunn/vim-emoji'
 Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'othree/html5.vim'
+Plugin 'luochen1990/rainbow'
 Plugin 'maralla/completor.vim'
 Plugin 'vimwiki/vimwiki'
 call vundle#end()            " required
@@ -203,15 +205,6 @@ let R_assign = 0 " disable _ to <-
 "let R_setwidth = 0 " need of setwith Console width adapted to window
 let R_hl_term = 1 " need of colorout 
 autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
-
-" Python IDE
-augroup vimrc_autocmds
-    autocmd!
-    " highlight characters past column 120
-    autocmd FileType python highlight Excess ctermbg=DarkGrey guibg=Black
-    autocmd FileType python match Excess /\%120v.*/
-    autocmd FileType python set nowrap
-    augroup END
 
 " Jedi
 let python_highlight_all = 1
@@ -274,7 +267,6 @@ let g:syntastic_auto_loc_list            = 1 " No erros list
 let g:syntastic_enable_signs             = 1 " No sign column
 let g:syntastic_check_on_open            = 1
 let g:syntastic_check_on_wq              = 0
-
 " Use vint for vim style
 let g:syntastic_vim_checkers=['vint'] " requires vint: pip install vim-vint
 
@@ -312,16 +304,14 @@ let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
 
 " Vimwiki
-"let g:vimwiki_list = [{'path': '~/vimwiki', 'template_path': '~/vimwiki/templates/',
-"          \ 'template_default': 'default', 
-"          \ 'path_html': '~/vimwiki/site_html/', 
-"          \ 'template_ext': '.tpl'}]
-          "\ 'path_html': '~/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
-
 let g:vimwiki_list = [{'path': '~/vimwiki', 'template_path': '~/vimwiki/templates/',
           \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.wiki',
-          \ 'path_html': '~/vimwiki/site_html/', 
+          \ 'path_html': '~/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
           \ 'template_ext': '.tpl'}]
 
-
 nmap <silent> <leader>wah :VimwikiAll2HTML<cr>
+let g:vimwiki_table_mappings = 0
+
+" Raibow parenteses
+let g:rainbow_active = 0 "0 if you want to enable it later via :RainbowToggle
+nmap <leader>R :RainbowToggle<cr>
