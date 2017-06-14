@@ -1,5 +1,5 @@
 [global]
-    font = "Inconsolata 8"
+    font = "Lato 8"
     allow_markup = yes
     format = "<b>%s %p</b>\n%b"
     sort = yes

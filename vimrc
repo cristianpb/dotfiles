@@ -316,10 +316,12 @@ let g:javascript_plugin_flow = 1
 "          \ 'template_default': 'default', 
 "          \ 'path_html': '~/vimwiki/site_html/', 
 "          \ 'template_ext': '.tpl'}]
+          "\ 'path_html': '~/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
 
 let g:vimwiki_list = [{'path': '~/vimwiki', 'template_path': '~/vimwiki/templates/',
           \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.wiki',
-          \ 'path_html': '~/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
+          \ 'path_html': '~/vimwiki/site_html/', 
           \ 'template_ext': '.tpl'}]
+
 
 nmap <silent> <leader>wah :VimwikiAll2HTML<cr>
