@@ -59,7 +59,18 @@ set modeline
 "set relativenumber
 
 " Position of cursor
-"set ruler
+set ruler
+
+" Better wrapping
+set breakindent
+set showbreak=\\\\\
+
+" Only syntax highlighting the first 200 characters of each line.
+set synmaxcol=200
+
+" Opening new files via :e, a breeze with TAB expansion.
+set wildmenu
+set wildmode=full
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
