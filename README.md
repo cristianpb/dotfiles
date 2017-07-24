@@ -1,3 +1,189 @@
 # Dotfiles
 
 Using [rcm](https://robots.thoughtbot.com/rcm-for-rc-files-in-dotfiles-repos)
+
+# Arch linux install
+
+* Create partitions
+* Format partitions
+
+```bash
+# mkfs.ext4 /dev/sdaY
+# mkswap /dev/sdaZ
+```
+
+* Mount system and swap
+
+```bash
+# swapon /dev/sdaZ
+# mount /dev/sda1 /mnt
+```
+
+* Use the pacstrap script to install the base package group:
+
+```bash
+# pacstrap /mnt base
+```
+
+* Generate an fstab file (use -U or -L to define by UUID or labels, respectively):
+
+```bash
+# genfstab -U /mnt >> /mnt/etc/fstab
+```
+
+* Change root into the new system:
+
+```
+# arch-chroot /mnt
+```
+
+* Set the time zone:
+
+```bash
+# ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+```
+
+* Run hwclock(8) to generate /etc/adjtime:
+
+```bash
+# hwclock --systohc
+```
+
+* Uncomment en_US.UTF-8 UTF-8 and other needed localizations in /etc/locale.gen, and generate them with:
+
+```bash
+# locale-gen
+```
+
+* Set the LANG variable in `/etc/locale.conf`
+
+```
+LANG=en_US.UTF-8
+```
+
+* If you set the keyboard layout, make the changes persistent in vconsole `/etc/vconsole.conf`
+
+```bash
+KEYMAP=de-latin1
+```
+
+* Create the hostname in `/etc/hostname`
+
+```bash
+myhostname
+```
+
+* Consider adding a matching entry to hosts `/etc/hosts`
+
+```
+127.0.0.1	localhost.localdomain	localhost
+::1		localhost.localdomain	localhost
+127.0.1.1	myhostname.localdomain	myhostname
+```
+
+* Optionally install dialog for usage of wifi-menu.
+
+```
+# pacman -S dialog
+```
+
+* Set the root password:
+
+```bash
+# passwd
+```
+
+* Boot loader: Grub
+
+```
+# pacman -S grub
+# grub-install --target=i386-pc /dev/sdx
+# grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+where /dev/sdx is the partitioned disk where grub is to be installed. 
+
+## Post installation instructions
+
+```
+pacman -S base base-devel iw wpa_supplicant intel-ucode grub dialog sudo
+```
+
+## Video
+
+### Xorg
+
+```
+pacman -S xorg xorg-apps xorg-server xorg-server-utils xorg-xinit xorg-xinit
+```
+
+### Drivers
+
+```
+pacman -S xf86-video bumblebee mesa nvidia xf86-video-intel
+```
+
+## Display manager
+
+```bash
+pacman -S lightdm lightdm-gtk-greeter
+```
+
+### Windows manager - *i3*
+
+```
+pacman -S i3 dmenu
+```
+
+### Network manager
+
+```
+pacman -S networkmanager network-manager-applet
+```
+
+### Touchpad
+
+```
+pacman -S xf86-input-libinput libinput
+```
+
+### Disks management
+
+```
+pacman -S udisks2 udiskie
+```
+
+### Additional
+
+```
+pacman -S tmux ranger mutt vim termite firefox xclip gnupg offlineimap pass notmuch notmuch-mutt msmtp dunst sxiv rsync zathura zathura-pdf-poppler zathura-djvu rofi inkscape gvfs feh libreoffice-still filezilla pavucontrol openssh
+```
+
+## Bluetooth
+
+```
+pacman -S alsa-utils bluez bluez-utils blueman pulseaudio-bluetooth
+```
+
+### Fonts
+
+```
+pacman -S ttf-inconsolata awesome-terminal-fonts powerline-fonts 
+```
+
+### Cower
+
+```
+# gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
+# curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower
+# makepkg -si PKGBUILD --noconfirm
+```
+
+* polybar-git
+* rcm
+
+### Python
+
+```
+pacman -S jupyter mathjax python-numpy python-matplotlib python-pandas
+```

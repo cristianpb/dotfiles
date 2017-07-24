@@ -31,7 +31,7 @@ path=/home/arch/Mail
 [user]
 name=Cristian
 primary_email=felipebrokate@gmail.com
-other_email=cristian.perez-brokate@chimie-paristech.fr;
+other_email=cperez@kernix.com;
 
 # Configuration for "notmuch new"
 #
