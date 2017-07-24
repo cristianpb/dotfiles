@@ -112,8 +112,8 @@ rg() {
 function def { sdcv --data-dir ~/Documents/Script/EnglishDic/ -n "$1" | less}
 function sig { sdcv --data-dir ~/Documents/Script/FrenchDic/ -n "$1" | less}
 
-# TMUX
-# If not running interactively, do not do anything
+## TMUX
+## If not running interactively, do not do anything
 [[ $- != *i* ]] && return
 [[ -z "$TMUX" ]] && exec tmux
 
@@ -174,3 +174,6 @@ PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
 alias tdark='cp ~/.config/termite/configDark ~/.config/termite/config' # keyboardlight
 alias tlight='cp ~/.config/termite/configLigth ~/.config/termite/config' # keyboardlight
 alias tnova='cp ~/.config/termite/configNova ~/.config/termite/config' # keyboardNova
+
+GPG_TTY=$(tty)
+export GPG_TTY

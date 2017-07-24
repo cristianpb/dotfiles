@@ -92,7 +92,7 @@ alias toshiba2pcR='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Clas
 alias pc2toshibaScript='rsync -avzh --delete --progress /home/arch/Documents/Script /run/media/arch/Toshiba2/Clases'
 alias toshiba2pcScript='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Clases/Script/ /home/arch/Documents/Script/'
 
-alias pc2toshibaTotal='rsync -avzh --delete --progress /home/arch/Documents/ /run/media/arch/Toshiba2/Clases/'
+alias pc2toshibaTotal='rsync -avzh --progress /home/arch/Documents/ /run/media/arch/Toshiba2/Clases/'
 alias toshiba2pcTotal='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Clases/ /home/arch/Documents'
 alias toshiba2pcMusic='rsync -avzh --delete --progress /run/media/arch/Toshiba/Music/ /home/arch/Musique/'
 alias toshiba2pcPictures='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Pictures/ /home/arch/Images/'
