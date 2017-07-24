@@ -48,10 +48,9 @@ set $urgent-bg-color     #E53935
 #bindsym $mod+d exec dmenu_run
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='rofi -dmenu -i -tokenize -color-enabled'
 bindsym $mod+d exec --no-startup-id rofi -show drun
-
 #bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 100 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 18"
 
-#rofi_power menu
+# rofi_power menu
 bindsym $mod+Shift+q exec ~/.config/i3/rofi_powermenu.sh
 
 # There also is the (new) i3-dmenu-desktop which only displays applications

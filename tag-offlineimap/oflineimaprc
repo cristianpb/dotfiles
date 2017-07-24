@@ -6,14 +6,14 @@ pythonfile = ~/.offlineimap2.py
 maxsyncaccounts = 1
 
 [Account Gmail]
-postsynchook = ~/Documents/Script/notmuch-hook.sh
+postsynchook = ~/.dotfiles/notmuch-hook.sh
 localrepository = Gmail-Local
 remoterepository = Gmail-Remote
 #autorefresh = 0.5
 #quick = 10
 
 [Account Kernix]
-postsynchook = ~/Documents/Script/notmuch-hook.sh
+postsynchook = ~/.dotfiles/notmuch-hook.sh
 localrepository = Kernix-Local
 remoterepository = Kernix-Remote
 
@@ -44,7 +44,6 @@ nametrans = lambda folder: {'Drafts':   '[Gmail]/Brouillons',
 [Repository Gmail-Remote]
 type = Gmail
 remoteuser = felipebrokate@gmail.com
-#remotepasseval = get_password("mutt_gmail")
 remotepasseval = get_pass("Gmail")
 folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
 nametrans = lambda folder: {'[Gmail]/Drafts':    'Drafts',
@@ -69,8 +68,7 @@ oauth2_refresh_token = 1/-qkD6DWmdfYbXLJb3iJqc13NWyy1ByTIAj9E9s15eAQ
 [Repository Kernix-Remote]
 type = Gmail
 remoteuser = cperez@kernix.com
-#remotepasseval = get_pass("Kernix")
-remotepasseval = "Ajkm55798"
+remotepasseval = get_pass("Kernix")
 folderfilter = lambda foldername: foldername not in ['[Gmail]/Tous les messages']
 nametrans = lambda folder: {'[Gmail]/Brouillons':    'Drafts',
                             '[Gmail]/Messages envoy&AOk-s': 'Sent',
