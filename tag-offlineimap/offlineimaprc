@@ -1,6 +1,6 @@
 [general]
 ui = ttyui
-accounts = Gmail,Chimie,Kernix
+accounts = Gmail,Kernix
 pythonfile = ~/.offlineimap2.py
 #pythonfile = ~/.offlineimap.py
 maxsyncaccounts = 1
@@ -9,13 +9,6 @@ maxsyncaccounts = 1
 postsynchook = ~/Documents/Script/notmuch-hook.sh
 localrepository = Gmail-Local
 remoterepository = Gmail-Remote
-#autorefresh = 0.5
-#quick = 10
-
-[Account Chimie]
-postsynchook = ~/Documents/Script/notmuch-hook.sh
-localrepository = Chimie-Local
-remoterepository = Chimie-Remote
 #autorefresh = 0.5
 #quick = 10
 
@@ -35,10 +28,6 @@ nametrans = lambda folder: {'Drafts':   '[Gmail]/Drafts',
                             'Starred':  '[Gmail]/Starred',
                             'Archive':  '[Gmail]/All Mail',
                             }.get(folder, folder)
-
-[Repository Chimie-Local]
-type = Maildir
-localfolders = ~/Mail/Chimie
 
 [Repository Kernix-Local]
 type = Maildir
@@ -77,22 +66,11 @@ oauth2_client_secret = bp_oH6HCoJe4k2c7gtfsC0EP
 #oauth2_request_url = https://accounts.google.com/o/oauth2/token
 oauth2_refresh_token = 1/-qkD6DWmdfYbXLJb3iJqc13NWyy1ByTIAj9E9s15eAQ
 
-[Repository Chimie-Remote]
-type = IMAP
-remoteuser = cristian.perez-brokate@chimie-paristech.fr
-remotehost = webmail.chimie-paristech.fr
-#remotepasseval = get_password("mutt_chimie")
-remotepasseval = get_pass("Chimie")
-#realdelete = no
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-#keepalive = 60
-#holdconnectionopen = yes
-
 [Repository Kernix-Remote]
 type = Gmail
 remoteuser = cperez@kernix.com
-#remotepasseval = get_password("mutt_gmail")
-remotepasseval = get_pass("Kernix")
+#remotepasseval = get_pass("Kernix")
+remotepasseval = "Ajkm55798"
 folderfilter = lambda foldername: foldername not in ['[Gmail]/Tous les messages']
 nametrans = lambda folder: {'[Gmail]/Brouillons':    'Drafts',
                             '[Gmail]/Messages envoy&AOk-s': 'Sent',

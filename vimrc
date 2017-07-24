@@ -179,13 +179,13 @@ let g:airline_theme='solarized'
 let g:airline#extensions#tmuxline#enabled = 1
 let g:tmuxline_preset = {
       \'a'    : '#S',
-      \'b'    : '#(~/Documents/Script/new_mail.sh)',
+      \'b'    : '#(~/Documents/Script/new_mail.sh)', 
       \'win'  : ['#W'],
       \'cwin' : '#F #W',
       \'y'    : '#(~/Documents/Script/tmux-slack-notifier.sh)',
       \'z'    : '%R'}
 
-" Promptline
+" Promptline " 
 "":PromptlineSnapshot! .shell_prompt.sh airline
 let g:promptline_preset = {
         \'a'    : [ promptline#slices#host() ],
@@ -315,3 +315,6 @@ let g:vimwiki_table_mappings = 0
 " Raibow parenteses
 let g:rainbow_active = 0 "0 if you want to enable it later via :RainbowToggle
 nmap <leader>R :RainbowToggle<cr>
+
+" Completor
+let g:completor_auto_trigger=0
