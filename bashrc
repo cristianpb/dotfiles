@@ -21,6 +21,7 @@ blue=$(tput setaf 4)
 green=$(tput setaf 2)
 
 PS1='\[$red\]\u\[$reset\] \[$blue\]\W\[$reset\] \$ '
+source ~/.shell_prompt.sh
 
 function extract()      # Handy Extract Program
  {
