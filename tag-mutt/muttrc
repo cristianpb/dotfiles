@@ -5,11 +5,12 @@ set sidebar_width   = 24
 color sidebar_new color221 color233
 
 # Sidebar Navigation ---------------------------------
-bind index,pager <down>   sidebar-next
-bind index,pager <up>     sidebar-prev
-bind index,pager <right>  sidebar-open
+#bind index,pager <down>   sidebar-next
+#bind index,pager <up>     sidebar-prev
+#bind index,pager <right>  sidebar-open
 bind index,pager b sidebar-toggle-visible # b toggles sidebar visibility
 set index_format="%4C %Z %?X?A&-? %{%d/%b/%y} %-12.12L %?M?(#%03M)&(%4c)? %?y?(%.20Y) ?%s"
+set display_filter="$HOME/.dotfiles/tag-mutt/mutt/local-date.py"
 
 # Status Bar -----------------------------------------
 set status_chars  = " *%A"
@@ -32,7 +33,7 @@ set beep_new              # bell on new mails
 set delete           # don't ask, just do
 unset confirmappend  # don't ask, just do!
 set quit             # don't ask, just do!!
-set text_flowed=yes # Format-Flowed
+set text_flowed=yes # Format-Flowed 
 
 # look and feel
 set pager_index_lines = 8
@@ -64,6 +65,7 @@ source ~/.mutt/mailboxes
 #macro index c "<change-vfolder>?" "Change to vfolder overview"
 #macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
+# Linux
 macro index <F8> \
      "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>" \
      "notmuch: search mail"
@@ -74,8 +76,16 @@ macro index <F6> \
      "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" \
      "notmuch: remove message from inbox"
 
+## Mac
+#macro index S \
+#  "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
+#  <shell-escape>~/Documents/Script/notmuch-mutt -r --prompt search<enter>\
+#  <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
+#  <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
+#  "notmuch: search mail"
+## format send
+#set send_charset="us-ascii:utf-8"
 
-folder-hook 'Chimie/*' 'source ~/.mutt/account_chimie'
 folder-hook 'Gmail/*' 'source ~/.mutt/account_gmail'
 folder-hook 'Kernix/*' 'source ~/.mutt/account_kernix'
 
@@ -86,7 +96,26 @@ macro index,pager <F5>  "<change-folder> =Kernix/INBOX<enter>"  "go Kernix"
 ## Default account
 source "~/.mutt/account_gmail"
 
-## Mailcap
+## Keybindings
+bind pager q         exit
+bind pager /         search
+#bind pager <up>      previous-line
+#bind pager <down>    next-line
+bind pager k         previous-line
+bind pager j         next-line
+bind pager gg        top
+bind pager G         bottom
+bind index gg        first-entry
+bind index G         last-entry
+bind pager K         previous-undeleted
+bind pager J         next-undeleted
+bind index K         previous-unread
+bind index J         next-unread
+bind index,pager R   group-reply
+bind index,pager \Cp sidebar-prev
+bind index,pager \Cn sidebar-next
+bind index,pager \Ci sidebar-open
+
 set mailcap_path	= ~/.mutt/mailcap
 alternative_order text/plain text/html
 auto_view text/html
@@ -108,7 +137,7 @@ set envelope_from
 # Signature
 #set signature="~/.mutt/signature"
 
-## Security
+# Security
 source /usr/share/doc/mutt/samples/gpg.rc
 #set pgp_use_gpg_agent = yes
 set pgp_timeout        = 3600       # how long to cache the pass-phrase
@@ -116,7 +145,7 @@ set pgp_timeout        = 3600       # how long to cache the pass-phrase
 #set crypt_replyencrypt = yes # automatically encrypt replies to  encrypted messages
 set pgp_sign_as        = "B212E65B"   # my Key ID
 
-## Paths
+# Paths
 source ~/.mutt/mutt-colors-solarized-dark-16.muttrc
 source ~/.mutt/alias
 set alias_file = ~/.mutt/alias # where to store aliases
