@@ -1,6 +1,6 @@
 # Dotfiles
 
-Using [rcm](https://robots.thoughtbot.com/rcm-for-rc-files-in-dotfiles-repos)
+Created using `create_links.sh`
 
 # Arch linux install
 
@@ -33,7 +33,7 @@ Using [rcm](https://robots.thoughtbot.com/rcm-for-rc-files-in-dotfiles-repos)
 
 * Change root into the new system:
 
-```
+```bash
 # arch-chroot /mnt
 ```
 
@@ -57,14 +57,14 @@ Using [rcm](https://robots.thoughtbot.com/rcm-for-rc-files-in-dotfiles-repos)
 
 * Set the LANG variable in `/etc/locale.conf`
 
-```
+```bash
 LANG=en_US.UTF-8
 ```
 
 * If you set the keyboard layout, make the changes persistent in vconsole `/etc/vconsole.conf`
 
 ```bash
-KEYMAP=de-latin1
+KEYMAP=fr-latin1
 ```
 
 * Create the hostname in `/etc/hostname`
@@ -75,7 +75,7 @@ myhostname
 
 * Consider adding a matching entry to hosts `/etc/hosts`
 
-```
+```bash
 127.0.0.1	localhost.localdomain	localhost
 ::1		localhost.localdomain	localhost
 127.0.1.1	myhostname.localdomain	myhostname
@@ -83,7 +83,7 @@ myhostname
 
 * Optionally install dialog for usage of wifi-menu.
 
-```
+```bash
 # pacman -S dialog
 ```
 
@@ -95,7 +95,7 @@ myhostname
 
 * Boot loader: Grub
 
-```
+```bash
 # pacman -S grub
 # grub-install --target=i386-pc /dev/sdx
 # grub-mkconfig -o /boot/grub/grub.cfg
@@ -105,7 +105,7 @@ where /dev/sdx is the partitioned disk where grub is to be installed.
 
 ## Post installation instructions
 
-```
+```bash
 pacman -S base base-devel iw wpa_supplicant intel-ucode grub dialog sudo
 ```
 
@@ -113,13 +113,13 @@ pacman -S base base-devel iw wpa_supplicant intel-ucode grub dialog sudo
 
 ### Xorg
 
-```
+```bash
 pacman -S xorg xorg-apps xorg-server xorg-server-utils xorg-xinit xorg-xinit
 ```
 
 ### Drivers
 
-```
+```bash
 pacman -S xf86-video bumblebee mesa nvidia xf86-video-intel
 ```
 
@@ -129,51 +129,51 @@ pacman -S xf86-video bumblebee mesa nvidia xf86-video-intel
 pacman -S lightdm lightdm-gtk-greeter
 ```
 
-### Windows manager - *i3*
+## Windows manager - *i3*
 
-```
+```bash
 pacman -S i3 dmenu
 ```
 
-### Network manager
+## Network manager
 
-```
+```bash
 pacman -S networkmanager network-manager-applet
 ```
 
-### Touchpad
+## Touchpad
 
-```
+```bash
 pacman -S xf86-input-libinput libinput
 ```
 
-### Disks management
+## Disks management
 
-```
+```bash
 pacman -S udisks2 udiskie
 ```
 
-### Additional
+## Additional
 
-```
-pacman -S tmux ranger mutt vim termite firefox xclip gnupg offlineimap pass notmuch notmuch-mutt msmtp dunst sxiv rsync zathura zathura-pdf-poppler zathura-djvu rofi inkscape gvfs feh libreoffice-still filezilla pavucontrol openssh
+```bash
+pacman -S tmux ranger mutt vim termite firefox xclip gnupg offlineimap pass notmuch notmuch-mutt msmtp dunst sxiv rsync zathura zathura-pdf-poppler zathura-djvu rofi inkscape gvfs feh libreoffice-still filezilla pavucontrol openssh w3m ctags
 ```
 
 ## Bluetooth
 
-```
+```bash
 pacman -S alsa-utils bluez bluez-utils blueman pulseaudio-bluetooth
 ```
 
-### Fonts
+## Fonts
 
-```
+```bash
 pacman -S ttf-inconsolata awesome-terminal-fonts powerline-fonts 
 ```
 
-### Cower
+## Cower
 
-```
+```bash
 # gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
 # curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower
 # makepkg -si PKGBUILD --noconfirm
@@ -182,8 +182,8 @@ pacman -S ttf-inconsolata awesome-terminal-fonts powerline-fonts
 * polybar-git
 * rcm
 
-### Python
+## Python
 
-```
+```bash
 pacman -S jupyter mathjax python-numpy python-matplotlib python-pandas
 ```
