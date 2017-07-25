@@ -33,7 +33,7 @@ set beep_new              # bell on new mails
 set delete           # don't ask, just do
 unset confirmappend  # don't ask, just do!
 set quit             # don't ask, just do!!
-set text_flowed=yes # Format-Flowed 
+set text_flowed=yes # Format-Flowed
 
 # look and feel
 set pager_index_lines = 8
@@ -116,6 +116,7 @@ bind index,pager \Cp sidebar-prev
 bind index,pager \Cn sidebar-next
 bind index,pager \Ci sidebar-open
 
+## Mailcap 
 set mailcap_path	= ~/.mutt/mailcap
 alternative_order text/plain text/html
 auto_view text/html
@@ -137,7 +138,7 @@ set envelope_from
 # Signature
 #set signature="~/.mutt/signature"
 
-# Security
+## Security
 source /usr/share/doc/mutt/samples/gpg.rc
 #set pgp_use_gpg_agent = yes
 set pgp_timeout        = 3600       # how long to cache the pass-phrase
@@ -145,7 +146,7 @@ set pgp_timeout        = 3600       # how long to cache the pass-phrase
 #set crypt_replyencrypt = yes # automatically encrypt replies to  encrypted messages
 set pgp_sign_as        = "B212E65B"   # my Key ID
 
-# Paths
+## Paths
 source ~/.mutt/mutt-colors-solarized-dark-16.muttrc
 source ~/.mutt/alias
 set alias_file = ~/.mutt/alias # where to store aliases

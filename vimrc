@@ -190,7 +190,7 @@ let g:airline_theme='solarized'
 let g:airline#extensions#tmuxline#enabled = 1
 let g:tmuxline_preset = {
       \'a'    : '#S',
-      \'b'    : '#(~/Documents/Script/new_mail.sh)', 
+      \'b'    : '#(~/.dotfiles/new_mail.sh)', 
       \'win'  : ['#W'],
       \'cwin' : '#F #W',
       \'y'    : '#(~/Documents/Script/tmux-slack-notifier.sh)',
