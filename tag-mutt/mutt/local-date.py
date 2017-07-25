@@ -25,7 +25,7 @@ if date:
         sys.stdout.write(fp.getvalue())
     except:
         import traceback
-        print traceback.format_exc()
+        print(traceback.format_exc())
         sys.stdout.write(raw_msg)
 else:
     # just write it out

@@ -162,6 +162,7 @@ declare -a FILES_TO_SYMLINK=(
     'toprc'
     'vimrc'
     'xinitrc'
+    'Xresources'
 )
 
 # FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin" # add in vim and the binaries
@@ -198,6 +199,7 @@ done
 
 declare -a FILES_TO_SYMLINK=(
     'mutt/mutt'
+    'mutt/muttrc'
     'zsh/zshrc'
     'zsh/zshenv'
 )

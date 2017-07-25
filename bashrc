@@ -125,6 +125,8 @@ rg() {
 . /etc/profile.d/vte.sh
 
 alias ddisk='udisksctl unmount -b /dev/sdc1;udisksctl unmount -b /dev/dm-0;udisksctl lock -b /dev/sdc2;udisksctl power-off -b /dev/sdc;'
+alias ledu='sudo ~/.config/i3/leds_up.sh' # keyboardlight
+alias ledd='sudo ~/.config/i3/leds_down.sh' # keyboardlight
 
 # If not running interactively, do not do anything
 [[ $- != *i* ]] && return
@@ -138,6 +140,15 @@ fi
 
 # Set editor  vim
 export EDITOR=vim
+
+# Export ruby gems
+PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
+# Install locally gems
+export GEM_HOME=$(ruby -e 'print Gem.user_dir')
+
+# GPG variables
+GPG_TTY=$(tty)
+export GPG_TTY
 
 # Java for neo4j
 #export JAVA_HOME=/usr/lib/jvm/java-8-openjdk

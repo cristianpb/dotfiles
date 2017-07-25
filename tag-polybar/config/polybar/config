@@ -16,7 +16,11 @@ foreground = #dfdfdf
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
-alert = #bd2c40
+alert = #40
+black = #000
+white = #dfdfdf
+blue = #00f
+green = #0f0
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -33,7 +37,7 @@ foreground = ${colors.foreground}
 line-size = 1
 line-color = #f00
 
-border-size = 2
+border-size = 1
 border-color = #00000000
 
 padding-left = 0
@@ -42,20 +46,16 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 2
 
-font-0 = Lato:style=Regular:size=8;4
+font-0 = fixed:pixelsize=9;1
 font-1 = FontAwesome:pixelsize=9;2
-#font-1 = Inconsolata:fontformat=truetype:size=8:antialias=false;0
-#font-0 = fixed:pixelsize=10;1
-#font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-#font-2 = siji:pixelsize=10;1
+font-2 = siji:pixelsize=9;1
 
-modules-left = bspwm i3
-modules-center = 
-modules-right = mail hamster xbacklight volume wlan eth battery weather date powermenu
-#modules-right = filesystem backlight-acpi volume xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-left = i3
+modules-center = xwindow
+modules-right = mail xbacklight volume wlan eth battery weather date powermenu
 
 tray-position = right
-tray-padding = 4
+tray-padding = 2
 ;tray-transparent = true
 ;tray-background = #0063ff
 
@@ -70,9 +70,61 @@ tray-padding = 4
 ;scroll-up = i3wm-wsnext
 ;scroll-down = i3wm-wsprev
 
+;;;;;;;;;;;;;;;;;;;;;;;;;
+;;monitor = ${env:MONITOR:HDMI-1}
+;width = 100%
+;height = 15
+;;offset-x = 1%
+;;offset-y = 1%
+;radius = 6.0
+;fixed-center = false
+;
+;background = ${colors.background}
+;foreground = ${colors.foreground}
+;
+;line-size = 1
+;line-color = #f00
+;
+;border-size = 2
+;border-color = #00000000
+;
+;padding-left = 0
+;padding-right = 2
+;
+;module-margin-left = 1
+;module-margin-right = 2
+;
+;font-0 = Lato:style=Regular:size=8;4
+;font-1 = FontAwesome:pixelsize=9;2
+;#font-1 = Inconsolata:fontformat=truetype:size=8:antialias=false;0
+;#font-0 = fixed:pixelsize=10;1
+;#font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+;#font-2 = siji:pixelsize=10;1
+;
+;modules-left = bspwm i3
+;modules-center = 
+;modules-right = mail hamster xbacklight volume wlan eth battery weather date powermenu
+;#modules-right = filesystem backlight-acpi volume xkeyboard memory cpu wlan eth battery temperature date powermenu
+;
+;tray-position = right
+;tray-padding = 4
+;;tray-transparent = true
+;;tray-background = #0063ff
+;
+;;wm-restack = bspwm
+;;wm-restack = i3
+;
+;;override-redirect = true
+;
+;;scroll-up = bspwm-desknext
+;;scroll-down = bspwm-deskprev
+;
+;;scroll-up = i3wm-wsnext
+;;scroll-down = i3wm-wsprev
+
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:30:...%
+label = %title:0:80:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -212,6 +264,7 @@ interval = 3.0
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = #9f78e1
 label-connected = " %essid%"
+label-connected-foreground=${colors.white}
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -246,7 +299,7 @@ format-disconnected =
 type = internal/date
 interval = 5
 
-date =
+date = %d -
 date-alt = " %Y-%m-%d"
 
 time = %H:%M
@@ -257,34 +310,49 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #0a6cf5
 
 label = %date% %time%
+label-foreground = ${colors.white}
 
 [module/volume]
 type = internal/volume
+speaker-mixer = Speaker
+headphone-mixer = Headphone
+headphone-id = 9
 
-format-volume = <label-volume> <bar-volume>
-label-volume = 
-label-volume-foreground = ${root.foreground}
+format-volume = <ramp-volume> <label-volume>
+label-muted =  muted
+label-muted-foreground = #66
+label-volume-foreground=${colors.white}
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-foreground=${colors.foreground}
 
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = |
-bar-volume-indicator-font = 2
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
+#format-volume = <label-volume> <bar-volume>
+#label-volume = 
+#label-volume-foreground = ${root.foreground}
+#
+#format-muted-prefix = " "
+#format-muted-foreground = ${colors.foreground-alt}
+#label-muted = sound muted
+#
+#bar-volume-width = 10
+#bar-volume-foreground-0 = #55aa55
+#bar-volume-foreground-1 = #55aa55
+#bar-volume-foreground-2 = #55aa55
+#bar-volume-foreground-3 = #55aa55
+#bar-volume-foreground-4 = #55aa55
+#bar-volume-foreground-5 = #f5a70a
+#bar-volume-foreground-6 = #ff5555
+#bar-volume-gradient = false
+#bar-volume-indicator = |
+#bar-volume-indicator-font = 2
+#bar-volume-fill = ─
+#bar-volume-fill-font = 2
+#bar-volume-empty = ─
+#bar-volume-empty-font = 2
+#bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
@@ -296,15 +364,16 @@ format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
 
 format-discharging = <ramp-capacity> <label-discharging>
+label-discharging-foreground=${colors.white}
 format-discharging-underline = ${self.format-charging-underline}
 
 format-full =  
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
 ramp-capacity-foreground = ${colors.foreground-alt}
 
 animation-charging-0 = 
@@ -382,18 +451,10 @@ exec = ~/.dotfiles/new_mail.sh
 type = custom/script
 interval = 10
 format = <label>
+format-foreground = ${colors.white}
 format-underline = ${colors.foreground}
 #format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 exec = ~/.config/i3/IconicWeather.sh "EUR|FR|FR623|Paris"
-
-[module/hamster]
-type = custom/script
-interval = 2
-
-exec = ~/.config/polybar/hamster.sh
-
-format-prefix = " "
-format-prefix-foreground = ${colors.magenta}
 
 ; vim:ft=dosini
