@@ -17,7 +17,11 @@ if date:
         epoch_time = mktime_tz(tz_tuple)
         msg.add_header('Local-Date', formatdate( epoch_time, localtime=True ))
 
-        from cStringIO import StringIO
+        #from cStringIO import StringIO
+        try:
+            from StringIO import StringIO
+        except ImportError:
+            from io import StringIO
         from email.generator import Generator
         fp = StringIO()
         g = Generator(fp, mangle_from_=False, maxheaderlen=200)
