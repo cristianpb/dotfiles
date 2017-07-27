@@ -159,6 +159,7 @@ declare -a FILES_TO_SYMLINK=(
     'README.md'
     'Rprofile'
     'tmux.conf'
+    'tmux.theme'
     'toprc'
     'vimrc'
     'xinitrc'

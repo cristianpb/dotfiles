@@ -254,4 +254,5 @@ exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id unclutter
 exec --no-startup-id udiskie 
+exec --no-startup-id compton 
 exec "sh -c 'sleep 300; exec ~/Documents/Script/BingDownloadImage.sh'"
