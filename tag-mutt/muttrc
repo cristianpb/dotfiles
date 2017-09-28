@@ -51,7 +51,7 @@ set mbox_type=Maildir
 
 ## url view
 #macro pager \cu <pipe-entry>'urlview'<enter> 'Follow links with urlview' 
-macro pager \Cu "|urlview<enter>" "call urlview to open links"
+macro pager \Cu "|urlscan<enter>" "call urlview to open links"
 
 set folder = "~/Mail"
 set spoolfile = "+Gmail/INBOX"

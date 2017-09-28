@@ -129,7 +129,7 @@ print_success() {
 
 
 dir=~/.dotfiles                        # dotfiles directory
-dir_backup=~/dotfiles_old             # old dotfiles backup directory
+dir_backup=/tmp/dotfiles_old             # old dotfiles backup directory
 
 # Get current dir (so run this script from anywhere)
 
@@ -156,7 +156,6 @@ declare -a FILES_TO_SYMLINK=(
     'msmtprc'
     'new_mail.sh'
     'notmuch-hook.sh'
-    'README.md'
     'Rprofile'
     'tmux.conf'
     'tmux.theme'
@@ -203,6 +202,9 @@ declare -a FILES_TO_SYMLINK=(
     'mutt/muttrc'
     'zsh/zshrc'
     'zsh/zshenv'
+    'mpd/mpd'
+    'mpd/mpdconf'
+    'ncmpcpp/ncmpcpp'
 )
 
 # FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin" # add in vim and the binaries

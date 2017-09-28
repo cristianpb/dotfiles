@@ -216,10 +216,10 @@ new_window 1pixel
 bindsym Mod4+Control+l exec i3-msg workspace $workspace10 && i3lock -i ~/Images/Wallpaper/wallpaper.png --tiling --dpms --color 000000
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioLowerVolume exec amixer sset Master 5%- && pkill -RTMIN+1 i3blocks
-#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
-#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+#bindsym XF86AudioRaiseVolume exec amixer sset Master 5%+ && pkill -RTMIN+1 i3blocks
+#bindsym XF86AudioLowerVolume exec amixer sset Master 5%- && pkill -RTMIN+1 i3blocks
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
 
 # Sreen brightness controls
@@ -229,14 +229,17 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightne
 # Touchpad controls
 bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
 
+# Print Screen
+bindsym Print exec scrot ~/Images/`date +%Y-%m-%d_%H:%M:%S`.png
+
 # Media player controls
 #bindsym XF86AudioPlay exec playerctl play
 #bindsym XF86AudioPause exec playerctl pause
-bindsym $mod+F10 exec playerctl play-pause #toggle play-pause
 #bindsym XF86AudioNext exec playerctl next
-bindsym $mod+F12 exec playerctl next
 #bindsym XF86AudioPrev exec playerctl previous
-bindsym $mod+F11 exec playerctl previous
+bindsym $mod+F11 exec mpc prev
+bindsym $mod+F12 exec mpc next
+bindsym $mod+F10 exec mpc toggle
 
 # Keyboard Brightness
 bindsym XF86KbdBrightnessDown exec "~/.config/i3/leds_down.sh"
@@ -255,4 +258,6 @@ exec --no-startup-id blueman-applet
 exec --no-startup-id unclutter
 exec --no-startup-id udiskie 
 exec --no-startup-id compton 
-exec "sh -c 'sleep 300; exec ~/Documents/Script/BingDownloadImage.sh'"
+exec --no-startup-id dunst 
+exec --no-startup-id mpd 
+exec "sh -c 'sleep 300; exec ~/.dotfiles/BingDownloadImage.sh'"

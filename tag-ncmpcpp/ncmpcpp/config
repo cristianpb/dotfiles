@@ -1,0 +1,164 @@
+% egrep -v '^#' .ncmpcpp/config
+#mpd_music_dir = "/home/user/Music/"
+mpd_music_dir = "~/Music_clean"
+
+#mpd_host = "127.0.0.1"
+mpd_port = "6600"
+
+
+####songs####
+#([cyan,date],[cyan, length], [cyan,title] | [cyan,date],[blue,title],[cyan])
+song_list_format = "{$7%a $7%l $7%t}|{$7%a $5%t $7}"
+#([red,artist],[magenta],[red,length])
+song_status_format = "$2%a $6 $2%l"
+#([cyan,length],[blue,title],[end current color])
+song_library_format = "$7%l $5%t$9"
+#([magenta,blue,magenta]|[blue]
+now_playing_prefix = "{ $6◀$5●$6▶}|{$5●}"
+#now_playing_prefix = "{  $2●}"
+#([blue],[cyan,artist],[blue,title],[yellow,album],[magenta,length] 
+song_columns_list_format = "(4)[]{} (15)[cyan]{a} (30)[blue]{t} (46)[white]{b} (5)[magenta]{l}"
+
+####misc####
+playlist_separate_albums = "no"
+playlist_display_mode = "columns" (classic/columns)
+browser_display_mode = "columns"
+volume_change_step = "5"
+progressbar_look = "─╼·"
+user_interface = "alternative"
+data_fetching_delay = "yes"
+media_library_primary_tag = "artist"
+default_find_mode = "wrapped"
+header_visibility = "no"
+statusbar_visibility = "yes"
+titles_visibility = "no"
+header_text_scrolling = "yes" 
+cyclic_scrolling = "yes"
+startup_screen = "media_library"
+ask_before_clearing_playlists = "yes"
+clock_display_seconds = "yes"
+display_volume_level = "yes"
+display_bitrate = "yes"
+display_remaining_time = "yes"
+ignore_leading_the = "no"
+mouse_support = "no"
+#use_console_editor = "yes"
+autocenter_mode = "yes"
+
+####colors####
+colors_enabled = "yes"
+empty_tag_color = "blue"
+#header_window_color = "red"
+volume_color = "black"
+state_line_color = "black"
+color1 = "blue"
+color2 = "blue"
+current_item_prefix = "$(green)$r"
+current_item_suffix = "$/r$(end)"
+current_item_inactive_column_prefix = "$(white)$r"
+current_item_inactive_column_suffix = "$/r$(end)"
+main_window_color = "blue"
+progressbar_color = "magenta" 
+progressbar_elapsed_color = "cyan"
+statusbar_color = "green"
+alternative_ui_separator_color = "red"
+window_border_color = "green"
+active_window_border = "cyan"
+discard_colors_if_item_is_selected = "no"
+
+######colors_enabled                        = "yes"
+######song_status_format                    = "$0{$8%t$9} on {$5%b$9} by {$3%a}" 
+######song_columns_list_format              = "(30)[green]{a} (40)[]{t|f} (30)[blue]{b}"
+######now_playing_prefix                    = "$b$8> $/b$9"
+######now_playing_suffix                    = ""
+######progressbar_look                      = "─  "
+######
+######user_interface                        = "classic"
+######playlist_display_mode                 = "columns"
+#######media_library_disable_two_column_mode = "yes"
+######header_visibility                     = "no"
+######statusbar_visibility                  = "yes"
+######titles_visibility                     = "no"
+######playlist_disable_highlight_delay      = "1"
+######message_delay_time                    = "1"
+######autocenter_mode                       = "yes"
+######centered_cursor                       = "yes"
+######mouse_support                         = "yes"
+######discard_colors_if_item_is_selected    = "yes"
+#######fancy_scrolling                       = "yes"
+######ignore_leading_the                    = "yes"
+######
+######main_window_color           = "default"
+######main_window_highlight_color = "default"
+######progressbar_color           = "red"
+######progressbar_elapsed_color = "white"
+######active_column_color         = "yellow"
+######enable_window_title         = "yes"
+
+##message_delay_time = "3"
+##playlist_shorten_total_times = "yes"
+##playlist_display_mode = "classic"
+##browser_display_mode = "columns"
+##search_engine_display_mode = "columns"
+##playlist_editor_display_mode = "columns"
+##autocenter_mode = "yes"
+##centered_cursor = "yes"
+##user_interface = "classic"
+##follow_now_playing_lyrics = "yes"
+##locked_screen_width_part = "60"
+##display_bitrate = "no"
+##external_editor = "nano"
+##
+##main_window_highlight_color = "white"
+##
+##progressbar_elapsed_color = "white"
+##progressbar_color = "black"
+##
+##progressbar_look = "▃▃▃"
+###progressbar_look = "─⊙ "
+##
+##mouse_support = "yes"
+##header_visibility = "no"
+##statusbar_visibility = "no"
+##
+##statusbar_color = "white"
+##visualizer_color = "white"
+##titles_visibility = "no"
+##enable_window_title = "yes"
+##
+##now_playing_prefix = "$b"
+##now_playing_suffix = "$8$/b"
+##
+###now_playing_prefix = "$u$2"
+###now_playing_suffix = "$2$/u$2"
+##
+##song_columns_list_format = "(6)[]{} (23)[red]{a} (26)[yellow]{t|f} (40)[green]{b} (4)[blue]{l}"
+##
+##color1 = "white"
+##color2 = "black"
+##
+###song_list_format = " $7%l  $2%t $R$5%a "
+##
+###uncomment both statement's below if you want to display the albumart
+##
+###execute_on_song_change="~/.dotfiles/art.sh"
+##song_list_format = "                       $2%t $R$5%a "
+##
+##song_status_format = "$b$7♫ $2%a $4⟫$3⟫ $8%t $4⟫$3⟫ $5%b "
+##song_window_title_format = " {%a} - {%t}"
+
+#mpd_host = localhost
+#mpd_port = 6600
+#mpd_connection_timeout = 5
+#mpd_music_dir = "~/Music"
+#
+#####timeouts and delays####
+#mpd_crossfade_time = "3"
+#
+#visualizer_fifo_path = "/tmp/mpd.fifo"
+#visualizer_output_name = "my_fifo"
+#visualizer_sync_interval = "30" 
+#visualizer_in_stereo = "yes"
+#visualizer_type = "spectrum"
+#visualizer_look = "+|"
+execute_on_song_change = "~/.dotfiles/notify.sh"
