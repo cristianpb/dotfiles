@@ -126,8 +126,10 @@ pacman -S xf86-video bumblebee mesa nvidia xf86-video-intel
 ## Display manager
 
 ```bash
-pacman -S lightdm lightdm-gtk-greeter
+pacman -S xorg-xdm
 ```
+
+Enable the display manager service: `# systemctl enable xdm.service`
 
 ## Windows manager - *i3*
 
@@ -168,7 +170,7 @@ pacman -S alsa-utils bluez bluez-utils blueman pulseaudio-bluetooth
 ## Fonts
 
 ```bash
-pacman -S ttf-inconsolata awesome-terminal-fonts powerline-fonts 
+pacman -S ttf-inconsolata awesome-terminal-fonts powerline-fonts noto-fonts-emoji
 ```
 
 ## Cower

@@ -9,7 +9,8 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #222
+;background = #222
+background = #00000000
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -22,7 +23,7 @@ white = #dfdfdf
 blue = #00f
 green = #0f0
 
-[bar/example]
+[bar/top]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
 height = 15
@@ -56,8 +57,8 @@ modules-right = mail xbacklight volume wlan eth battery weather date powermenu
 
 tray-position = right
 tray-padding = 2
-;tray-transparent = true
-;tray-background = #0063ff
+tray-transparent = true
+tray-background = #0063ff
 
 ;wm-restack = bspwm
 ;wm-restack = i3
@@ -443,8 +444,8 @@ margin-bottom = 1
 type = custom/script
 interval = 10
 format = <label>
-format-prefix = "  "
-format-prefix-foreground = ${colors.foreground-alt}
+#format-prefix = "  "
+#format-prefix-foreground = ${colors.foreground-alt}
 exec = ~/.dotfiles/new_mail.sh
 
 [module/weather]

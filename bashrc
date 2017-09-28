@@ -71,15 +71,10 @@ sdcv "$1" -u "Moby Thesaurus II"
 
 function levantese() { sudo rtcwake -vm no -a -t $(date +%s -d "${1%%/}") ; }
 
-alias enscp='ssh -X c.perez-brokate@193.51.253.15 -p 993'
-#alias enscp='ssh c.perez-broka@193.51.253.222 -Y'
-alias conssh='ssh -p 7777 cristian@127.0.0.1 -Y'
 alias klab='ssh -p 2266 lab@hq.kernix.com'
-alias leri8='ssh -p 993 c.perez-brokate@193.51.253.15 -L 7777:10.0.1.122:22'
-alias leri2='ssh c.perez-brokate@193.51.253.15 -L 2222:10.0.1.120:993'
-alias leri5='ssh c.perez-brokate@193.51.253.15 -L 2222:10.0.1.121:993'
-alias leri6='ssh c.perez-brokate@193.51.253.15 -L 2222:10.0.1.123:993'
-alias leri7='ssh c.perez-brokate@193.51.253.15 -L 2222:10.0.1.124:993'
+function getklab() { scp -P 2266 -pr lab@hq.kernix.com:/Users/lab/Cristian/"${1%%/}" ./ ; }
+function putklab() { scp -P 2266 -pr "${1%%/}" lab@hq.kernix.com:/Users/lab/Cristian/  ; }
+
 alias toshiba2pc='rsync -avzh --delete --progress /run/media/arch/Toshiba/UPMC /home/arch/Documents'
 alias pc2toshiba='rsync -avzh --delete --progress /home/arch/Documents/UPMC /run/media/arch/Toshiba'
 alias pc2toshibaMusic='rsync -avzh --delete --progress /home/arch/Music /run/media/arch/Toshiba'
@@ -98,9 +93,6 @@ alias toshiba2pcTotal='rsync -avzh --delete --progress /run/media/arch/Toshiba2/
 alias toshiba2pcMusic='rsync -avzh --delete --progress /run/media/arch/Toshiba/Music/ /home/arch/Musique/'
 alias toshiba2pcPictures='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Pictures/ /home/arch/Images/'
 
-function putssh() { scp -P 7777 -pr "${1%%/}" cristian@127.0.0.1:~/ ; }
-function getssh() { scp -P 7777 -pr cristian@127.0.0.1:/home/cristian/"${1%%/}" ./ ; }
-
 export PATH=/opt/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
 
@@ -109,6 +101,7 @@ alias manus='cd /home/arch/Documents/UPMC/Presentations/These/Manuscrit/'
 alias vi='vim'
 alias bbon='sudo tee /proc/acpi/bbswitch <<< ON'
 alias bboff='sudo rmmod nvidia_uvm; sudo rmmod nvidia; sudo tee /proc/acpi/bbswitch <<< OFF;'
+alias ncm='ncmpcpp'
 
 alias ltx="grep -l '\\documentclass' *tex | xargs latexmk -pdf -pvc -silent > /dev/null 2>&1 &"
 
@@ -153,3 +146,4 @@ export GPG_TTY
 # Java for neo4j
 #export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 #export JAVA_HOME= /usr/lib/jvm/java-7-openjdk/jre
+source ~/.dotfiles/APIs

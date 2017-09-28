@@ -19,6 +19,7 @@
     startup_notification = false
     dmenu = "/usr/bin/dmenu -p dunst: -nb #FFFFFF -nf #000000 -sb #94DBFF -sf #000000"
     browser = /home/knopwob/bin/url_dispatcher
+    icon_position = left
 
 
 [frame]
