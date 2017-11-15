@@ -6,9 +6,9 @@ set imap_user        = "felipebrokate@gmail.com"
 set my_PWgmail       = `pass Mail/Gmail`
 set imap_pass        = $my_PWgmail
 set postponed        = "+Gmail/Drafts"
-set header_cache     = ~/.mutt/accounts/gmail/headers
-set message_cachedir = ~/.mutt/accounts/gmail/bodies
-set certificate_file = ~/.mutt/accounts/gmail/certificates
+set header_cache     = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/cache/certificates
 
 set mbox = "+Gmail/Archives"
 

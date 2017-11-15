@@ -9,8 +9,8 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-;background = #222
-background = #00000000
+background = #222
+#background = #00000000 # Transparent
 background-alt = #444
 ;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
@@ -39,7 +39,8 @@ line-size = 1
 line-color = #f00
 
 border-size = 1
-border-color = #00000000
+#border-color = #00000000
+border-color = #222
 
 padding-left = 0
 padding-right = 2
@@ -57,8 +58,10 @@ modules-right = mail xbacklight volume wlan eth battery weather date powermenu
 
 tray-position = right
 tray-padding = 2
-tray-transparent = true
-tray-background = #0063ff
+#tray-transparent = true
+#tray-background = #0063ff
+tray-transparent = false
+tray-background = #222
 
 ;wm-restack = bspwm
 ;wm-restack = i3

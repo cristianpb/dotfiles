@@ -29,7 +29,7 @@ function reset_background
            #scale down the cover to 30% of the original
            #printf "\e]20;${COVER};70x70+0+00:op=keep-aspect\a"
            notify-send --urgency=low --expire-time=5000 --app-name=ncmpcpp \
-           --icon="$COVER" "$album" "$artist\n$title"
+           --icon="$COVER" "$title" "$artist\n$album"
         else
             reset_background
         fi

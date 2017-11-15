@@ -101,8 +101,7 @@ autocmd BufReadPost *
 set viminfo^=%
 
 " Clipboard to use it exterior
-"set clipboard=unnamedplus
-"set clipboard=unnamed
+set clipboard=unnamedplus
 
 " Format-Flowed text
 setlocal fo+=aw
@@ -139,6 +138,7 @@ filetype off                  " required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'morhetz/gruvbox'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'benmills/vimux'
@@ -184,7 +184,8 @@ let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#branch#enabled=1
 let g:airline#extensions#hunks#enabled=0
 let g:airline_powerline_fonts = 1
-let g:airline_theme='solarized'
+"let g:airline_theme='solarized'
+let g:airline_theme='gruvbox'
 
 " Tmuxline
 let g:airline#extensions#tmuxline#enabled = 1
@@ -287,7 +288,8 @@ nmap <F6> :TagbarToggle<CR>
 " Solarized
 let g:solarized_termcolors = 16
 set background=dark
-colorscheme solarized
+"colorscheme solarized
+colorscheme gruvbox 
 let g:solarized_termtrans = 1
 syntax enable
 
