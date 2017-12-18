@@ -131,48 +131,48 @@ nmap <Leader>se :setlocal spell! spelllang=en_gb<CR>
 map <F8> : !w <bar> ./% <CR> " Compile
 nnoremap <F5> :w <CR> :!make <CR> " Makefile
 
-"" Vundle 
-" git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-set nocompatible              " be iMproved, required
-filetype off                  " required
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'morhetz/gruvbox'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'benmills/vimux'
-Plugin 'davidhalter/jedi-vim'
-Plugin 'edkolev/promptline.vim'
-Plugin 'edkolev/tmuxline.vim'
-Plugin 'epeli/slimux'
-Plugin 'honza/vim-snippets'
-Plugin 'itchyny/calendar.vim'
-Plugin 'jalvesaq/Nvim-R'
-"Plugin 'jgors/vimux-ipy'
-Plugin 'junegunn/vim-easy-align'
-Plugin 'lervag/vimtex' "Latex suite that replace gerw/vim-latex-suite
-Plugin 'majutsushi/tagbar'
-Plugin 'pangloss/vim-javascript'
-Plugin 'roxma/vim-paste-easy'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'sirver/ultisnips'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Vimjas/vim-python-pep8-indent'
-"Plugin 'ryanoasis/vim-devicons'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'junegunn/vim-emoji'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'othree/html5.vim'
-Plugin 'luochen1990/rainbow'
-Plugin 'maralla/completor.vim'
-Plugin 'vimwiki/vimwiki'
-call vundle#end()            " required
-filetype plugin indent on    " required
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+call plug#begin('~/.vim/plugged')
+Plug 'VundleVim/Vundle.vim'
+Plug 'morhetz/gruvbox'
+Plug 'airblade/vim-gitgutter'
+Plug 'altercation/vim-colors-solarized'
+Plug 'benmills/vimux'
+Plug 'davidhalter/jedi-vim'
+Plug 'edkolev/promptline.vim'
+Plug 'edkolev/tmuxline.vim'
+Plug 'epeli/slimux'
+Plug 'honza/vim-snippets'
+Plug 'itchyny/calendar.vim'
+Plug 'jalvesaq/Nvim-R'
+"Plun 'jgors/vimux-ipy'
+Plug 'junegunn/vim-easy-align'
+Plug 'lervag/vimtex' "Latex suite that replace gerw/vim-latex-suite
+Plug 'majutsushi/tagbar'
+Plug 'pangloss/vim-javascript'
+Plug 'roxma/vim-paste-easy'
+Plug 'scrooloose/nerdtree'
+Plug 'w0rp/ale'
+Plug 'sirver/ultisnips'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'Vimjas/vim-python-pep8-indent'
+"Plun 'ryanoasis/vim-devicons'
+Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/vim-emoji'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'othree/html5.vim'
+Plug 'luochen1990/rainbow'
+Plug 'maralla/completor.vim'
+Plug 'vimwiki/vimwiki'
+call plug#end()
 
 " NerdTreeToogle
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
@@ -205,8 +205,6 @@ let g:promptline_preset = {
         \'c'    : [ promptline#slices#vcs_branch() ],
         \'warn' : [ promptline#slices#last_exit_code() ],
         \'z'    : [ promptline#slices#python_virtualenv() ]}
-
-
 
 " Nvim-R options
 let R_pdfviewer = 'zathura'
@@ -270,17 +268,16 @@ vmap <Enter> <Plug>(EasyAlign)
 "" Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-" Syntastic
-nnoremap <leader>sc :SyntasticToggleMode<CR> 
-let g:syntastic_mode_map                 = { 'mode': 'passive', 'active_filetypes': [],'passive_filetypes': [] }
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_enable_highlighting      = 1 " Highlight
-let g:syntastic_auto_loc_list            = 1 " No erros list
-let g:syntastic_enable_signs             = 1 " No sign column
-let g:syntastic_check_on_open            = 1
-let g:syntastic_check_on_wq              = 0
-" Use vint for vim style
-let g:syntastic_vim_checkers=['vint'] " requires vint: pip install vim-vint
+
+" Ale requires flake8 for python / requires vint: pip install vim-vint
+nnoremap <leader>sc :ALEToggle<CR>
+let g:ale_enabled = 0
+let g:ale_completion_enabled = 1
+let g:ale_fixers = {
+\   'javascript': ['eslint'],
+\   'python': ['flake8'], 
+\   'vim': ['vint'],
+\}
 
 " Tagbar
 nmap <F6> :TagbarToggle<CR>

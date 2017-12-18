@@ -71,33 +71,34 @@ sdcv "$1" -u "Moby Thesaurus II"
 
 function levantese() { sudo rtcwake -vm no -a -t $(date +%s -d "${1%%/}") ; }
 
-alias klab='ssh -p 2266 lab@hq.kernix.com'
+#alias klab='ssh -p 2266 lab@hq.kernix.com'
+alias klab='ssh -p 2266 -L 8899:localhost:8899 lab@hq.kernix.com'
 function getklab() { scp -P 2266 -pr lab@hq.kernix.com:/Users/lab/Cristian/"${1%%/}" ./ ; }
 function putklab() { scp -P 2266 -pr "${1%%/}" lab@hq.kernix.com:/Users/lab/Cristian/  ; }
 
-alias toshiba2pc='rsync -avzh --delete --progress /run/media/arch/Toshiba/UPMC /home/arch/Documents'
-alias pc2toshiba='rsync -avzh --delete --progress /home/arch/Documents/UPMC /run/media/arch/Toshiba'
-alias pc2toshibaMusic='rsync -avzh --delete --progress /home/arch/Music /run/media/arch/Toshiba'
-alias pc2toshibaPictures='rsync -avzh --delete --progress /home/arch/Images/ /run/media/arch/Toshiba2/Pictures/'
-alias toshiba2pcPapeles='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Clases/Papeles /home/arch/Documents'
-alias pc2toshibaPapeles='rsync -avzh --delete --progress /home/arch/Documents/Papeles/ /run/media/arch/Toshiba2/Clases/Papeles/'
-alias pc2toshibaCV='rsync -avzh --delete --progress /home/arch/Documents/CVS/ /run/media/arch/Toshiba2/Clases/CVS/'
-alias toshiba2pcCV='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Clases/CVS/ /home/arch/Documents/CVS/'
-alias pc2toshibaR='rsync -avzh --delete --progress /home/arch/R/examples/ /run/media/arch/Toshiba2/Clases/R/'
-alias toshiba2pcR='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Clases/R/ /home/arch/R/examples/'
-alias pc2toshibaScript='rsync -avzh --delete --progress /home/arch/Documents/Script /run/media/arch/Toshiba2/Clases'
-alias toshiba2pcScript='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Clases/Script/ /home/arch/Documents/Script/'
+alias toshiba2pc='rsync -avzh --delete --progress /run/media/cris/Toshiba/UPMC /home/cris/Documents'
+alias pc2toshiba='rsync -avzh --delete --progress /home/cris/Documents/UPMC /run/media/cris/Toshiba'
+alias pc2toshibaMusic='rsync -avzh --delete --progress /home/cris/Music /run/media/cris/Toshiba'
+alias pc2toshibaPictures='rsync -avzh --delete --progress /home/cris/Images/ /run/media/cris/Toshiba2/Pictures/'
+alias toshiba2pcPapeles='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/Papeles /home/cris/Documents'
+alias pc2toshibaPapeles='rsync -avzh --delete --progress /home/cris/Documents/Papeles/ /run/media/cris/Toshiba2/Clases/Papeles/'
+alias pc2toshibaCV='rsync -avzh --delete --progress /home/cris/Documents/CVS/ /run/media/cris/Toshiba2/Clases/CVS/'
+alias toshiba2pcCV='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/CVS/ /home/cris/Documents/CVS/'
+alias pc2toshibaR='rsync -avzh --delete --progress /home/cris/R/examples/ /run/media/cris/Toshiba2/Clases/R/'
+alias toshiba2pcR='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/R/ /home/cris/R/examples/'
+alias pc2toshibaScript='rsync -avzh --delete --progress /home/cris/Documents/Script /run/media/cris/Toshiba2/Clases'
+alias toshiba2pcScript='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/Script/ /home/cris/Documents/Script/'
 
-alias pc2toshibaTotal='rsync -avzh --delete --progress /home/arch/Documents/ /run/media/arch/Toshiba2/Clases/'
-alias toshiba2pcTotal='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Clases/ /home/arch/Documents'
-alias toshiba2pcMusic='rsync -avzh --delete --progress /run/media/arch/Toshiba/Music/ /home/arch/Musique/'
-alias toshiba2pcPictures='rsync -avzh --delete --progress /run/media/arch/Toshiba2/Pictures/ /home/arch/Images/'
+alias pc2toshibaTotal='rsync -avzh --delete --progress /home/cris/Documents/ /run/media/cris/Toshiba2/Clases/'
+alias toshiba2pcTotal='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/ /home/cris/Documents'
+alias toshiba2pcMusic='rsync -avzh --delete --progress /run/media/cris/Toshiba/Music/ /home/cris/Musique/'
+alias toshiba2pcPictures='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Pictures/ /home/cris/Images/'
 
 export PATH=/opt/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
 
 function cowerup() { cower -df "${1%%/}" ; cd ~/.builds/"${1%%/}" ; makepkg -si ; cd ~ ; }
-alias manus='cd /home/arch/Documents/UPMC/Presentations/These/Manuscrit/'
+alias manus='cd /home/cris/Documents/UPMC/Presentations/These/Manuscrit/'
 alias vi='vim'
 alias bbon='sudo tee /proc/acpi/bbswitch <<< ON'
 alias bboff='sudo rmmod nvidia_uvm; sudo rmmod nvidia; sudo tee /proc/acpi/bbswitch <<< OFF;'
@@ -118,6 +119,7 @@ rg() {
 . /etc/profile.d/vte.sh
 
 alias ddisk='udisksctl unmount -b /dev/sdc1;udisksctl unmount -b /dev/dm-0;udisksctl lock -b /dev/sdc2;udisksctl power-off -b /dev/sdc;'
+alias udisk='udisksctl unlock -b /dev/sdc2;udisksctl mount -b /dev/dm-0;'
 alias ledu='sudo ~/.config/i3/leds_up.sh' # keyboardlight
 alias ledd='sudo ~/.config/i3/leds_down.sh' # keyboardlight
 
@@ -147,3 +149,5 @@ export GPG_TTY
 #export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 #export JAVA_HOME= /usr/lib/jvm/java-7-openjdk/jre
 source ~/.dotfiles/APIs
+
+#CHROME_PATH="/usr/bin/google-chrome-unstable" node test_nick.js
