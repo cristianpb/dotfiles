@@ -10,7 +10,6 @@ alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias ls='ls --color=auto'
 PS1='[\u@\h \W]\$ '
 
 #PS1='[\u@\h \W]\$ '  # To leave the default one
@@ -116,7 +115,6 @@ rg() {
     fi
 }
 
-. /etc/profile.d/vte.sh
 
 alias ddisk='udisksctl unmount -b /dev/sdc1;udisksctl unmount -b /dev/dm-0;udisksctl lock -b /dev/sdc2;udisksctl power-off -b /dev/sdc;'
 alias udisk='udisksctl unlock -b /dev/sdc2;udisksctl mount -b /dev/dm-0;'
@@ -148,6 +146,12 @@ export GPG_TTY
 # Java for neo4j
 #export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 #export JAVA_HOME= /usr/lib/jvm/java-7-openjdk/jre
-source ~/.dotfiles/APIs
 
 #CHROME_PATH="/usr/bin/google-chrome-unstable" node test_nick.js
+
+# No mac
+#. /etc/profile.d/vte.sh
+#source ~/.dotfiles/APIs
+alias top='htop'
+alias ls='ls -G'
+export PATH="/usr/local/sbin:$PATH"

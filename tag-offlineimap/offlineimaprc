@@ -55,7 +55,7 @@ nametrans = lambda folder: {'[Gmail]/Drafts':    'Drafts',
                             }.get(folder, folder)
 # Necessary as of OfflineIMAP 6.5.4
 #'[Gmail]/Trash':     'trash',
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+sslcacertfile = /usr/local/etc/openssl/cert.pem
 #keepalive = 60
 #holdconnectionopen = yes
 auth_mechanisms = GSSAPI, CRAM-MD5, XOAUTH2, PLAIN, LOGIN
@@ -79,7 +79,7 @@ nametrans = lambda folder: {'[Gmail]/Brouillons':    'Drafts',
                             '[Gmail]/Tous les messages':  'Archive',
                             }.get(folder, folder)
 ## Necessary as of OfflineIMAP 6.5.4
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+sslcacertfile = /usr/local/etc/openssl/cert.pem
 auth_mechanisms = GSSAPI, CRAM-MD5, XOAUTH2, PLAIN, LOGIN
 oauth2_client_id = 227304564556-j0o0l300kj8puegjpqetj7si2cbofa2g.apps.googleusercontent.com
 oauth2_client_secret = MRQH2-_Q5gLa7q1_WfAmpZaq
