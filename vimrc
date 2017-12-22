@@ -123,13 +123,18 @@ nmap <Leader>sf :setlocal spell! spelllang=fr<CR>
 nmap <Leader>sl :setlocal spell! spelllang=es<CR>
 nmap <Leader>se :setlocal spell! spelllang=en_gb<CR>
 
+
+"""""""""""""""
+"  Shortcuts  "
+"""""""""""""""
+
+map <F8> : !w <bar> ./% <CR> " Compile
+nnoremap <F5> :w <CR> :!make <CR> " Makefile
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Shortcuts
-map <F8> : !w <bar> ./% <CR> " Compile
-nnoremap <F5> :w <CR> :!make <CR> " Makefile
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
