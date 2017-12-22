@@ -150,6 +150,7 @@ echo "done"
 declare -a FILES_TO_SYMLINK=(
     'toprc'
     'bashrc'
+    'bash_profile'
     'BingDownloadImage.sh'
     'checkmail.sh'
     'create_links.sh'
@@ -200,6 +201,8 @@ done
 declare -a FILES_TO_SYMLINK=(
     'mutt/mutt'
     'mutt/muttrc'
+    'offlineimap/offlineimaprc'
+    'offlineimap/offlineimap2.py'
     'zsh/zshrc'
     'zsh/zshenv'
     'mpd/mpd'

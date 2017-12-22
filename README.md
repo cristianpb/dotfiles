@@ -2,6 +2,46 @@
 
 Created using `create_links.sh`
 
+# OSX conf
+
+```bash
+brew install caskroom/cask/iterm2;
+brew install tmux ranger mutt vim offlineimap pass notmuch msmtp openssh ctags gpg-agent;
+mkdir ~/.dotfiles;
+git clone https://github.com/cristianpb/dotfiles.git ~/.dotfiles
+#vim :PromptlineSnapshot! .shell_prompt.sh airline
+brew tap caskroom/fonts
+brew cask install font-inconsolata-nerd-font
+```
+
+## gpg keys
+
+```bash
+gpg --list-keys
+cp ~/.dotfiles/gpg-agent.conf .gnupg/gpg-agent.conf
+gpg --import XXX.asc
+gpg --import XXX.gpg
+```
+
+## Pass
+
+* Initiate pass with gpg key
+```
+pass init B212E65B
+```
+* Insert passwords
+```
+pass insert Mail/Gmail
+pass insert Mail/Kernix
+```
+
+## Offlineimap
+
+```python
+ssl=true
+sslcacertfile = /usr/local/etc/openssl/cert.pem
+```
+
 # Arch linux install
 
 * Create partitions
