@@ -201,6 +201,8 @@ done
 declare -a FILES_TO_SYMLINK=(
     'mutt/mutt'
     'mutt/muttrc'
+    'offlineimap/offlineimaprc'
+    'offlineimap/offlineimap2.py'
     'zsh/zshrc'
     'zsh/zshenv'
     'mpd/mpd'
