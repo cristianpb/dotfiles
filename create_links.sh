@@ -150,6 +150,7 @@ echo "done"
 declare -a FILES_TO_SYMLINK=(
     'toprc'
     'bashrc'
+    'bash_profile'
     'BingDownloadImage.sh'
     'checkmail.sh'
     'create_links.sh'
