@@ -45,7 +45,7 @@ nametrans = lambda folder: {'Drafts':   '[Gmail]/Brouillons',
 type = Gmail
 remoteuser = felipebrokate@gmail.com
 remotepasseval = get_pass("Gmail")
-folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Sent Mail']
 nametrans = lambda folder: {'[Gmail]/Drafts':    'Drafts',
                             '[Gmail]/Sent Mail': 'Sent',
                             '[Gmail]/Important':   'Important',
