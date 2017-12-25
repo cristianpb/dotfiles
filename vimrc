@@ -72,6 +72,10 @@ set synmaxcol=200
 set wildmenu
 set wildmode=full
 
+" Folding
+"set foldmethod=indent
+"set foldnestmax=2
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -123,13 +127,18 @@ nmap <Leader>sf :setlocal spell! spelllang=fr<CR>
 nmap <Leader>sl :setlocal spell! spelllang=es<CR>
 nmap <Leader>se :setlocal spell! spelllang=en_gb<CR>
 
+
+"""""""""""""""
+"  Shortcuts  "
+"""""""""""""""
+
+map <F8> : !w <bar> ./% <CR> " Compile
+nnoremap <F5> :w <CR> :!make <CR> " Makefile
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Shortcuts
-map <F8> : !w <bar> ./% <CR> " Compile
-nnoremap <F5> :w <CR> :!make <CR> " Makefile
 
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -149,46 +158,66 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'epeli/slimux'
 Plug 'honza/vim-snippets'
 Plug 'itchyny/calendar.vim'
-Plug 'jalvesaq/Nvim-R'
+Plug 'jalvesaq/Nvim-R' " R - vim
 "Plun 'jgors/vimux-ipy'
-Plug 'junegunn/vim-easy-align'
-Plug 'lervag/vimtex' "Latex suite that replace gerw/vim-latex-suite
-Plug 'majutsushi/tagbar'
-Plug 'pangloss/vim-javascript'
-Plug 'roxma/vim-paste-easy'
-Plug 'scrooloose/nerdtree'
-Plug 'w0rp/ale'
-Plug 'sirver/ultisnips'
-Plug 'tpope/vim-fugitive'
+Plug 'junegunn/vim-easy-align' " Align text <Shift><Enter>
+Plug 'lervag/vimtex' " Latex suite that replace gerw/vim-latex-suite
+Plug 'majutsushi/tagbar' " Ctags <F6>
+Plug 'pangloss/vim-javascript' "Js hightlight
+Plug 'roxma/vim-paste-easy' " Avoid indent break when paste
+Plug 'scrooloose/nerdtree' " File manager <F3>
+Plug 'w0rp/ale' " Asynchronous linter <leader>sc
+Plug 'sirver/ultisnips' " Snippets
+Plug 'tpope/vim-fugitive' " Git-vim
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Vimjas/vim-python-pep8-indent'
-"Plun 'ryanoasis/vim-devicons'
-Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/vim-emoji'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'othree/html5.vim'
-Plug 'luochen1990/rainbow'
-Plug 'maralla/completor.vim'
-Plug 'vimwiki/vimwiki'
+Plug 'Vimjas/vim-python-pep8-indent' " Better python indent
+"Plun 'ryanoasis/vim-devicons' " Icons to vim
+Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
+Plug 'junegunn/vim-emoji' " Emojis <C-X><C-U>
+Plug 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
+Plug 'othree/html5.vim' " Hightlight
+Plug 'luochen1990/rainbow' " Parentheses highlight <leader>R
+Plug 'maralla/completor.vim' 
+Plug 'vimwiki/vimwiki' " Vimwiki notes <leader>ww
 call plug#end()
 
-" NerdTreeToogle
+""""""""""""""""""""
+"  NerdTreeToogle  "
+""""""""""""""""""""
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 nmap <silent> <F3> :NERDTreeToggle<CR>
 
-" Airline
+"""""""""""""
+"  Airline  "
+"""""""""""""
+" Dont use whitespace
 let g:airline#extensions#whitespace#enabled = 0
+
+" Use tabline
 let g:airline#extensions#tabline#enabled = 1
+
+" Use branch
 let g:airline#extensions#branch#enabled=1
+
+" Use hunks
 let g:airline#extensions#hunks#enabled=0
+
+" Use powerline fonts
 let g:airline_powerline_fonts = 1
+
+" Theme
 "let g:airline_theme='solarized'
 let g:airline_theme='gruvbox'
 
-" Tmuxline
+""""""""""""""
+"  Tmuxline  "
+""""""""""""""
+" use airline
 let g:airline#extensions#tmuxline#enabled = 1
+
+" Conf tmuxline
 let g:tmuxline_preset = {
       \'a'    : '#S',
       \'b'    : '#(~/.dotfiles/new_mail.sh)', 
@@ -197,8 +226,12 @@ let g:tmuxline_preset = {
       \'y'    : '#(~/Documents/Script/tmux-slack-notifier.sh)',
       \'z'    : '%R'}
 
-" Promptline " 
-"":PromptlineSnapshot! .shell_prompt.sh airline
+""""""""""""""""
+"  Promptline  "
+""""""""""""""""
+" Create snapshot using ':PromptlineSnapshot! .shell_prompt.sh airline'
+"
+" Conf promptline
 let g:promptline_preset = {
         \'a'    : [ promptline#slices#host() ],
         \'b'    : [ promptline#slices#cwd() ],
@@ -206,46 +239,97 @@ let g:promptline_preset = {
         \'warn' : [ promptline#slices#last_exit_code() ],
         \'z'    : [ promptline#slices#python_virtualenv() ]}
 
-" Nvim-R options
+"""""""""""""""""""""""""""
+"  Nvim-R: use R and vim  "
+"""""""""""""""""""""""""""
+" Default pdf viewer 
 let R_pdfviewer = 'zathura'
-let R_in_buffer = 0 " tmux and R
+
+" tmux and R
+let R_in_buffer = 0 
+
+" Dont use R.app (mac) or Rstudio for graphic
 let R_applescript = 0
+
+" Make a tmux split
 let R_tmux_split = 1
-let R_assign = 0 " disable _ to <-
-"let R_setwidth = 0 " need of setwith Console width adapted to window
+
+" Disable _ to <-
+let R_assign = 0 
+
+" need of setwith Console width adapted to window
+"let R_setwidth = 0 
+
+" need of colorout
 let R_hl_term = 1 " need of colorout 
+
+" If exit buffer then exit the command ligne
 autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
 
-" Jedi
+"""""""""""""""""""""""""""
+"  Jedi: python vim help  "
+"""""""""""""""""""""""""""
 let python_highlight_all = 1
+
+" Completions command
 let g:jedi#completions_command = '<C-N>'
+
+" See usages of a variable
 let g:jedi#usages_command = '<leader>z'
+
+" Dont show popup when writing dot
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
+
+" Max doc height
 let g:jedi#max_doc_height = 30
+
+" No automatic import after 
 let g:jedi#smart_auto_mappings = 0 " no automatic import after from
 "map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
-" UltiSnips
+"""""""""""""""
+"  Ultisnips  "
+"""""""""""""""
+" Edit in vertical split
 let g:UltiSnipsEditSplit='vertical' " If you want :UltiSnipsEdit to split your window.
+
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger='<tab>'
-"let g:UltiSnipsJumpForwardTrigger="<c-b>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Create own snips
 set runtimepath+=~/.vim/my-snippets
+
+" Directory for own snips
 let g:UltiSnipsSnippetsDir='~/.vim/my-snippets'
 
-" Vimux Vslime
+""""""""""""""""""""""""""""""""""""""""""""""
+"  Vimux: send commands from vim to terinal  "
+""""""""""""""""""""""""""""""""""""""""""""""
+" Use nearest pane
 let g:VimuxUseNearest = 1
+
+" Height of terminal 
 let g:VimuxHeight = '30'
+
+" Create a new terminal
 map <Leader>vp :VimuxPromptCommand<CR> 
+
+" Run the current command ?
 map <Leader>rb :call VimuxRunCommand("")<CR> " Run the current file with rspec
 function! VimuxSlime()
  call VimuxSendText(@v)
  call VimuxSendKeys('Enter')
 endfunction
 
-" Slimux
+" If text is selected, save it in the v buffer and send that buffer it to tmux
+vmap <LocalLeader><ENTER> "vy :call VimuxSlime()<CR>
+" Select current paragraph and send it to tmux
+nmap <LocalLeader><ENTER> vip<LocalLeader>vs<CR>
+
+"""""""""""""""""""""
+"  Slimux: Testing  "
+"""""""""""""""""""""
 let g:slimux_python_ipython = 1
 "nnoremap <C-c><C-c> :SlimuxREPLSendLine<CR>
 "vnoremap <C-c><C-c> :SlimuxREPLSendLine<CR>
@@ -256,75 +340,110 @@ vmap <Leader>s :SlimuxREPLSendSelection<CR>
 "map <Leader>a :SlimuxShellLast<CR>
 "map <Leader>k :SlimuxSendKeysLast<CR>
 
-" Vimuxslime
-" If text is selected, save it in the v buffer and send that buffer it to tmux
-vmap <LocalLeader><ENTER> "vy :call VimuxSlime()<CR>
-" Select current paragraph and send it to tmux
-nmap <LocalLeader><ENTER> vip<LocalLeader>vs<CR>
-
-" Easy Align
-"" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+""""""""""""""""
+"  Easy align  "
+""""""""""""""""
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
-"" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-
-" Ale requires flake8 for python / requires vint: pip install vim-vint
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"  Ale: requires flake8 for python and vint for vim lighting (pip install 
+"  vim-vint  "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Toggle ALE with <leader>sc
 nnoremap <leader>sc :ALEToggle<CR>
+
+" Not enable by default
 let g:ale_enabled = 0
+
+" Do compleition
 let g:ale_completion_enabled = 1
+
+" Use fixers
 let g:ale_fixers = {
 \   'javascript': ['eslint'],
 \   'python': ['flake8'], 
 \   'vim': ['vint'],
 \}
 
-" Tagbar
+""""""""""""
+"  Tagbar  "
+""""""""""""
+" Open tag list with <F6>
 nmap <F6> :TagbarToggle<CR>
 
-" Solarized
+"""""""""""
+"  Theme  "
+"""""""""""
+" 16 colors theme
 let g:solarized_termcolors = 16
+
+" Black theme
 set background=dark
+
+" Set color scheme
 "colorscheme solarized
 colorscheme gruvbox 
+
+" Use theme transparency if terminal has
 let g:solarized_termtrans = 1
-syntax enable
 
+""""""""""""""
+"  Fugitive  "
+""""""""""""""
+" When doing Gdiff make a vertical split by default
+set diffopt+=vertical
 
-" Fugitive
-set diffopt+=vertical "Vertical split by default
-
-" Folding
-"set foldmethod=indent
-"set foldnestmax=2
-
-" Git gutter (Git diff)
+"""""""""""""""""""""""""""
+"  Git gutter (git diff)  "
+"""""""""""""""""""""""""""
+" Not enable by default
 let g:gitgutter_enabled=0
+
+" Activate using <leader>d
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
-" Calendar
+""""""""""""""
+"  Calendar  "
+""""""""""""""
+" Sync to google calendar
 "let g:calendar_google_calendar = 1
 
+"""""""""""
+"  Emoji  "
+"""""""""""
 " Emoji completion for md files (:app<CTRL-X><CTRL-U> to find :apple:)
 setlocal completefunc=emoji#complete
 
-" JavaScript vim
+""""""""""""
+"  Js vim  "
+""""""""""""
 let g:javascript_plugin_jsdoc = 1
 let g:javascript_plugin_ngdoc = 1
 let g:javascript_plugin_flow = 1
 
-" Vimwiki
+"""""""""""""
+"  Vimwiki  "
+"""""""""""""
+" Configuration
 let g:vimwiki_list = [{'path': '~/vimwiki', 'template_path': '~/vimwiki/templates/',
           \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.wiki',
           \ 'path_html': '~/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
           \ 'template_ext': '.tpl'}]
 
+" Transform to html
 nmap <silent> <leader>wah :VimwikiAll2HTML<cr>
 let g:vimwiki_table_mappings = 0
 
-" Raibow parenteses
+"""""""""""""""""""""""""
+"  Rainbow Parentheses  "
+"""""""""""""""""""""""""
 let g:rainbow_active = 0 "0 if you want to enable it later via :RainbowToggle
 nmap <leader>R :RainbowToggle<cr>
 
-" Completor
+"""""""""""""""
+"  Completor  "
+"""""""""""""""
 let g:completor_auto_trigger=0
