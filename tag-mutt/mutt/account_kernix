@@ -15,7 +15,7 @@ set mbox = "+Kernix/Archives"
 set realname      = "Cristian PEREZ"
 set from          = "cperez@kernix.com"
 # Conf msmtp
-set sendmail="/usr/bin/msmtp"
+set sendmail="/usr/local/bin/msmtp"
 set use_from=yes
 set envelope_from=yes
 

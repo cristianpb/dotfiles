@@ -155,3 +155,12 @@ export GPG_TTY
 alias top='htop'
 alias ls='ls -G'
 export PATH="/usr/local/sbin:$PATH"
+export PATH="~/.bin:$PATH"
+
+
+# Point perl to local modules
+export PERL_LOCAL_LIB_ROOT="$HOME/perl5"
+export PERL5LIB="$PERL_LOCAL_LIB_ROOT/lib/perl5"
+export PERL_MB_OPT="--install_base \"$PERL_LOCAL_LIB_ROOT\""
+export PERL_MM_OPT="INSTALL_BASE=$PERL_LOCAL_LIB_ROOT"
+export PATH="$PERL_LOCAL_LIB_ROOT/bin:$PATH";
