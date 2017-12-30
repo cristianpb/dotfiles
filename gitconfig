@@ -1,0 +1,33 @@
+[core]
+  editor = vim
+  excludesfile = ~/.gitignore
+[color]
+  ui = auto
+[help]
+  autocorrect = 1
+[alias]
+  co = checkout
+  db = "!f() { [ -n \"$1\" ] && git branch -d $1 && git push origin :$1; }; f"
+  dbf = "!f() { [ -n \"$1\" ] && git branch -D $1 && git push origin :$1; }; f"
+  dc = diff --cached
+  lg = log --oneline --decorate --all --graph -30
+  pr = !git push -u && hub pull-request
+  st = status
+  tg = "!f() { [ -n \"$1\" ] && git tag -s -m $1 $1; }; f"
+  up = !git fetch origin && git rebase origin/master
+  co-pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+  merge-pr = "!f() { git fetch origin pull/$1/head:pr/$1 && git merge pr/$1; }; f"
+  recommit = "!f() { git commit --amend --no-edit; }; f"
+#[merge]
+#  ff = only
+[push]
+  default = current
+#[status]
+#  branch = 1
+#  short = 1
+[user]
+  email = felipebrokate@gmail.com
+  name = cristianpb
+  signingkey = B212E65B
+[commit]
+  gpgsign = true
