@@ -314,8 +314,21 @@ pacman -S alsa-utils bluez bluez-utils blueman pulseaudio-bluetooth
 
 ## Fonts
 
-```bash
+* Download popular fonts
+
+```sh
 pacman -S ttf-inconsolata awesome-terminal-fonts powerline-fonts noto-fonts-emoji
+```
+
+* Add [InconsolataGo nerd font](https://github.com/ryanoasis/nerd-fonts/releases)
+
+```sh
+curl https://github.com/ryanoasis/nerd-fonts/releases/download/v1.2.0/InconsolataGo.zip --output InconsolataGo.zip
+mkdir /usr/share/fonts/InconsolataGo
+mv InconsolataGo.zip /usr/share/fonts/InconsolataGo
+extract /usr/share/fonts/InconsolataGo/InconsolataGo.zip
+chmod 0555 /usr/share/fonts/InconsolataGo
+chmod 0444 /usr/share/fonts/InconsolataGo/InconsolataGo.zip
 ```
 
 ## Cower
