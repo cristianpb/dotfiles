@@ -12,6 +12,7 @@ git clone https://github.com/cristianpb/dotfiles.git ~/.dotfiles
 vim -cmd "+PromptlineSnapshot! .shell_prompt.sh airline" +qall
 brew tap caskroom/fonts
 brew cask install font-inconsolata-nerd-font
+pip install -U mutt_ics
 ```
 
 ## gpg keys
@@ -38,6 +39,7 @@ pass insert Mail/Kernix
 ## Offlineimap
 
 ```python
+# .offlineimaprc
 ssl=true
 sslcacertfile = /usr/local/etc/openssl/cert.pem
 ```

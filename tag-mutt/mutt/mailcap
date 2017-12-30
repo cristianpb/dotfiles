@@ -4,11 +4,16 @@ text/html; w3m -I %{charset} -T text/html; copiousoutput;
 #        copiousoutput
 text/html;  /usr/bin/firefox %s >/dev/null 2>&1; needsterminal
 #text/html;  elinks -dump %s; nametemplate=%s.html; copiousoutput
-###text/html;                      ~/.mutt/tiny.pl %s ; copiousoutput ;  nametemplate=%s.html
-###text/plain;                      ~/.mutt/tiny.pl %s 't' ; copiousoutput ; nametemplate=%s.html
 image/*; sxiv %s 
-application/pdf; { set -m \; /bin/mv -T %s %s.mv \; ( zathura %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
-audio/* ; /usr/bin/mplayer %s ; copiousoutput
-video/* ; /usr/bin/mplayer %s ; copiousoutput
+#audio/* ; /usr/bin/mplayer %s ; copiousoutput
+#video/* ; /usr/bin/mplayer %s ; copiousoutput
 text/calendar; mutt-ics; copiousoutput
 application/ics; mutt-ics; copiousoutput 
+
+Image/JPEG;~/.dotfiles/view_attachement.sh %s
+Image/PNG; ~/.dotfiles/view_attachement.sh %s
+Image/GIF; ~/.dotfiles/view_attachement.sh %s
+Application/PDF; ~/.dotfiles/view_attachement.sh %s
+#text/html; ~/.dotfiles/view_attachement.sh %s html
+Application/vnd.ms-excel; /usr/local/bin/view_attachment %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice'
+Application/msword; /usr/local/bin/view_attachment %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice'
