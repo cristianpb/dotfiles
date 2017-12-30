@@ -1,7 +1,7 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Sets how many lines of history VIM has to remember
+" Set how many lines of history VIM has to remember
 set history=700
 
 " Enable filetype plugins
@@ -147,6 +147,7 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
+"Plug 'rhysd/vim-grammarous'
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'lifepillar/vim-solarized8'
@@ -229,10 +230,6 @@ let g:tmuxline_preset = {
       \'cwin' : '#F #W',
       \'y'    : '#(~/.config/i3/IconicWeather.sh "EUR|FR|FR623|Paris")',
       \'z'    : '%R'}
-
-
-" Theme
-"let g:tmuxline_theme = 'jellybeans'
 
 """"""""""""""""
 "  Promptline  "
@@ -400,9 +397,8 @@ let g:gruvbox_termcolors = 16
 "let g:gruvbox_italic=1
 
 " Set color scheme
-colorscheme gruvbox 
+colorscheme gruvbox
 "colorscheme solarized8
-
 
 """"""""""""""
 "  Fugitive  "
@@ -464,3 +460,11 @@ nmap <leader>R :RainbowToggle<cr>
 "  Completor  "
 """""""""""""""
 let g:completor_auto_trigger=0
+
+""""""""""""""""""""""""""""""
+"  Language Tool: Testing, corrections?   "
+""""""""""""""""""""""""""""""
+"let g:grammarous#languagetool_cmd = 'languagetool'
+"let g:grammarous#show_first_error = 1
+"let g:grammarous#use_vim_spelllang = 1
+"nmap <F7> <Plug>(grammarous-open-info-window)
