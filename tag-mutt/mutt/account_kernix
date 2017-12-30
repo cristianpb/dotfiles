@@ -6,9 +6,9 @@ set imap_user        = "cperez@kernix.com"
 set my_PWgmail       = `pass Mail/Kernix`
 set imap_pass        = $my_PWgmail
 set postponed        = "+Kernix/Drafts"
-set header_cache     = ~/.mutt/cache/headers
-set message_cachedir = ~/.mutt/cache/bodies
-set certificate_file = ~/.mutt/cache/certificates
+set header_cache     = ~/.mutt/cache/headers_kernix
+set message_cachedir = ~/.mutt/cache/bodies_kernix
+set certificate_file = ~/.mutt/cache/certificates_kernix
 
 set mbox = "+Kernix/Archives"
 

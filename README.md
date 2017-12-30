@@ -6,10 +6,10 @@ Created using `create_links.sh`
 
 ```bash
 brew install caskroom/cask/iterm2;
-brew install tmux ranger mutt vim offlineimap pass notmuch msmtp openssh ctags gpg-agent;
+brew install tmux ranger mutt vim offlineimap pass notmuch msmtp openssh ctags gpg-agent w3m;
 mkdir ~/.dotfiles;
 git clone https://github.com/cristianpb/dotfiles.git ~/.dotfiles
-#vim :PromptlineSnapshot! .shell_prompt.sh airline
+vim -cmd "+PromptlineSnapshot! .shell_prompt.sh airline" +qall
 brew tap caskroom/fonts
 brew cask install font-inconsolata-nerd-font
 ```
@@ -120,6 +120,31 @@ notmuch
 ```
 
 * Then open mutt and open a search with `<F8>`.
+
+## Python install
+
+Install python3 and ensure that you have the lastest pip version. Install 
+jupyter notebook and add the python2 kernel.
+
+```bash
+brew install python3
+pip3 install --upgrade pip
+pip3 install jupyter
+python2 -m pip install ipykernel
+python2 -m ipykernel install --user
+```
+
+## Ranger
+
+* Change preview method to iterm2
+
+* Install imagemagick (convert) and poppler (pdftoppm) to obtain preview for 
+  images, pdf et svg
+
+```
+brew install imagemagick
+brew install poppler --with-splash-output
+```
 
 
 # Arch linux install

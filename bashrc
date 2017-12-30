@@ -191,7 +191,10 @@ export GPG_TTY
 #############
 #  Termite  #
 #############
-#. /etc/profile.d/vte.sh
+if [[ $TERM == xterm-termite ]]; then
+  . /etc/profile.d/vte.sh
+  __vte_prompt_command
+fi
 
 # Termite change conf
 alias tdark='cp ~/.config/termite/configDark ~/.config/termite/config' # keyboardlight
@@ -210,7 +213,6 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 # Java for neo4j
 #export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 #export JAVA_HOME= /usr/lib/jvm/java-7-openjdk/jre
-
 # Source API tokens
 #source ~/.dotfiles/APIs
 
@@ -220,7 +222,15 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 # PATH
 export PATH="/usr/local/sbin:$PATH"
 export PATH="~/.bin:$PATH"
+export PATH="/usr/local/Cellar/python/2.7.14/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
+export PATH="/usr/local/Cellar/python/2.7.14/bin:$PATH"
+#export VIRTUALENVWRAPPER_PYTHON=/usr/local/Cellar/python/2.7.14/bin
 
+########################
+#  Virtualenv Wrapper  #
+########################
+export WORKON_HOME=~/Envs
+source /usr/local/bin/virtualenvwrapper.sh
 
 # Point perl to local modules
 export PERL_LOCAL_LIB_ROOT="$HOME/perl5"

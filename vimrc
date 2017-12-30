@@ -140,48 +140,55 @@ nnoremap <F5> :w <CR> :!make <CR> " Makefile
 " => Plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin('~/.vim/plugged')
-Plug 'VundleVim/Vundle.vim'
-Plug 'morhetz/gruvbox'
-Plug 'airblade/vim-gitgutter'
-Plug 'altercation/vim-colors-solarized'
-Plug 'benmills/vimux'
-Plug 'davidhalter/jedi-vim'
-Plug 'edkolev/promptline.vim'
-Plug 'edkolev/tmuxline.vim'
-Plug 'epeli/slimux'
-Plug 'honza/vim-snippets'
-Plug 'itchyny/calendar.vim'
-Plug 'jalvesaq/Nvim-R' " R - vim
+"if empty(glob('~/.vim/autoload/plug.vim'))
+"  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+"    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+"  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+"endif
+"
+"call plug#begin('~/.vim/plugged')
+"Plug 'VundleVim/Vundle.vim'
+set nocompatible
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'morhetz/gruvbox'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'benmills/vimux'
+Plugin 'lifepillar/vim-solarized8'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'edkolev/promptline.vim'
+Plugin 'edkolev/tmuxline.vim'
+Plugin 'epeli/slimux'
+Plugin 'itchyny/calendar.vim'
+Plugin 'jalvesaq/Nvim-R' " R - vim
 "Plun 'jgors/vimux-ipy'
-Plug 'junegunn/vim-easy-align' " Align text <Shift><Enter>
-Plug 'lervag/vimtex' " Latex suite that replace gerw/vim-latex-suite
-Plug 'majutsushi/tagbar' " Ctags <F6>
-Plug 'pangloss/vim-javascript' "Js hightlight
-Plug 'roxma/vim-paste-easy' " Avoid indent break when paste
-Plug 'scrooloose/nerdtree' " File manager <F3>
-Plug 'w0rp/ale' " Asynchronous linter <leader>sc
-Plug 'sirver/ultisnips' " Snippets
-Plug 'tpope/vim-fugitive' " Git-vim
-Plug 'tpope/vim-surround'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'Vimjas/vim-python-pep8-indent' " Better python indent
-"Plun 'ryanoasis/vim-devicons' " Icons to vim
-Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
-Plug 'junegunn/vim-emoji' " Emojis <C-X><C-U>
-Plug 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
-Plug 'othree/html5.vim' " Hightlight
-Plug 'luochen1990/rainbow' " Parentheses highlight <leader>R
-Plug 'maralla/completor.vim' 
-Plug 'vimwiki/vimwiki' " Vimwiki notes <leader>ww
-call plug#end()
+Plugin 'junegunn/vim-easy-align' " Align text <Shift><Enter>
+Plugin 'lervag/vimtex' " Latex suite that replace gerw/vim-latex-suite
+Plugin 'majutsushi/tagbar' " Ctags <F6>
+Plugin 'pangloss/vim-javascript' "Js hightlight
+Plugin 'roxma/vim-paste-easy' " Avoid indent break when paste
+Plugin 'scrooloose/nerdtree' " File manager <F3>
+Plugin 'w0rp/ale' " Asynchronous linter <leader>sc
+Plugin 'sirver/ultisnips' " Snippets
+Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-fugitive' " Git-vim
+Plugin 'tpope/vim-surround'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Vimjas/vim-python-pep8-indent' " Better python indent
+Plugin 'ryanoasis/vim-devicons' " Icons to vim
+Plugin 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
+Plugin 'junegunn/vim-emoji' " Emojis <C-X><C-U>
+Plugin 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
+Plugin 'othree/html5.vim' " Hightlight
+Plugin 'luochen1990/rainbow' " Parentheses highlight <leader>R
+Plugin 'maralla/completor.vim' 
+Plugin 'vimwiki/vimwiki' " Vimwiki notes <leader>ww
+call vundle#end()
+filetype plugin indent on
+"call plug#end()
 
 """"""""""""""""""""
 "  NerdTreeToogle  "
@@ -214,6 +221,8 @@ let g:airline_theme='gruvbox'
 """"""""""""""
 "  Tmuxline  "
 """"""""""""""
+" Create snapshot using: 'TmuxlineSnapshot! .tmux.theme'
+"
 " use airline
 let g:airline#extensions#tmuxline#enabled = 1
 
@@ -223,8 +232,12 @@ let g:tmuxline_preset = {
       \'b'    : '#(~/.dotfiles/new_mail.sh)', 
       \'win'  : ['#W'],
       \'cwin' : '#F #W',
-      \'y'    : '#(~/Documents/Script/tmux-slack-notifier.sh)',
+      \'y'    : '#(~/.config/i3/IconicWeather.sh "EUR|FR|FR623|Paris")',
       \'z'    : '%R'}
+
+
+" Theme
+"let g:tmuxline_theme = 'jellybeans'
 
 """"""""""""""""
 "  Promptline  "
@@ -362,11 +375,11 @@ let g:ale_enabled = 0
 let g:ale_completion_enabled = 1
 
 " Use fixers
-let g:ale_fixers = {
-\   'javascript': ['eslint'],
-\   'python': ['flake8'], 
-\   'vim': ['vint'],
-\}
+"let g:ale_fixers = {
+"\   'javascript': ['eslint'],
+"\   'python': ['flake8'], 
+"\   'vim': ['vint'],
+"\}
 
 """"""""""""
 "  Tagbar  "
@@ -377,18 +390,24 @@ nmap <F6> :TagbarToggle<CR>
 """""""""""
 "  Theme  "
 """""""""""
-" 16 colors theme
-let g:solarized_termcolors = 16
-
 " Black theme
 set background=dark
 
-" Set color scheme
-"colorscheme solarized
-colorscheme gruvbox 
+" Add underline syntax details
+syntax enable
 
-" Use theme transparency if terminal has
-let g:solarized_termtrans = 1
+" 16 colors theme
+"let g:gruvbox_termcolors = 16
+"let g:solarized_use16 = 1
+
+" Set italics
+"let g:solarized_term_italics=1
+"let g:gruvbox_italic=1
+
+" Set color scheme
+colorscheme gruvbox 
+"colorscheme solarized8
+
 
 """"""""""""""
 "  Fugitive  "

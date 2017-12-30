@@ -54,7 +54,7 @@ set mbox_type=Maildir
 macro pager \Cu "|urlscan<enter>" "call urlview to open links"
 
 set folder = "~/Mail"
-set spoolfile = "+Gmail/INBOX"
+set spoolfile = "+Kernix/INBOX"
 source ~/.mutt/mailboxes
 
 ## Not much
