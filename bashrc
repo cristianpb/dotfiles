@@ -69,7 +69,7 @@ rg() {
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias ls='ls --color=auto'
+alias ls='ls --color'
 
 # Backup aliases
 alias toshiba2pc='rsync -avzh --delete --progress /run/media/cris/Toshiba/UPMC 
@@ -100,7 +100,8 @@ alias toshiba2pcPictures='rsync -avzh --delete --progress /run/media/cris/Toshib
 alias klab='ssh -p 2266 -L 8899:localhost:8899 lab@hq.kernix.com'
 
 # Port forwarding
-alias concperez='ssh -p 7777 cperez@127.0.0.1 -Y'
+#alias concperez='ssh -p 7777 cperez@localhost -Y'
+alias concperez='ssh -p 7777 -L 8899:localhost:8899 cperez@localhost -Y'
 alias cperez='ssh -p 2266 lab@hq.kernix.com -L 7777:192.168.2.75:22'
 
 # Send and receive files with scp
@@ -114,8 +115,7 @@ function putcperez() { scp -P 7777 -pr "${1%%/}" cristian@127.0.0.1:~/ ; }
 #######################################################################
 
 # Install cower aur packages
-function cowerup() { cower -df "${1%%/}" ; cd ~/.builds/"${1%%/}" ; makepkg 
-    -si; cd ~ ; }
+function cowerup() { cower -df "${1%%/}" ; cd ~/.builds/"${1%%/}" ; makepkg -si; cd ~ ; }
 
 # Turn on nvidia card
 alias bbon='sudo tee /proc/acpi/bbswitch <<< ON'
@@ -187,18 +187,28 @@ export GPG_TTY
 #############
 #  Termite  #
 #############
-. /etc/profile.d/vte.sh
+if [[ $TERM == xterm-termite ]]; then
+  . /etc/profile.d/vte.sh
+  __vte_prompt_command
+fi
 
 # Termite change conf
-alias tdark='cp ~/.config/termite/configDark ~/.config/termite/config' # keyboardlight
-alias tlight='cp ~/.config/termite/configLigth ~/.config/termite/config' # keyboardlight
-alias tnova='cp ~/.config/termite/configNova ~/.config/termite/config' # keyboardNova
+alias tdark='cp ~/.config/termite/configSolarizedDark ~/.config/termite/config' 
+alias tlight='cp ~/.config/termite/configSolarizedLight ~/.config/termite/config'
+alias tgruv='cp ~/.config/termite/configGruv ~/.config/termite/config' 
 
 ############
 #  Ranger  #
 ############
 # Disable loading of global config
 export RANGER_LOAD_DEFAULT_RC=FALSE
+
+#########################
+#  Virtual Env Wrapper  #
+#########################
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/bin/virtualenvwrapper.sh
 
 ############
 #  Others  #

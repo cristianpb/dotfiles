@@ -158,6 +158,7 @@ declare -a FILES_TO_SYMLINK=(
     'new_mail.sh'
     'notmuch-hook.sh'
     'Rprofile'
+    'shell_prompt.sh'
     'tmux.conf'
     'tmux.theme'
     'toprc'
