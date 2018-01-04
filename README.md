@@ -1,60 +1,26 @@
 # Dotfiles
 
-Created using `create_links.sh`
+This dotfiles have my installation instruction for Arch Linux and the 
+configuration for my essential programs. The *master* branch contains a 
+configuration for Linux programs and the *OSX* branch contains instruction to 
+configure OSX programs such as mutt, offlineimap, pass.
 
-# OSX conf
+I keep these dotfiles at `~/.dotfiles/` and I create softlinks to the dotfiles 
+at `$HOME` using `create_links.sh`.
 
-```bash
-brew install caskroom/cask/iterm2;
-brew install tmux ranger mutt vim offlineimap pass notmuch msmtp openssh ctags gpg-agent;
-mkdir ~/.dotfiles;
-git clone https://github.com/cristianpb/dotfiles.git ~/.dotfiles
-#vim :PromptlineSnapshot! .shell_prompt.sh airline
-brew tap caskroom/fonts
-brew cask install font-inconsolata-nerd-font
-```
-
-## gpg keys
-
-```bash
-gpg --list-keys
-cp ~/.dotfiles/gpg-agent.conf .gnupg/gpg-agent.conf
-gpg --import XXX.asc
-gpg --import XXX.gpg
-```
-
-## Pass
-
-* Initiate pass with gpg key
-```
-pass init B212E65B
-```
-* Insert passwords
-```
-pass insert Mail/Gmail
-pass insert Mail/Kernix
-```
-
-## Offlineimap
-
-```python
-ssl=true
-sslcacertfile = /usr/local/etc/openssl/cert.pem
-```
-
-# Arch linux install
+# Arch linux install 🐧
 
 * Create partitions
 * Format partitions
 
-```bash
+```sh
 # mkfs.ext4 /dev/sdaY
 # mkswap /dev/sdaZ
 ```
 
 * Mount system and swap
 
-```bash
+```sh
 # swapon /dev/sdaZ
 # mount /dev/sda1 /mnt
 ```
@@ -198,7 +164,10 @@ pacman -S udisks2 udiskie
 ## Additional
 
 ```bash
-pacman -S tmux ranger mutt vim termite firefox xclip gnupg offlineimap pass notmuch notmuch-mutt msmtp dunst sxiv rsync zathura zathura-pdf-poppler zathura-djvu rofi inkscape gvfs feh libreoffice-still filezilla pavucontrol openssh w3m ctags arandr unclutter mpd 
+pacman -S tmux ranger mutt vim termite firefox xclip gnupg offlineimap pass 
+notmuch notmuch-mutt msmtp atool dunst sxiv rsync zathura zathura-pdf-poppler 
+zathura-djvu rofi inkscape gvfs feh libreoffice-still filezilla pavucontrol 
+openssh w3m ctags arandr unclutter mpd
 ```
 
 ## Bluetooth
@@ -234,11 +203,18 @@ chmod 0444 /usr/share/fonts/InconsolataGo/InconsolataGo.zip
 # makepkg -si PKGBUILD --noconfirm
 ```
 
-* polybar-git
-* rcm
+* AUR: polybar
 
 ## Python
 
+* Basic packages for Data Science
+
 ```bash
 pacman -S jupyter mathjax python-numpy python-matplotlib python-pandas
+```
+
+* Other
+
+```sh
+pip install -U mutt_ics urlscan
 ```
