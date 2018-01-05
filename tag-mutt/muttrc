@@ -50,7 +50,6 @@ set mbox_type=Maildir
 #set imap_check_subscribed
 
 ## url view
-#macro pager \cu <pipe-entry>'urlview'<enter> 'Follow links with urlview' 
 macro pager \Cu "|urlscan<enter>" "call urlview to open links"
 
 set folder = "~/Mail"
@@ -77,18 +76,13 @@ macro index <F6> \
      "notmuch: remove message from inbox"
 
 ## Mac
-#macro index S \
-#"<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
-#<shell-escape>~/.bin/notmuch-mutt -r --prompt search<enter>\
-#<change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
-#<enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
-#"notmuch: search mail"
-## format send
 #set send_charset="us-ascii:utf-8"
 set rfc2047_parameters
 
 folder-hook 'Gmail/*' 'source ~/.mutt/account_gmail'
 folder-hook 'Kernix/*' 'source ~/.mutt/account_kernix'
+
+macro compose v "<edit-from>^Uidentity\_<tab>" "Select from"
 
 macro index,pager <F4>  "<change-folder> =Gmail/INBOX<enter>"  "go Gmail"
 macro index,pager <F5>  "<change-folder> =Kernix/INBOX<enter>"  "go Kernix"
