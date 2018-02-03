@@ -167,6 +167,7 @@ Plug 'pangloss/vim-javascript' "Js hightlight
 Plug 'roxma/vim-paste-easy' " Avoid indent break when paste
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File manager <F3>
 Plug 'w0rp/ale' " Asynchronous linter <leader>sc
+Plug 'editorconfig/editorconfig-vim'
 Plug 'sirver/ultisnips' " Snippets
     Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive' " Git-vim
@@ -441,9 +442,9 @@ let g:javascript_plugin_flow = 1
 "  Vimwiki  "
 """""""""""""
 " Configuration
-let g:vimwiki_list = [{'path': '~/vimwiki', 'template_path': '~/vimwiki/templates/',
+let g:vimwiki_list = [{'path': '~/Documents/vimwiki', 'template_path': '~/Documents/vimwiki/templates/',
           \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.wiki',
-          \ 'path_html': '~/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
+          \ 'path_html': '~/Documents/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
           \ 'template_ext': '.tpl'}]
 
 " Transform to html
@@ -463,6 +464,13 @@ nmap <leader>R :RainbowToggle<cr>
 "  Completor  "
 """""""""""""""
 let g:completor_auto_trigger=0
+
+""""""""""""""""""
+"  EditorConfig  "
+""""""""""""""""""
+" ensure that this plugin works well with Tim Pope's fugitive, avoid loading 
+" EditorConfig for any remote files over ssh
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 """"""""""""""""""""""""""""""
 "  Language Tool: Testing, corrections?   "

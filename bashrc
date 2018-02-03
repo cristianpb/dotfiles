@@ -72,23 +72,12 @@ alias l='ls -CF'
 alias ls='ls --color'
 
 # Backup aliases
-alias toshiba2pc='rsync -avzh --delete --progress /run/media/cris/Toshiba/UPMC 
-/home/cris/Documents'
-alias pc2toshiba='rsync -avzh --delete --progress /home/cris/Documents/UPMC /run/media/cris/Toshiba'
-alias pc2toshibaMusic='rsync -avzh --delete --progress /home/cris/Music /run/media/cris/Toshiba'
-alias pc2toshibaPictures='rsync -avzh --delete --progress /home/cris/Images/ /run/media/cris/Toshiba2/Pictures/'
-alias toshiba2pcPapeles='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/Papeles /home/cris/Documents'
-alias pc2toshibaPapeles='rsync -avzh --delete --progress /home/cris/Documents/Papeles/ /run/media/cris/Toshiba2/Clases/Papeles/'
-alias pc2toshibaCV='rsync -avzh --delete --progress /home/cris/Documents/CVS/ /run/media/cris/Toshiba2/Clases/CVS/'
-alias toshiba2pcCV='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/CVS/ /home/cris/Documents/CVS/'
-alias pc2toshibaR='rsync -avzh --delete --progress /home/cris/R/examples/ /run/media/cris/Toshiba2/Clases/R/'
-alias toshiba2pcR='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/R/ /home/cris/R/examples/'
-alias pc2toshibaScript='rsync -avzh --delete --progress /home/cris/Documents/Script /run/media/cris/Toshiba2/Clases'
-alias toshiba2pcScript='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/Script/ /home/cris/Documents/Script/'
-# Total backup aliases
-alias pc2toshibaTotal='rsync -avzh --delete --progress /home/cris/Documents/ 
-/run/media/cris/Toshiba2/Clases/'
-alias toshiba2pcTotal='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/ /home/cris/Documents'
+alias pc2toshibaDocuments='sudo rsync -e "sudo -u cris" -avzh --progress /home/cris/Documents/ /run/media/cris/Toshiba2/Clases'
+alias pc2toshibaMusic='sudo rsync -e "sudo -u cris" -avzh --delete --progress /home/cris/Music /run/media/cris/Toshiba'
+alias pc2toshibaPictures='sudo rsync -e "sudo -u cris" -avzh --progress /home/cris/Images/ /run/media/cris/Toshiba2/Pictures/'
+alias pc2toshibaVideos='sudo rsync -e "sudo -u cris" -avzh --progress /home/cris/Videos/ /run/media/cris/Toshiba2/Videos/'
+alias pc2toshibaR='sudo rsync -e "sudo -u cris" -avzh --delete --progress /home/cris/R/examples/ /run/media/cris/Toshiba2/Clases/R/'
+alias toshiba2pcDocuments='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/ /home/cris/Documents/'
 alias toshiba2pcMusic='rsync -avzh --delete --progress /run/media/cris/Toshiba/Music/ /home/cris/Musique/'
 alias toshiba2pcPictures='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Pictures/ /home/cris/Images/'
 

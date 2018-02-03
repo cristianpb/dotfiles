@@ -154,6 +154,7 @@ declare -a FILES_TO_SYMLINK=(
     'BingDownloadImage.sh'
     'checkmail.sh'
     'create_links.sh'
+    'editorconfig'
     'gitconfig'
     'msmtprc'
     'new_mail.sh'
