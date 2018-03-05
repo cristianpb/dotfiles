@@ -80,6 +80,8 @@ alias pc2toshibaR='sudo rsync -e "sudo -u cris" -avzh --delete --progress /home/
 alias toshiba2pcDocuments='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/ /home/cris/Documents/'
 alias toshiba2pcMusic='rsync -avzh --delete --progress /run/media/cris/Toshiba/Music/ /home/cris/Musique/'
 alias toshiba2pcPictures='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Pictures/ /home/cris/Images/'
+# sudo rsync -e "sudo -u arch" -avzh --progress /run/media/arch/Toshiba2/Clases/Papeles /home/arch/Documents/
+
 
 ########################
 #  Connection aliases  #
@@ -118,11 +120,11 @@ alias ncm='ncmpcpp'
 # Compile latex on background
 alias ltx="grep -l '\\documentclass' *tex | xargs latexmk -pdf -pvc -silent > /dev/null 2>&1 &"
 
-# Mount disk 
-alias ddisk='udisksctl unmount -b /dev/sdc1;udisksctl unmount -b /dev/dm-0;udisksctl lock -b /dev/sdc2;udisksctl power-off -b /dev/sdc;'
+# Unmount disk 
+alias udisk='udisksctl unmount -b /dev/sdb1;udisksctl unmount -b /dev/dm-0;udisksctl lock -b /dev/sdb2;udisksctl power-off -b /dev/sdb;'
 
-# Unmount disk
-alias udisk='udisksctl unlock -b /dev/sdc2;udisksctl mount -b /dev/dm-0;'
+# Mount disk
+alias mdisk='udisksctl unlock -b /dev/sdb2;udisksctl mount -b /dev/dm-0;'
 
 # Keyboard light up
 alias ledu='sudo ~/.config/i3/leds_up.sh' 

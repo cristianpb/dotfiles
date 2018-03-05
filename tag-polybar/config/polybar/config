@@ -262,7 +262,7 @@ label = %percentage_used%%
 
 [module/wlan]
 type = internal/network
-interface = wlp3s0
+interface = wlp4s0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -453,7 +453,7 @@ exec = ~/.dotfiles/new_mail.sh
 
 [module/weather]
 type = custom/script
-interval = 10
+interval = 30
 format = <label>
 format-foreground = ${colors.white}
 format-underline = ${colors.foreground}
