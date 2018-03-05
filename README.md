@@ -10,8 +10,11 @@ at `$HOME` using `create_links.sh`.
 
 # Arch linux install 🐧
 
-* Create partitions
-* Format partitions
+## Create partitions
+
+Use fdisk or cdisk. UEFI configurations have 3 partitions (ESP in FAT32 512 Mb, / in ext4 , and swap of at least the RAM)
+
+## Format partitions
 
 ```sh
 # mkfs.ext4 /dev/sdaY
@@ -87,55 +90,66 @@ myhostname
 127.0.1.1	myhostname.localdomain	myhostname
 ```
 
-* Optionally install dialog for usage of wifi-menu.
-
-```bash
-# pacman -S dialog
-```
-
 * Set the root password:
 
 ```bash
 # passwd
 ```
 
-* Boot loader: Grub
+* Boot loader
+
+For efi systems using grub.
+
+> grub-mkconfig will automatically detect the microcode update and configure GRUB appropriately. After installing the intel-ucode package, users are directed to regenerate the GRUB config to activate loading the microcode 
 
 ```bash
-# pacman -S grub
-# grub-install --target=i386-pc /dev/sdx
-# grub-mkconfig -o /boot/grub/grub.cfg
+pacman -S intel-ucode grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=arch
+grub-mkconfig -o /boot/grub/grub.cfg
+mkinitcpio -p linux
 ```
 
-where /dev/sdx is the partitioned disk where grub is to be installed. 
+For not efi configurations look precedent commits
 
 ## Post installation instructions
 
+Install minimum
+
 ```bash
-pacman -S base base-devel iw wpa_supplicant intel-ucode grub dialog sudo
+pacman -S base-devel iw wpa_supplicant dialog sudo
 ```
 
 ## Video
 
 ### Xorg
 
+1. Install packages
+
 ```bash
-pacman -S xorg xorg-apps xorg-server xorg-server-utils xorg-xinit xorg-xinit
+pacman -S xorg xorg-apps xorg-server xorg-server-utils xorg-xinit
 ```
+
+2. Test using `startx`. If needed install `xterm` and `xorg-twm`
 
 ### Drivers
 
+Install minimun drivers
+
 ```bash
-pacman -S xf86-video bumblebee mesa nvidia xf86-video-intel
+pacman -S xf86-video xf86-video-intel
 ```
 
+if nvidia graphic card, install `bumblebee mesa nvidia`
+
 ## Display manager
+
+1. Install packages
 
 ```bash
 pacman -S xorg-xdm
 ```
 
-Enable the display manager service: `# systemctl enable xdm.service`
+2. Enable service: `systemctl enable xdm.service`
 
 ## Windows manager - *i3*
 
@@ -145,17 +159,43 @@ pacman -S i3 dmenu
 
 ## Network manager
 
+1. Install networkmanager packages
+
 ```bash
 pacman -S networkmanager network-manager-applet
 ```
 
+2. Enable service
+
+```
+systemctl enable NetworkManager
+```
+
 ## Touchpad
+
+1. Install libinput package
 
 ```bash
 pacman -S xf86-input-libinput libinput
 ```
 
+2. Create file `/etc/X11/xorg.conf.d/30-touchpad.conf` to configure touchpad
+
+```
+Section "InputClass"
+    Identifier "touchpad"
+    Driver "libinput"
+    MatchIsTouchpad "on"
+    Option "Tapping" "on"
+    Option "TappingButtonMap" "lmr"
+EndSection
+```
+
+3. Set X11 keyboard layout `localectl --no-convert set-x11-keymap fr`
+
 ## Disks management
+
+Install diskie, if old keys use: `sudo pacman-key --refresh`
 
 ```bash
 pacman -S udisks2 udiskie
@@ -167,13 +207,21 @@ pacman -S udisks2 udiskie
 pacman -S tmux ranger mutt vim termite firefox xclip gnupg offlineimap pass 
 notmuch notmuch-mutt msmtp atool dunst sxiv rsync zathura zathura-pdf-poppler 
 zathura-djvu rofi inkscape gvfs feh libreoffice-still filezilla pavucontrol 
-openssh w3m ctags arandr unclutter mpd highlight
+openssh w3m ctags arandr unclutter mpd highlight curl git
 ```
 
 ## Bluetooth
 
+1. Install packages
+
 ```bash
 pacman -S alsa-utils bluez bluez-utils blueman pulseaudio-bluetooth
+```
+
+2. Enable service
+
+```
+systemctl enable bluetooth.service
 ```
 
 ## Fonts
@@ -187,20 +235,21 @@ pacman -S ttf-inconsolata awesome-terminal-fonts powerline-fonts noto-fonts-emoj
 * Add [InconsolataGo nerd font](https://github.com/ryanoasis/nerd-fonts/releases)
 
 ```sh
-curl https://github.com/ryanoasis/nerd-fonts/releases/download/v1.2.0/InconsolataGo.zip --output InconsolataGo.zip
+curl -L https://github.com/ryanoasis/nerd-fonts/releases/download/v1.2.0/InconsolataGo.zip --output InconsolataGo.zip
+extract InconsolataGo.zip
+rm InconsolataGo.zip
 mkdir /usr/share/fonts/InconsolataGo
-mv InconsolataGo.zip /usr/share/fonts/InconsolataGo
-extract /usr/share/fonts/InconsolataGo/InconsolataGo.zip
+mv InconsolataGo* /usr/share/fonts/InconsolataGo
 chmod 0555 /usr/share/fonts/InconsolataGo
-chmod 0444 /usr/share/fonts/InconsolataGo/InconsolataGo.zip
+chmod 0444 /usr/share/fonts/InconsolataGo/InconsolataGo*
 ```
 
 ## Cower
 
 ```bash
-# gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
-# curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower
-# makepkg -si PKGBUILD --noconfirm
+gpg --recv-keys --keyserver hkp://pgp.mit.edu 1EB2638FF56C0C53
+curl -o PKGBUILD https://aur.archlinux.org/cgit/aur.git/plain/PKGBUILD?h=cower
+makepkg -si PKGBUILD --noconfirm
 ```
 
 * AUR: polybar
@@ -210,7 +259,7 @@ chmod 0444 /usr/share/fonts/InconsolataGo/InconsolataGo.zip
 * Basic packages for Data Science
 
 ```bash
-pacman -S jupyter mathjax python-numpy python-matplotlib python-pandas
+pacman -S jupyter mathjax python-numpy python-matplotlib python-pandas python-virtualenvwrapper
 ```
 
 * Other
