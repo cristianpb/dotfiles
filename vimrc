@@ -29,7 +29,7 @@ command W w !sudo tee % > /dev/null
 " Ignore case when searching
 set ignorecase
 
-" When searching try to be smart about cases 
+" When searching try to be smart about cases
 set smartcase
 
 " Highlight search results
@@ -73,8 +73,10 @@ set wildmenu
 set wildmode=full
 
 " Folding
-"set foldmethod=indent
-"set foldnestmax=2
+set foldmethod=indent
+set foldnestmax=2
+" disable folding at the begging
+set nofoldenable
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Moving around, tabs, windows and buffers
@@ -105,7 +107,7 @@ autocmd BufReadPost *
 set viminfo^=%
 
 " Clipboard to use it exterior
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 " Format-Flowed text
 setlocal fo+=aw
@@ -153,6 +155,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'lifepillar/vim-solarized8'
 Plug 'benmills/vimux'
 Plug 'davidhalter/jedi-vim'
+Plug 'valloric/youcompleteme'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'epeli/slimux'
@@ -165,6 +168,8 @@ Plug 'majutsushi/tagbar' " Ctags <F6>
 Plug 'pangloss/vim-javascript' "Js hightlight
 Plug 'roxma/vim-paste-easy' " Avoid indent break when paste
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File manager <F3>
+Plug 'kchmck/vim-coffee-script'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale' " Asynchronous linter <leader>sc
 Plug 'sirver/ultisnips' " Snippets
     Plug 'honza/vim-snippets'
@@ -179,15 +184,16 @@ Plug 'junegunn/vim-emoji' " Emojis <C-X><C-U>
 Plug 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
 Plug 'othree/html5.vim' " Hightlight
 Plug 'luochen1990/rainbow' " Parentheses highlight <leader>R
-Plug 'maralla/completor.vim' 
+Plug 'maralla/completor.vim'
 Plug 'vimwiki/vimwiki' " Vimwiki notes <leader>ww
+Plug 'ervandew/supertab'
 call plug#end()
 
 """"""""""""""""""""
 "  NerdTreeToogle  "
 """"""""""""""""""""
 " Ignore files in NERDTree
-let NERDTreeIgnore=['\.pyc$', '\~$'] 
+let NERDTreeIgnore=['\.pyc$', '\~$']
 
 " Activate with <F3>
 nmap <silent> <F3> :NERDTreeToggle<CR>
@@ -225,7 +231,7 @@ let g:airline#extensions#tmuxline#enabled = 1
 " Conf tmuxline
 let g:tmuxline_preset = {
       \'a'    : '#S',
-      \'b'    : '#(~/.dotfiles/new_mail.sh)', 
+      \'b'    : '#(~/.dotfiles/new_mail.sh)',
       \'win'  : ['#W'],
       \'cwin' : '#F #W',
       \'y'    : '#(~/.config/i3/IconicWeather.sh "EUR|FR|FR623|Paris")',
@@ -247,11 +253,11 @@ let g:promptline_preset = {
 """""""""""""""""""""""""""
 "  Nvim-R: use R and vim  "
 """""""""""""""""""""""""""
-" Default pdf viewer 
+" Default pdf viewer
 let R_pdfviewer = 'zathura'
 
 " tmux and R
-let R_in_buffer = 0 
+let R_in_buffer = 0
 
 " Dont use R.app (mac) or Rstudio for graphic
 let R_applescript = 0
@@ -260,13 +266,13 @@ let R_applescript = 0
 let R_tmux_split = 1
 
 " Disable _ to <-
-let R_assign = 0 
+let R_assign = 0
 
 " need of setwith Console width adapted to window
-"let R_setwidth = 0 
+"let R_setwidth = 0
 
 " need of colorout
-let R_hl_term = 1 " need of colorout 
+let R_hl_term = 1 " need of colorout
 
 " If exit buffer then exit the command ligne
 autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
@@ -289,8 +295,8 @@ let g:jedi#popup_select_first = 0
 " Max doc height
 let g:jedi#max_doc_height = 30
 
-" No automatic import after 
-let g:jedi#smart_auto_mappings = 0 " no automatic import after from
+" No automatic import after
+let g:jedi#smart_auto_mappings = 0
 "map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 """""""""""""""
@@ -300,7 +306,9 @@ let g:jedi#smart_auto_mappings = 0 " no automatic import after from
 let g:UltiSnipsEditSplit='vertical' " If you want :UltiSnipsEdit to split your window.
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger='<tab>'
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 
 " Create own snips
 set runtimepath+=~/.vim/my-snippets
@@ -308,17 +316,25 @@ set runtimepath+=~/.vim/my-snippets
 " Directory for own snips
 let g:UltiSnipsSnippetsDir='~/.vim/my-snippets'
 
+"""""""""""""""""""""""
+"  Youcompleteme YCM  "
+"""""""""""""""""""""""
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
 """"""""""""""""""""""""""""""""""""""""""""""
 "  Vimux: send commands from vim to terinal  "
 """"""""""""""""""""""""""""""""""""""""""""""
 " Use nearest pane
 let g:VimuxUseNearest = 1
 
-" Height of terminal 
+" Height of terminal
 let g:VimuxHeight = '30'
 
 " Create a new terminal
-map <Leader>vp :VimuxPromptCommand<CR> 
+map <Leader>vp :VimuxPromptCommand<CR>
 
 " Run the current command ?
 map <Leader>rb :call VimuxRunCommand("")<CR> " Run the current file with rspec
@@ -354,7 +370,7 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Ale: requires flake8 for python and vint for vim lighting (pip install 
+"  Ale: requires flake8 for python and vint for vim lighting (pip install
 "  vim-vint  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle ALE with <leader>sc
@@ -369,7 +385,7 @@ let g:ale_completion_enabled = 1
 " Use fixers
 "let g:ale_fixers = {
 "\   'javascript': ['eslint'],
-"\   'python': ['flake8'], 
+"\   'python': ['flake8'],
 "\   'vim': ['vint'],
 "\}
 
@@ -383,7 +399,7 @@ nmap <F6> :TagbarToggle<CR>
 "  Theme  "
 """""""""""
 " Black theme
-set background=dark
+"set background=dark
 
 " Add underline syntax details
 syntax enable
@@ -451,7 +467,7 @@ let g:vimwiki_table_mappings = 0
 "  Rainbow Parentheses  "
 """""""""""""""""""""""""
 " 0 if you want to enable it later via :RainbowToggle
-let g:rainbow_active = 0 
+let g:rainbow_active = 0
 
 " Toggle rainbow with <leader>R
 nmap <leader>R :RainbowToggle<cr>
@@ -460,6 +476,12 @@ nmap <leader>R :RainbowToggle<cr>
 "  Completor  "
 """""""""""""""
 let g:completor_auto_trigger=0
+
+""""""""""""""""""
+"  EditorConfig  "
+""""""""""""""""""
+" Ensure that works with fugitive and not use for remote files
+let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
 
 """"""""""""""""""""""""""""""
 "  Language Tool: Testing, corrections?   "
