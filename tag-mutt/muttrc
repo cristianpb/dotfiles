@@ -110,7 +110,7 @@ bind index,pager \Cp sidebar-prev
 bind index,pager \Cn sidebar-next
 bind index,pager \Ci sidebar-open
 
-## Mailcap 
+## Mailcap
 set mailcap_path	= ~/.mutt/mailcap
 alternative_order text/plain text/html
 auto_view text/html
@@ -124,10 +124,9 @@ set sort_aux = last-date-received
 # Fetch mail shortcut
 macro generic,index,pager  <F2>  "<enter-command>unset wait_key<enter><shell-escape>offlineimap -u quiet -q &<enter>"  "Fetch messages"
 set print_command="~/Documents/Script/mutt_print.sh"
-bind index,pager u bounce-message
 
 # Pre-fills the "From" address when replying to emails, based on the email a account that received the original mail
-set reverse_name 
+set reverse_name
 set envelope_from
 
 # Signature

@@ -10,10 +10,50 @@ image/*; sxiv %s
 text/calendar; mutt-ics; copiousoutput
 application/ics; mutt-ics; copiousoutput 
 
-Image/JPEG;~/.dotfiles/view_attachement.sh %s
-Image/PNG; ~/.dotfiles/view_attachement.sh %s
-Image/GIF; ~/.dotfiles/view_attachement.sh %s
-Application/PDF; ~/.dotfiles/view_attachement.sh %s
+Image/JPEG;~/.dotfiles/view_attachement.sh %s img
+Image/PNG; ~/.dotfiles/view_attachement.sh %s img
+Image/GIF; ~/.dotfiles/view_attachement.sh %s img
+Application/PDF; ~/.dotfiles/view_attachement.sh %s pdf
 #text/html; ~/.dotfiles/view_attachement.sh %s html
-Application/vnd.ms-excel; /usr/local/bin/view_attachment %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice'
-Application/msword; /usr/local/bin/view_attachment %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice'
+
+
+## MS Excel
+# this will use the default xls spreadsheet handler from open
+application/x-msexcel; ~/.dotfiles/view_attachement.sh %s doc
+application/ms-exc; ~/.dotfiles/view_attachement.sh %s doc
+application/excel; ~/.dotfiles/view_attachement.sh %s doc
+application/msexcel; ~/.dotfiles/view_attachement.sh %s doc
+application/vnd.ms-exc; ~/.dotfiles/view_attachement.sh %s doc
+application/vnd.ms-excel; ~/.dotfiles/view_attachement.sh %s doc
+# MS Word
+# use textedit to open .doc files as it's more light-weight
+application/msword; ~/.dotfiles/view_attachement.sh %s doc
+
+# Star/Open Office Impress
+application/x-starimpress; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.sun.xml.impress.template; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.sun.xml.impress; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.stardivision.impress; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.stardivision.impress-packed; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+
+
+# docx
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.openxmlformats-officedocument.spreadsheetml.template; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.openxmlformats-officedocument.presentationml.template; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.openxmlformats-officedocument.presentationml.slideshow; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.openxmlformats-officedocument.presentationml.presentation; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.openxmlformats-officedocument.presentationml.slide; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.openxmlformats-officedocument.wordprocessingml.template; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.ms-excel.addin.macroEnabled.12; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.ms-excel.sheet.binary.macroEnabled.12; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+
+# xlsx
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; ~/.dotfiles/view_attachement.sh %s "-" '/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+
+#Application/vnd.ms-excel; /usr/local/bin/view_attachment %s "-" 
+#'/Applications/LibreOffice.app/Contents/MacOS/soffice' doc
+#Application/msword; /usr/local/bin/view_attachment %s "-" 
+#'/Applications/LibreOffice.app/Contents/MacOS/soffice' doc

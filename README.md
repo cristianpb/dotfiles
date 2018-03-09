@@ -12,13 +12,13 @@ at `$HOME` using `create_links.sh`.
 
 ```bash
 brew install caskroom/cask/iterm2;
-brew install tmux ranger mutt vim offlineimap pass notmuch msmtp openssh ctags gpg-agent w3m;
+brew install tmux ranger mutt vim offlineimap pass notmuch msmtp openssh ctags gpg-agent w3m reattach-to-user-namespace;
 mkdir ~/.dotfiles;
 git clone https://github.com/cristianpb/dotfiles.git ~/.dotfiles
 vim -cmd "+PromptlineSnapshot! .shell_prompt.sh airline" +qall
 brew tap caskroom/fonts
 brew cask install font-inconsolata-nerd-font
-pip install -U mutt_ics urlscan
+pip install -U mutt_ics urlscan jedi
 ```
 
 ## gpg keys
