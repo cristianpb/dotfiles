@@ -62,7 +62,7 @@ width = 100%
 height = 15
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 0
 fixed-center = false
 background = ${colors.background}
 foreground = ${colors.foreground}
@@ -84,7 +84,7 @@ font-0 = fixed:pixelsize=9;1
 font-1 = FontAwesome:pixelsize=9;2
 font-2 = siji:pixelsize=9;1
 
-modules-left = 
+modules-left = volume
 modules-center = filesystem cpu memory networkspeedup networkspeeddown battery1
 modules-right = 
 
@@ -94,7 +94,7 @@ width = 100%
 height = 15
 ;offset-x = 1%
 ;offset-y = 1%
-radius = 6.0
+radius = 0
 fixed-center = false
 
 background = ${colors.background}
@@ -119,7 +119,7 @@ font-2 = siji:pixelsize=9;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = mail xbacklight volume wlan eth battery weather date powermenu
+modules-right = mail xbacklight pulseaudio1 wlan eth battery weather date powermenu
 
 tray-position = right
 tray-padding = 6
@@ -238,10 +238,17 @@ label-song-ellipsis = true
 [module/xbacklight]
 type = internal/xbacklight
 
-format = <label> <bar>
+format = <ramp> <bar>
 label = 
 label-foreground = ${colors.lime}
 format-underline = ${colors.lime}
+
+; Only applies if <ramp> is used
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
 
 bar-width = 10
 bar-indicator = |
@@ -394,24 +401,18 @@ speaker-mixer = Speaker
 headphone-mixer = Headphone
 headphone-id = 9
 
-#format-volume = <ramp-volume> <label-volume>
-#label-muted =  muted
-#label-muted-foreground = #66
-#label-volume-foreground=${colors.white}
-#
-#ramp-volume-0 = 
-#ramp-volume-1 = 
-#ramp-volume-2 = 
-#ramp-volume-3 = 
-#ramp-volume-foreground=${colors.foreground}
+format-volume = <ramp-volume> <bar-volume>
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-foreground=${colors.teal}
 
 format-volume-underline = ${colors.teal}
-format-volume = <label-volume> <bar-volume>
-label-volume = 
-label-volume-foreground = ${colors.teal}
 
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
+format-muted-prefix = 
+format-muted-foreground = ${colors.red}
 label-muted =   muted
 
 bar-volume-width = 10
@@ -526,27 +527,15 @@ type = custom/menu
 
 format-spacing = 1
 
-label-open = 
+label-open = 
 label-open-foreground = ${colors.secondary}
-label-close =  cancel
+label-close = 
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
+menu-0-0 = lock
+menu-0-0-exec = i3lock -i ~/Images/Wallpaper/wallpaper.png --tiling --dpms --color 000000
 
 [settings]
 screenchange-reload = true
@@ -576,5 +565,59 @@ format-underline = ${colors.red}
 #format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 exec = ~/.config/i3/IconicWeather.sh "EUR|FR|FR623|Paris"
+
+[module/pulseaudio1]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = bluez_sink.FC_58_FA_10_B4_7F.a2dp_sink
+
+; Available tags:
+;   <label-volume> (default)
+;   <ramp-volume>
+;   <bar-volume>
+format-volume = <ramp-volume> <bar-volume>
+format-volume-underline = ${colors.teal}
+
+; Available tags:
+;   <label-muted> (default)
+;   <ramp-volume>
+;   <bar-volume>
+;format-muted = <label-muted>
+
+; Available tokens:
+;   %percentage% (default)
+;label-volume = %percentage%%
+
+; Available tokens:
+;   %percentage% (default)
+format-muted-prefix = 
+format-muted-foreground = ${colors.red}
+label-muted =   muted
+
+; Only applies if <ramp-volume> is used
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-foreground=${colors.teal}
+
+bar-volume-width = 10
+bar-volume-foreground-0 = ${colors.teal1}
+bar-volume-foreground-1 = ${colors.teal2}
+bar-volume-foreground-2 = ${colors.teal3}
+bar-volume-foreground-3 = ${colors.teal4}
+bar-volume-foreground-4 = ${colors.teal5}
+bar-volume-foreground-5 = ${colors.teal6}
+bar-volume-foreground-6 = ${colors.teal7}
+bar-volume-gradient = false
+bar-volume-indicator = 
+bar-volume-indicator-font = 2
+bar-volume-fill = 
+bar-volume-fill-font = 2
+bar-volume-empty = 
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
 
 ; vim:ft=dosini

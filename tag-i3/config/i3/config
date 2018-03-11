@@ -52,6 +52,7 @@ bindsym $mod+d exec --no-startup-id rofi -show drun
 
 # rofi_power menu
 bindsym $mod+Shift+q exec ~/.config/i3/rofi_powermenu.sh
+#bindsym XF86WakeUp exec ~/.config/i3/rofi_powermenu.sh
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
@@ -221,10 +222,11 @@ bindsym Mod4+Control+l exec i3-msg workspace $workspace10 && i3lock -i ~/Images/
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioMicMute exec amixer sset Capture toggle # mute mic key
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 20 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 20 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
@@ -256,8 +258,8 @@ exec_always feh --bg-scale ~/Images/Wallpaper/wallpaper.jpg
 exec --no-startup-id nm-applet
 exec --no-startup-id blueman-applet
 exec --no-startup-id unclutter
-exec --no-startup-id udiskie 
-exec --no-startup-id compton 
-exec --no-startup-id dunst 
-exec --no-startup-id mpd 
+exec --no-startup-id udiskie
+exec --no-startup-id compton
+exec --no-startup-id dunst
+exec --no-startup-id mpd
 exec "sh -c 'sleep 300; exec ~/.dotfiles/BingDownloadImage.sh'"
