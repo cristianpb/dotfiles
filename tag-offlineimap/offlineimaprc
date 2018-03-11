@@ -1,8 +1,7 @@
 [general]
 ui = ttyui
 accounts = Gmail,Kernix
-pythonfile = ~/.offlineimap2.py
-#pythonfile = ~/.offlineimap.py
+pythonfile = ~/.offlineimap.py
 maxsyncaccounts = 1
 
 [Account Gmail]
@@ -53,17 +52,15 @@ nametrans = lambda folder: {'[Gmail]/Drafts':    'Drafts',
                             '[Gmail]/Starred':   'Starred',
                             '[Gmail]/All Mail':  'Archive',
                             }.get(folder, folder)
-# Necessary as of OfflineIMAP 6.5.4
 #'[Gmail]/Trash':     'trash',
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 #keepalive = 60
 #holdconnectionopen = yes
 auth_mechanisms = GSSAPI, CRAM-MD5, XOAUTH2, PLAIN, LOGIN
-oauth2_client_id = 699167351438-hnjo8b35tvrgs62hbo80d96lu5l8a3pf.apps.googleusercontent.com 
-oauth2_client_secret = bp_oH6HCoJe4k2c7gtfsC0EP
-#oauth2_access_token = ya29.Ci_PAy9ZSyP671Ft2MgYTTUDyOfKLZKx2R9wxCNApTYJ1WweFgcHjm4ueU6Z6jB6Ag
+oauth2_client_id_eval = get_oauth2_client_id('Gmail')
+oauth2_client_secret_eval = get_oauth2_client_secret('Gmail')
 #oauth2_request_url = https://accounts.google.com/o/oauth2/token
-oauth2_refresh_token = 1/-qkD6DWmdfYbXLJb3iJqc13NWyy1ByTIAj9E9s15eAQ
+oauth2_refresh_token_eval = get_oauth2_refresh_token('Gmail')
 
 [Repository Kernix-Remote]
 type = Gmail
@@ -78,14 +75,12 @@ nametrans = lambda folder: {'[Gmail]/Brouillons':    'Drafts',
                             '[Gmail]/Corbeille':     'Trash',
                             '[Gmail]/Tous les messages':  'Archive',
                             }.get(folder, folder)
-## Necessary as of OfflineIMAP 6.5.4
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 auth_mechanisms = GSSAPI, CRAM-MD5, XOAUTH2, PLAIN, LOGIN
-oauth2_client_id = 227304564556-j0o0l300kj8puegjpqetj7si2cbofa2g.apps.googleusercontent.com
-oauth2_client_secret = MRQH2-_Q5gLa7q1_WfAmpZaq
-#oauth2_access_token = ya29.Ci_PA5Vobczy2Zq3aalK1VFAS9sbgImrMWUFVH7CCJFkoG7pz466LjiqswZJKXwufw 
-#oauth2_request_url = https://accounts.google.com/o/oauth2/token
-oauth2_refresh_token = 1/LHLnKjOn_8e2TPyyZnY-PhmRhIcF-P7GrnM0WGe3lv3PMCHJIHGW0Q_ZzhLvz3WX 
+oauth2_client_id_eval = get_oauth2_client_id('Kernix')
+oauth2_client_secret_eval = get_oauth2_client_secret('Kernix')
+#oauth2_access_token = #oauth2_request_url = https://accounts.google.com/o/oauth2/token
+oauth2_refresh_token_eval = get_oauth2_refresh_token('Kernix')
 
 [mbnames]
 enabled = yes
@@ -94,3 +89,5 @@ header = "mailboxes "
 peritem = "+%(accountname)s/%(foldername)s"
 sep = " "
 footer = "\n"
+
+# vim:filetype=msmtp
