@@ -207,7 +207,8 @@ pacman -S udisks2 udiskie
 pacman -S tmux ranger mutt vim termite firefox xclip gnupg offlineimap pass 
 notmuch notmuch-mutt msmtp atool dunst sxiv rsync zathura zathura-pdf-poppler 
 zathura-djvu rofi inkscape gvfs feh libreoffice-still filezilla pavucontrol 
-openssh w3m ctags arandr unclutter mpd highlight curl git
+openssh w3m ctags arandr unclutter mpd highlight scrot curl git flake8 ruby 
+nodejs npm
 ```
 
 ## Bluetooth
