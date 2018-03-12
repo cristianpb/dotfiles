@@ -112,6 +112,16 @@ set clipboard=unnamed
 " Format-Flowed text
 setlocal fo+=aw
 
+
+""""""""""""""
+"  Filetype  "
+""""""""""""""
+au FileType mail setlocal sw=2 sts=2 textwidth=0 wrapmargin=0 wrap linebreak nolist
+au FileType vimwiki  setlocal tabstop=2 shiftwidth=2 expandtab
+au FileType javascript  setlocal tabstop=2 shiftwidth=2 expandtab
+au FileType markdown  setlocal tabstop=2 shiftwidth=2 expandtab
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -149,7 +159,6 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin('~/.vim/plugged')
-"Plug 'rhysd/vim-grammarous'
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'lifepillar/vim-solarized8'
@@ -169,7 +178,6 @@ Plug 'pangloss/vim-javascript' "Js hightlight
 Plug 'roxma/vim-paste-easy' " Avoid indent break when paste
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File manager <F3>
 Plug 'kchmck/vim-coffee-script'
-Plug 'editorconfig/editorconfig-vim'
 Plug 'w0rp/ale' " Asynchronous linter <leader>sc
 Plug 'sirver/ultisnips' " Snippets
     Plug 'honza/vim-snippets'
@@ -399,7 +407,7 @@ nmap <F6> :TagbarToggle<CR>
 "  Theme  "
 """""""""""
 " Black theme
-"set background=dark
+set background=dark
 
 " Add underline syntax details
 syntax enable
@@ -477,16 +485,3 @@ nmap <leader>R :RainbowToggle<cr>
 """""""""""""""
 let g:completor_auto_trigger=0
 
-""""""""""""""""""
-"  EditorConfig  "
-""""""""""""""""""
-" Ensure that works with fugitive and not use for remote files
-let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
-
-""""""""""""""""""""""""""""""
-"  Language Tool: Testing, corrections?   "
-""""""""""""""""""""""""""""""
-"let g:grammarous#languagetool_cmd = 'languagetool'
-"let g:grammarous#show_first_error = 1
-"let g:grammarous#use_vim_spelllang = 1
-"nmap <F7> <Plug>(grammarous-open-info-window)
