@@ -84,9 +84,9 @@ font-0 = fixed:pixelsize=9;1
 font-1 = FontAwesome:pixelsize=9;2
 font-2 = siji:pixelsize=9;1
 
-modules-left = volume
-modules-center = filesystem cpu memory networkspeedup networkspeeddown battery1
-modules-right = 
+modules-left = volume mpd
+modules-center = 
+modules-right = filesystem cpu memory networkspeedup networkspeeddown battery1
 
 [bar/top]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -224,13 +224,64 @@ label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
 [module/mpd]
 type = internal/mpd
-format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
+host = 127.0.0.1
+port = 6600
 
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
+; Seconds to sleep between progressbar/song timer sync
+; Default: 1
+interval = 2
+
+format-online = <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>  <icon-repeat> <icon-random>  <bar-progress> <label-time>  <label-song>
+;format-playing = ${self.format-online}
+;format-paused = ${self.format-online}
+;format-stopped = ${self.format-online}
+
+; Available tags:
+;   <label-offline>
+;format-offline = <label-offline>
+
+; Available tokens:
+;   %artist%
+;   %album%
+;   %date%
+;   %title%
+; Default: %artist% - %title%
+label-song = 𝄞 %artist% - %title%
+
+; Available tokens:
+;   %elapsed%
+;   %total%
+; Default: %elapsed% / %total%
+;label-time = %elapsed% / %total%
+
+; Available tokens:
+;   None
+label-offline = 🎜 mpd is offline
+
+
+; Only applies if <icon-X> is used
+icon-play = 
+icon-pause =  
+icon-stop = 
+icon-prev = 
+icon-next =  
+icon-seekb = ⏪
+icon-seekf = ⏩
+icon-random = 🔀
+icon-repeat = 🔁
+icon-repeatone = 🔂
+icon-consume = ✀
+
+; Used to display the state of random/repeat/repeatone
+; Only applies if <icon-[random|repeat|repeatone]> is used
+toggle-on-foreground = #ff
+toggle-off-foreground = #55
+
+; Only applies if <bar-progress> is used
+bar-progress-width = 25
+bar-progress-indicator = |
+bar-progress-fill = ─
+bar-progress-empty = ─
 
 label-song-maxlen = 25
 label-song-ellipsis = true
@@ -552,6 +603,7 @@ margin-bottom = 1
 type = custom/script
 interval = 10
 format = <label>
+format-underline = ${colors.indigo}
 #format-prefix = "  "
 #format-prefix-foreground = ${colors.foreground-alt}
 exec = ~/.dotfiles/new_mail.sh
