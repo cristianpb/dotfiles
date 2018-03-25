@@ -1,5 +1,5 @@
 % egrep -v '^#' .ncmpcpp/config
-mpd_music_dir = "/home/cris/Music/"
+mpd_music_dir = "/home/cris/Music_clean/"
 
 #mpd_host = "127.0.0.1"
 mpd_port = "6600"

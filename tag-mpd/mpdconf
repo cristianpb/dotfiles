@@ -4,7 +4,7 @@ pid_file "~/.mpd/mpd.pid"
 db_file  "~/.mpd/mpd.db"
 state_file "~/.mpd/mpdstate"
 playlist_directory "~/.mpd/playlists"
-music_directory "~/Music/"
+music_directory "~/Music_clean/"
 port                 "6600"
 audio_output {
         type            "pulse"

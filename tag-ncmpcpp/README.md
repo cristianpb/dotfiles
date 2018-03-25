@@ -1,5 +1,33 @@
 # Mpd client
 
+## MCP Party client (web mdp client)
+
+* Clone mpcparty `git clone https://github.com/jplsek/MPCParty`. By default at `~/Documents/node/`
+
+* Install dependencies `npm install`
+
+* You can test using `npm start`
+
+* Create a service at `~/.config/systemd/user/mpcparty.service`
+
+```
+# mpcparty.service
+
+[Unit]
+Description=MPCParty
+After=mpd.service
+
+[Service]
+ExecStart=/usr/bin/node /home/arch/Documents/node/MPCParty/server.js
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+```
+
+* Enable service `systemctl --user enable mpcparty.service`
+
+
 ## Album notification http://dotshare.it/dots/1533/
 
 Find album in folder and send notification

@@ -239,9 +239,9 @@ bindsym Print exec scrot ~/Images/`date +%Y-%m-%d_%H:%M:%S`.png
 #bindsym XF86AudioPause exec playerctl pause
 #bindsym XF86AudioNext exec playerctl next
 #bindsym XF86AudioPrev exec playerctl previous
-bindsym $mod+F11 exec mpc prev
-bindsym $mod+F12 exec mpc next
-bindsym $mod+F10 exec mpc toggle
+bindsym $mod+XF86AudioLowerVolume exec mpc prev
+bindsym $mod+XF86AudioRaiseVolume exec mpc next
+bindsym $mod+XF86AudioMute exec mpc toggle
 
 # Keyboard Brightness
 bindsym XF86KbdBrightnessDown exec "~/.config/i3/leds_down.sh"
@@ -261,5 +261,4 @@ exec --no-startup-id unclutter
 exec --no-startup-id udiskie
 exec --no-startup-id compton
 exec --no-startup-id dunst
-exec --no-startup-id mpd
 exec "sh -c 'sleep 300; exec ~/.dotfiles/BingDownloadImage.sh'"
