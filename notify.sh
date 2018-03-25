@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 
-MUSIC_DIR=/home/cris/Music_clean #path to your music dir
+MUSIC_DIR=/home/arch/Music_clean #path to your music dir
 
 COVER=/tmp/cover.jpg
 

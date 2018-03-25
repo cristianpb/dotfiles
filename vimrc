@@ -119,6 +119,7 @@ au FileType mail setlocal sw=2 sts=2 textwidth=0 wrapmargin=0 wrap linebreak nol
 au FileType vimwiki  setlocal tabstop=2 shiftwidth=2 expandtab
 au FileType javascript  setlocal tabstop=2 shiftwidth=2 expandtab
 au FileType markdown  setlocal tabstop=2 shiftwidth=2 expandtab
+au FileType text  setlocal tabstop=2 shiftwidth=2 expandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
