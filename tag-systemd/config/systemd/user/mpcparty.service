@@ -1,0 +1,11 @@
+[Unit]
+Description=MPCParty
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/node /home/arch/Documents/node/MPCParty/server.js
+Restart=always
+TimeoutStartSec=10
+
+[Install]
+WantedBy=default.target

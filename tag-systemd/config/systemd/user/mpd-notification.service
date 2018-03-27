@@ -1,0 +1,8 @@
+[Unit]
+Description=MPD Notification
+
+[Service]
+ExecStart=/usr/bin/mpd-notification -m /home/arch/Music_clean/ -s 100
+
+[Install]
+WantedBy=default.target
