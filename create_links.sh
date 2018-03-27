@@ -278,3 +278,9 @@ for i in ${FILES_TO_SYMLINK[@]}; do
         fi
     fi
 done
+
+# ln -fs ~/.dotfiles/tag-systemd/config/systemd/user/checkmail.service ~/.config/systemd/user/checkmail.service
+# ln -fs ~/.dotfiles/tag-systemd/config/systemd/user/checkmail.timer ~/.config/systemd/user/checkmail.timer
+# ln -fs ~/.dotfiles/tag-systemd/config/systemd/user/mpcparty.service ~/.config/systemd/user/mpcparty.service
+# ln -fs ~/.dotfiles/tag-systemd/config/systemd/user/mpd-notification.service ~/.config/systemd/user/mpd-notification.service
+# ln -fs ~/.dotfiles/tag-systemd/config/systemd/user/mpd.service ~/.config/systemd/user/mpd.service

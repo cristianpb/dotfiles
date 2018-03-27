@@ -1,0 +1,8 @@
+[Unit]
+Description=check mail
+RefuseManualStart=no
+RefuseManualStop=yes
+
+[Service]
+Type=oneshot
+ExecStart=/home/arch/.dotfiles/checkmail.sh

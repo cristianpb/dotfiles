@@ -5,6 +5,7 @@ db_file  "~/.mpd/mpd.db"
 state_file "~/.mpd/mpdstate"
 playlist_directory "~/.mpd/playlists"
 music_directory "~/Music_clean/"
+restore_paused "yes"
 port                 "6600"
 audio_output {
         type            "pulse"
