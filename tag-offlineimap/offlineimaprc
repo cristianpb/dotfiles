@@ -22,6 +22,7 @@ type = Maildir
 localfolders = ~/Mail/Gmail
 nametrans = lambda folder: {'Drafts':   '[Gmail]/Drafts',
                             'Sent':     '[Gmail]/Sent Mail',
+                            'Trash':    '[Gmail]/Trash',
                             'Important':'[Gmail]/Important',
                             'Spam':     '[Gmail]/Spam',
                             'Starred':  '[Gmail]/Starred',
@@ -44,9 +45,10 @@ nametrans = lambda folder: {'Drafts':   '[Gmail]/Brouillons',
 type = Gmail
 remoteuser = felipebrokate@gmail.com
 remotepasseval = get_pass("Gmail")
-folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Sent Mail']
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail']
 nametrans = lambda folder: {'[Gmail]/Drafts':    'Drafts',
                             '[Gmail]/Sent Mail': 'Sent',
+                            '[Gmail]/Trash': 'Trash',
                             '[Gmail]/Important':   'Important',
                             '[Gmail]/Spam':   'Spam',
                             '[Gmail]/Starred':   'Starred',
