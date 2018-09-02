@@ -66,7 +66,7 @@ set breakindent
 set showbreak=\\\\\
 
 " Only syntax highlighting the first 200 characters of each line.
-set synmaxcol=200
+"set synmaxcol=200
 
 " Opening new files via :e, a breeze with TAB expansion.
 set wildmenu
@@ -118,8 +118,12 @@ setlocal fo+=aw
 au FileType mail setlocal sw=2 sts=2 textwidth=0 wrapmargin=0 wrap linebreak nolist
 au FileType vimwiki  setlocal tabstop=2 shiftwidth=2 expandtab
 au FileType javascript  setlocal tabstop=2 shiftwidth=2 expandtab
+au FileType json  setlocal tabstop=2 shiftwidth=2 expandtab
+au FileType typescript  setlocal tabstop=2 shiftwidth=2 expandtab
 au FileType markdown  setlocal tabstop=2 shiftwidth=2 expandtab
 au FileType text  setlocal tabstop=2 shiftwidth=2 expandtab
+au FileType html  setlocal tabstop=2 shiftwidth=2 expandtab
+au FileType yaml  setlocal tabstop=2 shiftwidth=2 expandtab
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Spell checking
@@ -191,6 +195,8 @@ Plug 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
 Plug 'othree/html5.vim' " Hightlight
 Plug 'luochen1990/rainbow' " Parentheses highlight <leader>R
 Plug 'maralla/completor.vim'
+Plug 'leafgarland/typescript-vim' " Typescript lighting
+"Plug 'quramy/tsuquyomi'
 Plug 'vimwiki/vimwiki' " Vimwiki notes <leader>ww
 Plug 'ervandew/supertab'
 call plug#end()
@@ -200,6 +206,16 @@ call plug#end()
 """"""""""""""""""""
 " Ignore files in NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$']
+
+" Disable that old Press ? for help
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+" Automatically close NerdTree when you open a file
+let NERDTreeQuitOnOpen = 1
+
+" Automatically delete the buffer of the file you just deleted with NerdTree:
+let NERDTreeAutoDeleteBuffer = 1
 
 " Activate with <F3>
 nmap <silent> <F3> :NERDTreeToggle<CR>
