@@ -166,7 +166,8 @@ Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'lifepillar/vim-solarized8'
 Plug 'benmills/vimux'
-Plug 'davidhalter/jedi-vim'
+"Plug 'davidhalter/jedi-vim'
+Plug 'python-mode/python-mode', { 'branch': 'develop' }
 Plug 'valloric/youcompleteme'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
@@ -187,7 +188,7 @@ Plug 'tpope/vim-fugitive' " Git-vim
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'Vimjas/vim-python-pep8-indent' " Better python indent
+"Plug 'Vimjas/vim-python-pep8-indent' " Better python indent
 Plug 'ryanoasis/vim-devicons' " Icons to vim
 Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
 Plug 'junegunn/vim-emoji' " Emojis <C-X><C-U>
@@ -299,6 +300,12 @@ let R_hl_term = 1 " need of colorout
 " If exit buffer then exit the command ligne
 autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
 
+""""""""""""
+"  Pymode  "
+""""""""""""
+let g:pymode_lint = 0
+ let g:pymode_rope_completion_bind = '<C-N>'
+
 """""""""""""""""""""""""""
 "  Jedi: python vim help  "
 """""""""""""""""""""""""""
@@ -306,6 +313,7 @@ let python_highlight_all = 1
 
 " Completions command
 let g:jedi#completions_command = '<C-N>'
+let g:jedi#completions_enabled = 0
 
 " See usages of a variable
 let g:jedi#usages_command = '<leader>z'
