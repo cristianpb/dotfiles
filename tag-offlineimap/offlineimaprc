@@ -56,6 +56,7 @@ nametrans = lambda folder: {'[Gmail]/Drafts':    'Drafts',
                             }.get(folder, folder)
 #'[Gmail]/Trash':     'trash',
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl_version = tls1_2
 #keepalive = 60
 #holdconnectionopen = yes
 auth_mechanisms = GSSAPI, CRAM-MD5, XOAUTH2, PLAIN, LOGIN
@@ -78,6 +79,7 @@ nametrans = lambda folder: {'[Gmail]/Brouillons':    'Drafts',
                             '[Gmail]/Tous les messages':  'Archive',
                             }.get(folder, folder)
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl_version = tls1_2
 auth_mechanisms = GSSAPI, CRAM-MD5, XOAUTH2, PLAIN, LOGIN
 oauth2_client_id_eval = get_oauth2_client_id('Kernix')
 oauth2_client_secret_eval = get_oauth2_client_secret('Kernix')
