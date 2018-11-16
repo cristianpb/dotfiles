@@ -497,3 +497,14 @@ nmap <leader>R :RainbowToggle<cr>
 "  Completor  "
 """""""""""""""
 let g:completor_auto_trigger=0
+
+""""""""""""
+"  neovim  "
+""""""""""""
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+    tnoremap <M-[> <Esc>
+    tnoremap <C-v><Esc> <Esc>
+    nmap <localleader>t <Plug>(iron-send-motion)
+endif
+autocmd TermOpen * set bufhidden=hide
