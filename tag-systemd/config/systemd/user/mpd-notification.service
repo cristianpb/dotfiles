@@ -6,6 +6,7 @@ After=mpd.service
 Type=simple
 Restart=always
 ExecStart=/usr/bin/mpd-notification -m /home/arch/Music_clean/ -s 100 -t 4
+ExecStop=/usr/bin/pkill mpd-notification
 
 [Install]
 WantedBy=default.target
