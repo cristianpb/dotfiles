@@ -165,16 +165,24 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'lifepillar/vim-solarized8'
-Plug 'benmills/vimux'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+Plug 'zchee/deoplete-jedi'
+Plug 'fszymanski/deoplete-emoji'
+Plug 'hkupty/iron.nvim'
 Plug 'davidhalter/jedi-vim'
-Plug 'valloric/youcompleteme'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
-Plug 'epeli/slimux'
 Plug 'itchyny/calendar.vim'
 Plug 'jalvesaq/Nvim-R' " R - vim
 "Plug 'jgors/vimux-ipy'
-Plug 'junegunn/vim-easy-align' " Align text <Shift><Enter>
+"Plug 'junegunn/vim-easy-align' " Align text <Shift><Enter>
 Plug 'lervag/vimtex' " Latex suite that replace gerw/vim-latex-suite
 Plug 'majutsushi/tagbar' " Ctags <F6>
 Plug 'pangloss/vim-javascript' "Js hightlight
@@ -190,11 +198,9 @@ Plug 'vim-airline/vim-airline-themes'
 "Plug 'Vimjas/vim-python-pep8-indent' " Better python indent
 Plug 'ryanoasis/vim-devicons' " Icons to vim
 Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
-Plug 'junegunn/vim-emoji' " Emojis <C-X><C-U>
 Plug 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
 Plug 'othree/html5.vim' " Hightlight
 Plug 'luochen1990/rainbow' " Parentheses highlight <leader>R
-Plug 'maralla/completor.vim'
 Plug 'leafgarland/typescript-vim' " Typescript lighting
 "Plug 'quramy/tsuquyomi'
 Plug 'vimwiki/vimwiki' " Vimwiki notes <leader>ww
@@ -304,7 +310,8 @@ autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "functio
 let python_highlight_all = 1
 
 " Completions command
-let g:jedi#completions_command = '<C-N>'
+"let g:jedi#completions_command = '<C-N>'
+let g:jedi#completions_enabled = 0 
 
 " See usages of a variable
 let g:jedi#usages_command = '<leader>z'
@@ -336,51 +343,6 @@ set runtimepath+=~/.vim/my-snippets
 
 " Directory for own snips
 let g:UltiSnipsSnippetsDir='~/.vim/my-snippets'
-
-"""""""""""""""""""""""
-"  Youcompleteme YCM  "
-"""""""""""""""""""""""
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-""""""""""""""""""""""""""""""""""""""""""""""
-"  Vimux: send commands from vim to terinal  "
-""""""""""""""""""""""""""""""""""""""""""""""
-" Use nearest pane
-let g:VimuxUseNearest = 1
-
-" Height of terminal
-let g:VimuxHeight = '30'
-
-" Create a new terminal
-map <Leader>vp :VimuxPromptCommand<CR>
-
-" Run the current command ?
-map <Leader>rb :call VimuxRunCommand("")<CR> " Run the current file with rspec
-function! VimuxSlime()
- call VimuxSendText(@v)
- call VimuxSendKeys('Enter')
-endfunction
-
-" If text is selected, save it in the v buffer and send that buffer it to tmux
-vmap <LocalLeader><ENTER> "vy :call VimuxSlime()<CR>
-" Select current paragraph and send it to tmux
-nmap <LocalLeader><ENTER> vip<LocalLeader>vs<CR>
-
-"""""""""""""""""""""
-"  Slimux: Testing  "
-"""""""""""""""""""""
-let g:slimux_python_ipython = 1
-"nnoremap <C-c><C-c> :SlimuxREPLSendLine<CR>
-"vnoremap <C-c><C-c> :SlimuxREPLSendLine<CR>
-"nnoremap <C-c><C-v> :SlimuxREPLConfigure<CR>
-map <Leader>s :SlimuxREPLSendLine<CR>
-vmap <Leader>s :SlimuxREPLSendSelection<CR>
-"map <Leader>b :SlimuxREPLSendBuffer<CR>
-"map <Leader>a :SlimuxShellLast<CR>
-"map <Leader>k :SlimuxSendKeysLast<CR>
 
 """"""""""""""""
 "  Easy align  "
@@ -458,12 +420,6 @@ nnoremap <silent> <leader>d :GitGutterToggle<cr>
 " Sync to google calendar
 "let g:calendar_google_calendar = 1
 
-"""""""""""
-"  Emoji  "
-"""""""""""
-" Emoji completion for md files (:app<CTRL-X><CTRL-U> to find :apple:)
-setlocal completefunc=emoji#complete
-
 """"""""""""
 "  Js vim  "
 """"""""""""
@@ -493,18 +449,16 @@ let g:rainbow_active = 0
 " Toggle rainbow with <leader>R
 nmap <leader>R :RainbowToggle<cr>
 
-"""""""""""""""
-"  Completor  "
-"""""""""""""""
-let g:completor_auto_trigger=0
-
 """"""""""""
-"  neovim  "
+"  Neovim  "
 """"""""""""
 if has('nvim')
     tnoremap <Esc> <C-\><C-n>
     tnoremap <M-[> <Esc>
     tnoremap <C-v><Esc> <Esc>
     nmap <localleader>t <Plug>(iron-send-motion)
+    autocmd TermOpen * set bufhidden=hide
 endif
-autocmd TermOpen * set bufhidden=hide
+
+nmap <localleader>t <Plug>(iron-send-motion)
+let g:iron_new_python_repl_hooks='ipython'
