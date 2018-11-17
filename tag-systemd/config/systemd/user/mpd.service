@@ -4,6 +4,7 @@ After=network.target sound.target
 
 [Service]
 ExecStart=/usr/bin/mpd --no-daemon /home/arch/.mpdconf
+ExecStop=/usr/bin/pkill mpd
 
 [Install]
 WantedBy=default.target
