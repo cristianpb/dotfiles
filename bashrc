@@ -211,5 +211,10 @@ source /usr/bin/virtualenvwrapper.sh
 # Source API tokens
 source ~/.dotfiles/APIs
 
+export PATH=/home/arch/.local/bin:$PATH
 # Nicky for chrome
 #CHROME_PATH="/usr/bin/google-chrome-unstable" node test_nick.js
+
+# Use bash-completion, if available
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
