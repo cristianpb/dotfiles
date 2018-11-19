@@ -458,7 +458,10 @@ if has('nvim')
     tnoremap <C-v><Esc> <Esc>
     nmap <localleader>t <Plug>(iron-send-motion)
     autocmd TermOpen * set bufhidden=hide
+    au TermOpen * setlocal nonumber norelativenumber
 endif
 
 nmap <localleader>t <Plug>(iron-send-motion)
 let g:iron_new_python_repl_hooks='ipython'
+
+command Mail e term://mutt
