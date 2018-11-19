@@ -462,6 +462,8 @@ if has('nvim')
     nmap <localleader>t <Plug>(iron-send-motion)
     autocmd TermOpen * set bufhidden=hide
     au TermOpen * setlocal nonumber norelativenumber
+    :hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
+    autocmd BufWinEnter,WinEnter term://* startinsert
 endif
 
 nmap <localleader>t <Plug>(iron-send-motion)
