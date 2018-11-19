@@ -250,6 +250,7 @@ declare -a FILES_TO_SYMLINK=(
     'ranger'
     'i3'
     'termite'
+    'nvim'
 )
 
 # FILES_TO_SYMLINK="$FILES_TO_SYMLINK .vim bin" # add in vim and the binaries
