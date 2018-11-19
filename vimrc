@@ -112,6 +112,9 @@ set clipboard=unnamedplus
 " Format-Flowed text
 setlocal fo+=aw
 
+" Escape using jj
+:imap jj <Esc>
+
 """"""""""""""
 "  Filetype  "
 """"""""""""""
