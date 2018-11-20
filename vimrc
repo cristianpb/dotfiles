@@ -104,13 +104,16 @@ autocmd BufReadPost *
      \ endif
 
 " Remember info about open buffers on close
-set viminfo^=%
+"set viminfo^=%
 
 " Clipboard to use it exterior
 set clipboard=unnamed
 
 " Format-Flowed text
 setlocal fo+=aw
+
+" Escape using jj
+:imap jj <Esc>
 
 """"""""""""""
 "  Filetype  "
@@ -165,17 +168,24 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'lifepillar/vim-solarized8'
-Plug 'benmills/vimux'
-"Plug 'davidhalter/jedi-vim'
-Plug 'python-mode/python-mode', { 'branch': 'develop' }
-Plug 'valloric/youcompleteme'
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+Plug 'zchee/deoplete-jedi'
+Plug 'fszymanski/deoplete-emoji'
+Plug 'hkupty/iron.nvim'
+Plug 'davidhalter/jedi-vim'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
-Plug 'epeli/slimux'
+Plug 'carlitux/deoplete-ternjs'
 Plug 'itchyny/calendar.vim'
 Plug 'jalvesaq/Nvim-R' " R - vim
-"Plug 'jgors/vimux-ipy'
-Plug 'junegunn/vim-easy-align' " Align text <Shift><Enter>
+"Plug 'junegunn/vim-easy-align' " Align text <Shift><Enter>
 Plug 'lervag/vimtex' " Latex suite that replace gerw/vim-latex-suite
 Plug 'majutsushi/tagbar' " Ctags <F6>
 Plug 'pangloss/vim-javascript' "Js hightlight
@@ -191,11 +201,9 @@ Plug 'vim-airline/vim-airline-themes'
 "Plug 'Vimjas/vim-python-pep8-indent' " Better python indent
 Plug 'ryanoasis/vim-devicons' " Icons to vim
 Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
-Plug 'junegunn/vim-emoji' " Emojis <C-X><C-U>
 Plug 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
 Plug 'othree/html5.vim' " Hightlight
 Plug 'luochen1990/rainbow' " Parentheses highlight <leader>R
-Plug 'maralla/completor.vim'
 Plug 'leafgarland/typescript-vim' " Typescript lighting
 "Plug 'quramy/tsuquyomi'
 Plug 'vimwiki/vimwiki' " Vimwiki notes <leader>ww
@@ -257,7 +265,6 @@ let g:tmuxline_preset = {
       \'b'    : '#(~/.dotfiles/new_mail.sh)',
       \'win'  : ['#W'],
       \'cwin' : '#F #W',
-      \'y'    : '#(~/.config/i3/IconicWeather.sh "EUR|FR|FR623|Paris")',
       \'z'    : '%R'}
 
 """"""""""""""""
@@ -276,11 +283,11 @@ let g:promptline_preset = {
 """""""""""""""""""""""""""
 "  Nvim-R: use R and vim  "
 """""""""""""""""""""""""""
-" Default pdf viewer
+" Default pdf viewer 
 let R_pdfviewer = 'zathura'
 
 " tmux and R
-let R_in_buffer = 0
+let R_in_buffer = 0 
 
 " Dont use R.app (mac) or Rstudio for graphic
 let R_applescript = 0
@@ -300,19 +307,13 @@ let R_hl_term = 1 " need of colorout
 " If exit buffer then exit the command ligne
 autocmd VimLeave * if exists("g:SendCmdToR") && string(g:SendCmdToR) != "function('SendCmdToR_fake')" | call RQuit("nosave") | endif
 
-""""""""""""
-"  Pymode  "
-""""""""""""
-let g:pymode_lint = 0
- let g:pymode_rope_completion_bind = '<C-N>'
-
 """""""""""""""""""""""""""
 "  Jedi: python vim help  "
 """""""""""""""""""""""""""
 let python_highlight_all = 1
 
 " Completions command
-let g:jedi#completions_command = '<C-N>'
+"let g:jedi#completions_command = '<C-N>'
 let g:jedi#completions_enabled = 0
 
 " See usages of a variable
@@ -346,51 +347,6 @@ set runtimepath+=~/.vim/my-snippets
 " Directory for own snips
 let g:UltiSnipsSnippetsDir='~/.vim/my-snippets'
 
-"""""""""""""""""""""""
-"  Youcompleteme YCM  "
-"""""""""""""""""""""""
-" make YCM compatible with UltiSnips (using supertab)
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-
-""""""""""""""""""""""""""""""""""""""""""""""
-"  Vimux: send commands from vim to terinal  "
-""""""""""""""""""""""""""""""""""""""""""""""
-" Use nearest pane
-let g:VimuxUseNearest = 1
-
-" Height of terminal
-let g:VimuxHeight = '30'
-
-" Create a new terminal
-map <Leader>vp :VimuxPromptCommand<CR>
-
-" Run the current command ?
-map <Leader>rb :call VimuxRunCommand("")<CR> " Run the current file with rspec
-function! VimuxSlime()
- call VimuxSendText(@v)
- call VimuxSendKeys('Enter')
-endfunction
-
-" If text is selected, save it in the v buffer and send that buffer it to tmux
-vmap <LocalLeader><ENTER> "vy :call VimuxSlime()<CR>
-" Select current paragraph and send it to tmux
-nmap <LocalLeader><ENTER> vip<LocalLeader>vs<CR>
-
-"""""""""""""""""""""
-"  Slimux: Testing  "
-"""""""""""""""""""""
-let g:slimux_python_ipython = 1
-"nnoremap <C-c><C-c> :SlimuxREPLSendLine<CR>
-"vnoremap <C-c><C-c> :SlimuxREPLSendLine<CR>
-"nnoremap <C-c><C-v> :SlimuxREPLConfigure<CR>
-map <Leader>s :SlimuxREPLSendLine<CR>
-vmap <Leader>s :SlimuxREPLSendSelection<CR>
-"map <Leader>b :SlimuxREPLSendBuffer<CR>
-"map <Leader>a :SlimuxShellLast<CR>
-"map <Leader>k :SlimuxSendKeysLast<CR>
-
 """"""""""""""""
 "  Easy align  "
 """"""""""""""""
@@ -400,7 +356,7 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Ale: requires flake8 for python and vint for vim lighting (pip install
+"  Ale: requires flake8 for python and vint for vim lighting (pip install 
 "  vim-vint  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle ALE with <leader>sc
@@ -467,12 +423,6 @@ nnoremap <silent> <leader>d :GitGutterToggle<cr>
 " Sync to google calendar
 "let g:calendar_google_calendar = 1
 
-"""""""""""
-"  Emoji  "
-"""""""""""
-" Emoji completion for md files (:app<CTRL-X><CTRL-U> to find :apple:)
-setlocal completefunc=emoji#complete
-
 """"""""""""
 "  Js vim  "
 """"""""""""
@@ -502,7 +452,80 @@ let g:rainbow_active = 0
 " Toggle rainbow with <leader>R
 nmap <leader>R :RainbowToggle<cr>
 
-"""""""""""""""
-"  Completor  "
-"""""""""""""""
-let g:completor_auto_trigger=0
+""""""""""""
+"  Tern  "
+""""""""""""
+" Set bin if you have many instalations
+let g:deoplete#sources#ternjs#timeout = 1
+
+" Whether to include the types of the completions in the result data. Default: 0
+let g:deoplete#sources#ternjs#types = 1
+
+" Whether to include the distance (in scopes for variables, in prototypes for 
+" properties) between the completions and the origin position in the result 
+" data. Default: 0
+let g:deoplete#sources#ternjs#depths = 1
+
+" Whether to include documentation strings (if found) in the result data.
+" Default: 0
+let g:deoplete#sources#ternjs#docs = 1
+
+" When on, only completions that match the current word at the given point will
+" be returned. Turn this off to get all results, so that you can filter on the 
+" client side. Default: 1
+let g:deoplete#sources#ternjs#filter = 0
+
+" Whether to use a case-insensitive compare between the current word and 
+" potential completions. Default 0
+let g:deoplete#sources#ternjs#case_insensitive = 1
+
+" When completing a property and no completions are found, Tern will use some 
+" heuristics to try and return some properties anyway. Set this to 0 to 
+" turn that off. Default: 1
+let g:deoplete#sources#ternjs#guess = 0
+
+" Determines whether the result set will be sorted. Default: 1
+let g:deoplete#sources#ternjs#sort = 0
+
+" When disabled, only the text before the given position is considered part of 
+" the word. When enabled (the default), the whole variable name that the cursor
+" is on will be included. Default: 1
+let g:deoplete#sources#ternjs#expand_word_forward = 0
+
+" Whether to ignore the properties of Object.prototype unless they have been 
+" spelled out by at least two characters. Default: 1
+let g:deoplete#sources#ternjs#omit_object_prototype = 0
+
+" Whether to include JavaScript keywords when completing something that is not 
+" a property. Default: 0
+let g:deoplete#sources#ternjs#include_keywords = 1
+
+" If completions should be returned when inside a literal. Default: 1
+let g:deoplete#sources#ternjs#in_literal = 0
+
+
+"Add extra filetypes
+let g:deoplete#sources#ternjs#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue',
+                \ '...'
+                \ ]
+
+""""""""""""
+"  Neovim  "
+""""""""""""
+if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+    tnoremap <M-[> <Esc>
+    tnoremap <C-v><Esc> <Esc>
+    nmap <localleader>t <Plug>(iron-send-motion)
+    autocmd TermOpen * set bufhidden=hide
+    au TermOpen * setlocal nonumber norelativenumber
+    :hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
+endif
+
+nmap <localleader>t <Plug>(iron-send-motion)
+let g:iron_new_python_repl_hooks='ipython'
+
+command Mail e term://mutt 
