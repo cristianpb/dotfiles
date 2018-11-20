@@ -22,9 +22,9 @@
 #  ff = only
 [push]
   default = current
-#[status]
-#  branch = 1
-#  short = 1
+[status]
+  branch = 1
+  short = 1
 [user]
   email = felipebrokate@gmail.com
   name = cristianpb
