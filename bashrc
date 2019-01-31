@@ -222,9 +222,13 @@ export RANGER_LOAD_DEFAULT_RC=FALSE
 # PATH
 export PATH="/usr/local/sbin:$PATH"
 export PATH="~/.bin:$PATH"
-export PATH="/usr/local/Cellar/python/2.7.14/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
-export PATH="/usr/local/Cellar/python/2.7.14/bin:$PATH"
+#export PATH="/usr/local/Cellar/python/2.7.14/Frameworks/Python.framework/Versions/2.7/bin:$PATH"
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+#export PATH=/usr/local/python/3.6.5/bin:$PATH
+
+#export PATH="/usr/local/Cellar/python/2.7.14/bin:$PATH"
 #export VIRTUALENVWRAPPER_PYTHON=/usr/local/Cellar/python/2.7.14/bin
+#export VIRTUALENVWRAPPER_PYTHON="/usr/local/bin"
 
 ########################
 #  Virtualenv Wrapper  #
@@ -238,3 +242,11 @@ export PERL5LIB="$PERL_LOCAL_LIB_ROOT/lib/perl5"
 export PERL_MB_OPT="--install_base \"$PERL_LOCAL_LIB_ROOT\""
 export PERL_MM_OPT="INSTALL_BASE=$PERL_LOCAL_LIB_ROOT"
 export PATH="$PERL_LOCAL_LIB_ROOT/bin:$PATH";
+
+export LC_ALL=en_US.UTF-8  export LANG=en_US.UTF-8
+
+if [ -f /usr/local/etc/bash_completion ]; then
+    . /usr/local/etc/bash_completion
+fi
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

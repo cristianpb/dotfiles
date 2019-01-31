@@ -177,12 +177,14 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 Plug 'zchee/deoplete-jedi'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'fszymanski/deoplete-emoji'
 Plug 'hkupty/iron.nvim'
 Plug 'davidhalter/jedi-vim'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'carlitux/deoplete-ternjs'
+Plug 'neo4j-contrib/cypher-vim-syntax'
 Plug 'itchyny/calendar.vim'
 Plug 'jalvesaq/Nvim-R' " R - vim
 "Plug 'junegunn/vim-easy-align' " Align text <Shift><Enter>
@@ -511,6 +513,13 @@ let g:deoplete#sources#ternjs#filetypes = [
                 \ 'vue',
                 \ '...'
                 \ ]
+
+
+
+"""""""""
+"  FZF  "
+"""""""""
+nmap <silent> <leader>f :FZF<CR>
 
 """"""""""""
 "  Neovim  "
