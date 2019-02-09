@@ -3,7 +3,7 @@ action=$(echo -e "lock\nlogout\nshutdown\nreboot" | rofi -dmenu -p "power:")
 
 if [[ "$action" == "lock" ]]
 then
-    i3lock -i ~/Images/Wallpaper/wallpaper.png --tiling --dpms --color 000000
+    $HOME/.dotfiles/blur.sh
 fi
 
 if [[ "$action" == "logout" ]]

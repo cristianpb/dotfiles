@@ -173,7 +173,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 new_window 1pixel
 
 # Lock screen. --dpms option will turn off all displays right after locking.
-bindsym Mod4+Control+l exec i3-msg workspace $workspace10 && i3lock -i ~/Images/Wallpaper/wallpaper.png --tiling --dpms --color 000000
+bindsym Mod4+Control+l exec $HOME/.dotfiles/blur.sh
 
 # Pulse Audio controls
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
