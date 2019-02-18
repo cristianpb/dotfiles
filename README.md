@@ -2,8 +2,8 @@
 
 This dotfiles have my installation instruction for Arch Linux and the 
 configuration for my essential programs. The *master* branch contains a 
-configuration for Linux programs and the *OSX* branch contains instruction to 
-configure OSX programs such as mutt, offlineimap, pass.
+configuration for Arch linux, *ubuntu* for ubuntu OS and the *OSX* branch 
+contains instruction to configure OSX programs such as mutt, offlineimap, pass.
 
 I keep these dotfiles at `~/.dotfiles/` and I create softlinks to the dotfiles 
 at `$HOME` using `create_links.sh`.
