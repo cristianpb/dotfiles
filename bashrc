@@ -72,34 +72,16 @@ alias l='ls -CF'
 alias ls='ls --color'
 
 # Backup aliases
-alias pc2toshibaDocuments='sudo rsync -e "sudo -u cris" -avzh --progress /home/cris/Documents/ /run/media/cris/Toshiba2/Clases'
-alias pc2toshibaMusic='sudo rsync -e "sudo -u cris" -avzh --delete --progress /home/cris/Music /run/media/cris/Toshiba'
-alias pc2toshibaPictures='sudo rsync -e "sudo -u cris" -avzh --progress /home/cris/Images/ /run/media/cris/Toshiba2/Pictures/'
+alias pc2toshibaDocuments='sudo rsync -e "sudo -u cris" -avzh --progress /home/arch/Documents/ /run/media/arch/Toshiba2/Clases'
+alias pc2toshibaMusic='sudo rsync -e "sudo -u arch" -avzh --delete --progress /home/arch/Music_clean/ /run/media/arch/Toshiba/Music_clean/'
+alias pc2toshibaPictures='sudo rsync -e "sudo -u arch" -avzh --progress /home/arch/Images/ /run/media/arch/Toshiba2/Pictures/'
+alias pc2toshibaMail='sudo rsync -e "sudo -u arch" -avzh --progress /home/arch/Mail/ /run/media/arch/Toshiba2/Mail/'
 alias pc2toshibaVideos='sudo rsync -e "sudo -u cris" -avzh --progress /home/cris/Videos/ /run/media/cris/Toshiba2/Videos/'
 alias pc2toshibaR='sudo rsync -e "sudo -u cris" -avzh --delete --progress /home/cris/R/examples/ /run/media/cris/Toshiba2/Clases/R/'
 alias toshiba2pcDocuments='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Clases/ /home/cris/Documents/'
-alias toshiba2pcMusic='rsync -avzh --delete --progress /run/media/cris/Toshiba/Music/ /home/cris/Musique/'
+alias toshiba2pcMusic='sudo rsync -e "sudo -u arch" -avzh --progress /run/media/arch/Toshiba/Music/ /home/arch/Music/'
 alias toshiba2pcPictures='rsync -avzh --delete --progress /run/media/cris/Toshiba2/Pictures/ /home/cris/Images/'
 # sudo rsync -e "sudo -u arch" -avzh --progress /run/media/arch/Toshiba2/Clases/Papeles /home/arch/Documents/
-
-
-########################
-#  Connection aliases  #
-########################
-# Connect by ssh
-#alias klab='ssh -p 2266 lab@hq.kernix.com'
-alias klab='ssh -p 2266 -L 8899:localhost:8899 lab@hq.kernix.com'
-
-# Port forwarding
-#alias concperez='ssh -p 7777 cperez@localhost -Y'
-alias concperez='ssh -p 7777 -L 8899:localhost:8899 cperez@localhost -Y'
-alias cperez='ssh -p 2266 lab@hq.kernix.com -L 7777:192.168.2.75:22'
-
-# Send and receive files with scp
-function getklab() { scp -P 2266 -pr lab@hq.kernix.com:/Users/lab/Cristian/"${1%%/}" ./ ; }
-function putklab() { scp -P 2266 -pr "${1%%/}" lab@hq.kernix.com:/Users/lab/Cristian/  ; }
-function getcperez() { scp -P 7777 -pr cperez@127.0.0.1:~/"${1%%/}"  ./ ; }
-function putcperez() { scp -P 7777 -pr "${1%%/}" cristian@127.0.0.1:~/ ; }
 
 #######################################################################
 #                              Shortcuts                              #
@@ -150,8 +132,9 @@ fi
 #########################
 #  Set text editor vim  #
 #########################
-export EDITOR=vim
-alias vi='vim'
+export EDITOR=nvim
+alias vi='nvim'
+alias vim='nvim'
 
 ######################
 #  Add CUDA to path  #
