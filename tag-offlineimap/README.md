@@ -1,5 +1,18 @@
 # Password management
 
+## Get access and refresh tokens
+
+* Get `cliend_id` and `client_secret` from [console.developers](https://console.developers.google.com/apis/dashboard?)
+
+* Execute:
+
+```
+  oauth2 --user=xxx@gmail.com \
+    --client_id=1038[...].apps.googleusercontent.com \
+    --client_secret=VWFn8LIKAMC-MsjBMhJeOplZ \
+    --generate_oauth2_token
+```
+
 ## Initiate gpg-agent
 
 * Import gpg keys
