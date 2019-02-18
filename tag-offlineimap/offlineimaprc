@@ -1,6 +1,6 @@
 [general]
 ui = ttyui
-accounts = Gmail,Kernix
+accounts = Gmail
 pythonfile = ~/.offlineimap.py
 maxsyncaccounts = 1
 
@@ -10,11 +10,6 @@ localrepository = Gmail-Local
 remoterepository = Gmail-Remote
 #autorefresh = 0.5
 #quick = 10
-
-[Account Kernix]
-postsynchook = ~/.dotfiles/notmuch-hook.sh
-localrepository = Kernix-Local
-remoterepository = Kernix-Remote
 
 [Repository Gmail-Local]
 #'trash':    '[Gmail]/Trash',
@@ -27,18 +22,6 @@ nametrans = lambda folder: {'Drafts':   '[Gmail]/Drafts',
                             'Spam':     '[Gmail]/Spam',
                             'Starred':  '[Gmail]/Starred',
                             'Archive':  '[Gmail]/All Mail',
-                            }.get(folder, folder)
-
-[Repository Kernix-Local]
-type = Maildir
-localfolders = ~/Mail/Kernix
-nametrans = lambda folder: {'Drafts':   '[Gmail]/Brouillons',
-                            'Sent':     '[Gmail]/Messages envoy&AOk-s',
-                            'Trash':    '[Gmail]/Corbeille',
-                            'Important':'[Gmail]/Important',
-                            'Spam':     '[Gmail]/Spam',
-                            'Follow':   '[Gmail]/Suivis',
-                            'Archive':  '[Gmail]/Tous les messages',
                             }.get(folder, folder)
 
 [Repository Gmail-Remote]
@@ -64,27 +47,6 @@ oauth2_client_id_eval = get_oauth2_client_id('Gmail')
 oauth2_client_secret_eval = get_oauth2_client_secret('Gmail')
 #oauth2_request_url = https://accounts.google.com/o/oauth2/token
 oauth2_refresh_token_eval = get_oauth2_refresh_token('Gmail')
-
-[Repository Kernix-Remote]
-type = Gmail
-remoteuser = cperez@kernix.com
-remotepasseval = get_pass("Kernix")
-folderfilter = lambda foldername: foldername not in ['[Gmail]/Tous les messages']
-nametrans = lambda folder: {'[Gmail]/Brouillons':    'Drafts',
-                            '[Gmail]/Messages envoy&AOk-s': 'Sent',
-                            '[Gmail]/Suivis':   'Follow',
-                            '[Gmail]/Important':   'Important',
-                            '[Gmail]/Spam':   'Spam',
-                            '[Gmail]/Corbeille':     'Trash',
-                            '[Gmail]/Tous les messages':  'Archive',
-                            }.get(folder, folder)
-sslcacertfile = /etc/ssl/certs/ca-certificates.crt
-ssl_version = tls1_2
-auth_mechanisms = GSSAPI, CRAM-MD5, XOAUTH2, PLAIN, LOGIN
-oauth2_client_id_eval = get_oauth2_client_id('Kernix')
-oauth2_client_secret_eval = get_oauth2_client_secret('Kernix')
-#oauth2_access_token = #oauth2_request_url = https://accounts.google.com/o/oauth2/token
-oauth2_refresh_token_eval = get_oauth2_refresh_token('Kernix')
 
 [mbnames]
 enabled = yes
