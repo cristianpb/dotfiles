@@ -90,10 +90,8 @@ set rfc2047_parameters
 macro compose v "<edit-from>^Uidentity\_<tab>" "Select from"
 
 folder-hook 'Gmail/*' 'source ~/.mutt/account_gmail'
-folder-hook 'Kernix/*' 'source ~/.mutt/account_kernix'
 
 macro index,pager <F4>  "<change-folder> =Gmail/INBOX<enter>"  "go Gmail"
-macro index,pager <F5>  "<change-folder> =Kernix/INBOX<enter>"  "go Kernix"
 
 ## Default account
 source "~/.mutt/account_gmail"
