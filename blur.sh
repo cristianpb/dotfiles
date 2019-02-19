@@ -30,4 +30,4 @@ BLURTYPE="0x5" # 7.52s
 $SCREENSHOT
 convert $IMAGE -blur $BLURTYPE $IMAGE
 i3lock -i $IMAGE
-rm $IMAGE_tmp
+rm $IMAGE

@@ -33,3 +33,11 @@ xscreensaver.Dialog.internalBorderWidth: 0
 xscreensaver.passwd.thermometer.background: #282828
 xscreensaver.passwd.thermometer.foreground: #fbf1c7
 xscreensaver.passwd.thermometer.width: 8
+
+Xautolock.time: 5
+Xautolock.locker: $HOME/.dotfiles/autolock.sh lock
+Xautolock.notify: 30
+Xautolock.notifier: $HOME/.dotfiles/autolock.sh notify
+Xautolock.detectsleep: true
+Xautolock.secure: true
+Xautolock.noclose: true

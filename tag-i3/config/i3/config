@@ -217,5 +217,6 @@ exec --no-startup-id unclutter
 exec --no-startup-id udiskie
 exec --no-startup-id compton
 exec --no-startup-id dunst
-exec $HOME/.dotfiles/DualMonitor.sh
+exec --no-startup-id xautolock
+#exec $HOME/.dotfiles/DualMonitor.sh
 exec "sh -c 'sleep 300; exec ~/.dotfiles/BingDownloadImage.sh'"
