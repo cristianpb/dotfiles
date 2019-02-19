@@ -104,7 +104,7 @@ autocmd BufReadPost *
      \ endif
 
 " Remember info about open buffers on close
-set viminfo^=%
+"set viminfo^=%
 
 " Clipboard to use it exterior
 set clipboard=unnamedplus
@@ -199,7 +199,7 @@ Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 "Plug 'Vimjas/vim-python-pep8-indent' " Better python indent
-Plug 'ryanoasis/vim-devicons' " Icons to vim
+"Plug 'ryanoasis/vim-devicons' " Icons to vim
 Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
 Plug 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
 Plug 'othree/html5.vim' " Hightlight
@@ -463,7 +463,7 @@ if has('nvim')
     autocmd TermOpen * set bufhidden=hide
     au TermOpen * setlocal nonumber norelativenumber
     :hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
-    autocmd BufWinEnter,WinEnter term://* startinsert
+    "autocmd BufWinEnter,WinEnter term://* startinsert
 endif
 
 nmap <localleader>t <Plug>(iron-send-motion)
