@@ -23,6 +23,8 @@ bindsym $mod+Shift+A kill
 ###########################
 # start passmenu
 bindsym $mod+i exec passmenu
+# start watsondmenu
+bindsym $mod+w exec ~/.dotfiles/watson_dmenu 
 bindsym $mod+Tab exec --no-startup-id rofi -show window
 bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run
