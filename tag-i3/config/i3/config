@@ -26,7 +26,7 @@ bindsym $mod+i exec passmenu
 # start watsondmenu
 bindsym $mod+w exec ~/.dotfiles/watson_dmenu 
 bindsym $mod+Tab exec --no-startup-id rofi -show window
-bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 bindsym $mod+Shift+q exec ~/.config/i3/rofi_powermenu.sh
 #bindsym XF86WakeUp exec ~/.config/i3/rofi_powermenu.sh
@@ -188,7 +188,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
 # Touchpad controls
-bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
+#bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
 
 # Print Screen
 bindsym Print exec scrot ~/Images/`date +%Y-%m-%d_%H:%M:%S`.png
