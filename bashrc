@@ -8,9 +8,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# Load shell prompt line
-source ~/.shell_prompt.sh
-
 # Handy Extract Program
 function extract()      
 {
@@ -117,18 +114,6 @@ alias ledd='sudo ~/.config/i3/leds_down.sh'
 #######################################################################
 #                               Config                                #
 #######################################################################
-##########
-#  Tmux  #
-##########
-# If not running interactively, do not do anything
-[[ $- != *i* ]] && return
-[[ -z "$TMUX" ]] && exec tmux
-
-if which tmux >/dev/null 2>&1; then
-    #if not inside a tmux session, and if no session is started, start a new session
-    test -z "$TMUX" && (tmux attach || tmux new-session)
-fi
-
 #########################
 #  Set text editor vim  #
 #########################
@@ -187,10 +172,6 @@ source /usr/bin/virtualenvwrapper.sh
 ############
 #  Others  #
 ############
-# Java for neo4j
-#export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-#export JAVA_HOME= /usr/lib/jvm/java-7-openjdk/jre
-
 # Source API tokens
 source ~/.dotfiles/APIs
 
@@ -201,3 +182,6 @@ export PATH=/home/arch/.local/bin:$PATH
 # Use bash-completion, if available
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
+
+# Load shell prompt line
+source ~/.shell_prompt.sh
