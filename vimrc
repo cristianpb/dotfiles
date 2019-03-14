@@ -104,7 +104,7 @@ autocmd BufReadPost *
      \ endif
 
 " Remember info about open buffers on close
-set viminfo^=%
+"set viminfo^=%
 
 " Clipboard to use it exterior
 set clipboard=unnamedplus
