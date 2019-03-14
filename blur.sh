@@ -30,6 +30,6 @@ BLURTYPE="0x5" # 7.52s
 $SCREENSHOT
 #convert $IMAGE -blur $BLURTYPE $IMAGE
 convert $IMAGE -scale 10% -scale 1000% $IMAGE
-i3lock -i $IMAGE
+i3lock -i $IMAGE --nofork 
 rm $IMAGE
 watson stop
