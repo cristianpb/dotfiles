@@ -520,3 +520,7 @@ nmap <localleader>t <Plug>(iron-send-motion)
 let g:iron_new_python_repl_hooks='ipython'
 
 command Mail e term://mutt
+
+set termguicolors " Enable true color support.
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
