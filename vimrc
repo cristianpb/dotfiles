@@ -387,6 +387,7 @@ nmap <F6> :TagbarToggle<CR>
 """""""""""
 " Black theme
 set background=dark
+"set background=light
 
 " Add underline syntax details
 syntax enable
@@ -397,7 +398,7 @@ let g:gruvbox_termcolors = 16
 
 " Set italics
 "let g:solarized_term_italics=1
-"let g:gruvbox_italic=1
+let g:gruvbox_italic=1
 
 " Set color scheme
 colorscheme gruvbox
