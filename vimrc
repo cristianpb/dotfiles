@@ -182,9 +182,7 @@ Plug 'hkupty/iron.nvim'
 Plug 'davidhalter/jedi-vim'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
-Plug 'itchyny/calendar.vim'
 Plug 'jalvesaq/Nvim-R' " R - vim
-"Plug 'jgors/vimux-ipy'
 "Plug 'junegunn/vim-easy-align' " Align text <Shift><Enter>
 Plug 'lervag/vimtex' " Latex suite that replace gerw/vim-latex-suite
 Plug 'majutsushi/tagbar' " Ctags <F6>
@@ -199,14 +197,13 @@ Plug 'tpope/vim-fugitive' " Git-vim
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'Vimjas/vim-python-pep8-indent' " Better python indent
 Plug 'ryanoasis/vim-devicons' " Icons to vim
-Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
+"Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
 Plug 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
 Plug 'othree/html5.vim' " Hightlight
 Plug 'luochen1990/rainbow' " Parentheses highlight <leader>R
 Plug 'leafgarland/typescript-vim' " Typescript lighting
-"Plug 'quramy/tsuquyomi'
+"Plug 'quramy/tsuquyomi' "Special linter for Typescript
 Plug 'vimwiki/vimwiki' " Vimwiki notes <leader>ww
 Plug 'ervandew/supertab'
 call plug#end()
@@ -284,11 +281,11 @@ let g:promptline_preset = {
 """""""""""""""""""""""""""
 "  Nvim-R: use R and vim  "
 """""""""""""""""""""""""""
-" Default pdf viewer 
+" Default pdf viewer
 let R_pdfviewer = 'zathura'
 
 " tmux and R
-let R_in_buffer = 0 
+let R_in_buffer = 0
 
 " Dont use R.app (mac) or Rstudio for graphic
 let R_applescript = 0
@@ -315,7 +312,7 @@ let python_highlight_all = 1
 
 " Completions command
 "let g:jedi#completions_command = '<C-N>'
-let g:jedi#completions_enabled = 0 
+let g:jedi#completions_enabled = 0
 
 " See usages of a variable
 let g:jedi#usages_command = '<leader>z'
@@ -330,6 +327,12 @@ let g:jedi#max_doc_height = 30
 " No automatic import after
 let g:jedi#smart_auto_mappings = 0
 "map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+
+" Work with virtualenvs
+let g:python3_host_prog = '/bin/python3' " Python 3
+
+" Show jedi docstrings
+let g:deoplete#sources#jedi#show_docstring = 1
 
 """""""""""""""
 "  Ultisnips  "
@@ -357,7 +360,7 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Ale: requires flake8 for python and vint for vim lighting (pip install 
+"  Ale: requires flake8 for python and vint for vim lighting (pip install
 "  vim-vint  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle ALE with <leader>sc
@@ -369,10 +372,12 @@ let g:ale_enabled = 0
 " Do compleition
 let g:ale_completion_enabled = 1
 
+let g:ale_linters = {'python': ['flake8', 'mypy']}
+
 " Use fixers
 "let g:ale_fixers = {
 "\   'javascript': ['eslint'],
-"\   'python': ['flake8'],
+"\   'python': ['autopep8', 'yapf'],
 "\   'vim': ['vint'],
 "\}
 
@@ -419,12 +424,6 @@ let g:gitgutter_enabled=0
 " Activate using <leader>d
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
-""""""""""""""
-"  Calendar  "
-""""""""""""""
-" Sync to google calendar
-"let g:calendar_google_calendar = 1
-
 """"""""""""
 "  Js vim  "
 """"""""""""
@@ -449,7 +448,7 @@ let g:vimwiki_table_mappings = 0
 "  Rainbow Parentheses  "
 """""""""""""""""""""""""
 " 0 if you want to enable it later via :RainbowToggle
-let g:rainbow_active = 0 
+let g:rainbow_active = 0
 
 " Toggle rainbow with <leader>R
 nmap <leader>R :RainbowToggle<cr>
@@ -457,12 +456,12 @@ nmap <leader>R :RainbowToggle<cr>
 """"""""""""
 "  Ternjs  "
 """"""""""""
-" Whether to include the types of the completions in the result data. Default: 
+" Whether to include the types of the completions in the result data. Default:
 " 0
 let g:deoplete#sources#ternjs#types = 1
 
-" Whether to include the distance (in scopes for variables, in prototypes for 
-" properties) between the completions and the origin position in the result 
+" Whether to include the distance (in scopes for variables, in prototypes for
+" properties) between the completions and the origin position in the result
 " data. Default: 0
 let g:deoplete#sources#ternjs#depths = 1
 
@@ -471,32 +470,32 @@ let g:deoplete#sources#ternjs#depths = 1
 let g:deoplete#sources#ternjs#docs = 1
 
 " When on, only completions that match the current word at the given point will
-" be returned. Turn this off to get all results, so that you can filter on the 
+" be returned. Turn this off to get all results, so that you can filter on the
 " client side. Default: 1
 let g:deoplete#sources#ternjs#filter = 0
 
-" Whether to use a case-insensitive compare between the current word and 
+" Whether to use a case-insensitive compare between the current word and
 " potential completions. Default 0
 let g:deoplete#sources#ternjs#case_insensitive = 1
 
-" When completing a property and no completions are found, Tern will use some 
-" heuristics to try and return some properties anyway. Set this to 0 to 
+" When completing a property and no completions are found, Tern will use some
+" heuristics to try and return some properties anyway. Set this to 0 to
 " turn that off. Default: 1
 let g:deoplete#sources#ternjs#guess = 0
 
 " Determines whether the result set will be sorted. Default: 1
 let g:deoplete#sources#ternjs#sort = 0
 
-" When disabled, only the text before the given position is considered part of 
+" When disabled, only the text before the given position is considered part of
 " the word. When enabled (the default), the whole variable name that the cursor
 " is on will be included. Default: 1
 let g:deoplete#sources#ternjs#expand_word_forward = 0
 
-" Whether to ignore the properties of Object.prototype unless they have been 
+" Whether to ignore the properties of Object.prototype unless they have been
 " spelled out by at least two characters. Default: 1
 let g:deoplete#sources#ternjs#omit_object_prototype = 0
 
-" Whether to include JavaScript keywords when completing something that is not 
+" Whether to include JavaScript keywords when completing something that is not
 " a property. Default: 0
 let g:deoplete#sources#ternjs#include_keywords = 1
 
