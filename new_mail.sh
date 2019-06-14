@@ -1,6 +1,6 @@
 #!/bin/sh
 
-countG=$(ls /home/arch/Mail/Gmail/INBOX/new | wc -l)
+countG=$(ls /home/arch/.mail/gmail/Inbox/new | wc -l)
 count=$((countG))
 
 if [[ -n "$count" && "$count" -gt 0 ]]; then
