@@ -58,10 +58,12 @@ set tmpdir = /tmp
 
 # Mailboxes to show in the sidebar.
 mailboxes =ALL-INBOXES
-mailboxes =gmail/Inbox
+mailboxes =gmail/Inbox =ministere/Inbox
 mailboxes ="==================="
 mailboxes =gmail
 mailboxes =gmail/archives =gmail/sent =gmail/drafts =gmail/spam =gmail/trash
+mailboxes =ministere
+mailboxes =ministere/archives =ministere/sent =ministere/drafts =ministere/spam =ministere/trash
 
 ## url view
 #macro pager \cu <pipe-entry>'urlview'<enter> 'Follow links with urlview' 
@@ -87,8 +89,10 @@ macro compose v "<edit-from>^Uidentity\_<tab>" "Select from"
 set realname      = "Cristian Perez"
 set spoolfile = "+gmail/Inbox"
 folder-hook 'gmail/*' 'source ~/.mutt/account_gmail'
+folder-hook 'ministere/*' 'source ~/.mutt/account_ministere'
 
 macro index,pager <F4>  "<change-folder> =gmail/Inbox<enter>"  "go Gmail"
+macro index,pager <F5>  "<change-folder> =ministere/Inbox<enter>"  "go Ministere"
 
 ## Default account
 source "~/.mutt/account_gmail"
