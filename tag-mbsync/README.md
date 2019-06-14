@@ -1,18 +1,5 @@
 # Password management
 
-## Get access and refresh tokens
-
-* Get `cliend_id` and `client_secret` from [console.developers](https://console.developers.google.com/apis/dashboard?)
-
-* Execute:
-
-```
-  oauth2 --user=xxx@gmail.com \
-    --client_id=1038[...].apps.googleusercontent.com \
-    --client_secret=VWFn8LIKAMC-MsjBMhJeOplZ \
-    --generate_oauth2_token
-```
-
 ## Initiate gpg-agent
 
 * Import gpg keys
@@ -47,37 +34,6 @@ Create a password for your email account(s):
 
 ```bash
 $ pass insert Mail/account
-```
-
-Now create a python function that will decrypt the password:
-
-```python
-# ~/.offlineimap.py
-
-#! /usr/bin/env python2
-from subprocess import check_output
-
-
-def get_pass(account):
-    return check_output("pass Mail/" + account, shell=True).splitlines()[0]
-```
-
-This is an example for a multi-account setup. You can customize the argument to pass as defined previously.
-
-Load this file from ~/.offlineimaprc and specify the defined function:
-
-```bash
-# ~/.offlineimaprc
-
-[general]
-# Path to file with arbitrary Python code to be loaded
-pythonfile = ~/.offlineimap.py
-...
-
-[Repository Gmail]
-# Decrypt and read the encrypted password
-remotepasseval = get_pass("Gmail")
-...
 ```
 
 # Configure daemon
