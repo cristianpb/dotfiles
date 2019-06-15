@@ -87,8 +87,9 @@ macro index <F6> \
      "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" \
      "notmuch: remove message from inbox"
 
-## format send
-#set send_charset="us-ascii:utf-8"
+# format
+set send_charset = "utf-8:iso-8859-1:us-ascii"
+set charset = "utf-8"
 set rfc2047_parameters
 
 macro compose v "<edit-from>^Uidentity\_<tab>" "Select from"
