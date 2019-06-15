@@ -16,3 +16,7 @@ set envelope_from=yes
 # looks like you must explicitly do this to make sure you
 # don't save local copies of sent mail >:(
 unset record
+
+macro index,pager A \
+  "<save-message>+gmail/archives<enter>"  \
+  "move message to the archive"
