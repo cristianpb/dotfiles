@@ -10,6 +10,7 @@ User felipebrokate@gmail.com
 PassCmd "pass Mail/Gmail"
 # Use SSL
 SSLType IMAPS
+#AuthMechs XOAUTH2
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 IMAPStore gmail-remote
@@ -88,14 +89,47 @@ Subfolders Verbatim
 Path ~/.mail/ministere/
 Inbox ~/.mail/ministere/Inbox
 
-Channel ministere
+Channel ministere-inbox
 Master :ministere-remote:
 Slave :ministere-local:
-# Exclude everything under the internal [Gmail] folder, except the interesting folders
-Patterns * ![ministere]* "[ministere]/Sent Mail" "[ministere]/Starred" "[ministere]/All Mail"
-# Or include everything
-#Patterns *
-# Automatically create missing mailboxes, both locally and on the server
-Create Both
-# Save the synchronization state files in the relevant directory
-SyncState *
+Patterns "Inbox"
+
+Channel ministere-sent
+Master :ministere-remote:"Sent"
+Slave :ministere-local:sent
+
+Channel ministere-drafts
+Master :ministere-remote:"Drafts"
+Slave :ministere-local:drafts
+
+Channel ministere-spam
+Master :ministere-remote:"SPAM"
+Slave :ministere-local:spam
+
+Channel ministere-trash
+Master :ministere-remote:"Trash"
+Slave :ministere-local:trash
+
+Channel ministere-archives
+Master :ministere-remote:"Archives"
+Slave :ministere-local:archives
+
+Group ministere
+Channel ministere-inbox
+Channel ministere-drafts
+Channel ministere-spam
+Channel ministere-trash
+Channel ministere-sent
+Channel ministere-archives
+
+# ministere mailboxes:
+# Archives/
+# Drafts/
+# GPU/
+#'IA Flash'/
+# Inbox/
+# Sent/
+# Sopra/
+# SPAM/
+# Templates/
+# Trash/
