@@ -1,7 +1,7 @@
 #!/bin/sh
 
 STATE=`nmcli networking connectivity`
-mailsync="mbsync gmail --quiet"
+mailsync="mbsync --quiet gmail "
 
 if [ $STATE = 'full' ]
 then
