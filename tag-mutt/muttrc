@@ -1,7 +1,13 @@
 # Sidebar Patch --------------------------------------
-#set sidebar_delim   = '  │'
-set sidebar_visible = yes
-set sidebar_width   = 24
+#set sidebar_visible = yes
+#set sidebar_width   = 24
+set sidebar_visible
+set sidebar_short_path
+set sidebar_folder_indent
+set sidebar_width = 25
+set sidebar_divider_char = ' | '
+set sidebar_indent_string = '  ''
+set sidebar_format = "%B %* [%?N?%N / ?%S]"
 color sidebar_new color221 color233
 
 # Sidebar Navigation ---------------------------------
@@ -64,6 +70,7 @@ mailboxes =gmail
 mailboxes =gmail/archives =gmail/sent =gmail/drafts =gmail/spam =gmail/trash
 mailboxes =ministere
 mailboxes =ministere/archives =ministere/sent =ministere/drafts =ministere/spam =ministere/trash
+#mailboxes =ministere/GPU =ministere/'IA Flash' =ministere/Drafts =ministere/Sent =ministere/Sopra =ministere/SPAM =ministere/Templates =ministere/Trash =ministere/Archives
 
 ## url view
 #macro pager \cu <pipe-entry>'urlview'<enter> 'Follow links with urlview' 
