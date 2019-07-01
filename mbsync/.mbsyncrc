@@ -92,7 +92,7 @@ Inbox ~/.mail/ministere/Inbox
 Channel ministere-inbox
 Master :ministere-remote:
 Slave :ministere-local:
-Patterns "Inbox"
+Patterns "INBOX"
 
 Channel ministere-sent
 Master :ministere-remote:"Sent"
