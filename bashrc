@@ -107,7 +107,10 @@ export PROJECT_HOME=$HOME/Devel
 source $HOME/.local/bin/virtualenvwrapper.sh
 
 # Source API tokens
-#source ~/.dotfiles/APIs
+source ~/.dotfiles/APIs
+
+alias milab='~/go/bin/slack-term -token "$SLACK_MILAB_TOKEN"'
+alias eig='~/go/bin/slack-term -token "$SLACK_EIG_TOKEN"'
 
 # Use bash-completion, if available
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
