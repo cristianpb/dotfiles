@@ -134,13 +134,18 @@ set sort=threads #sort by threads
 set sort_aux = last-date-received
 
 # Fetch mail shortcut
-macro generic,index,pager  <F2>  "<enter-command>unset wait_key<enter><shell-escape>mbsync --all --quiet &<enter>"  "Fetch messages"
+macro generic,index,pager  <F2>  "<enter-command>unset wait_key<enter><shell-escape>notify-send 'Sync gmail'; mbsync --quiet --quiet --all | xargs notify-send 'Gmail synced' &<enter>"  "Fetch messages"
 set print_command="~/Documents/Script/mutt_print.sh"
 #bind index,pager u bounce-message
 
 # Pre-fills the "From" address when replying to emails, based on the email a account that received the original mail
 set reverse_name 
 set envelope_from
+
+# Conf msmtp
+set sendmail="/usr/bin/msmtp"
+set use_from=yes
+set envelope_from=yes
 
 # Signature
 set signature="~/.mutt/signature"
