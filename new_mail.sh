@@ -1,8 +1,9 @@
-#!/bin/sh
+#!/bin/bash
 
-countG=$(ls /home/arch/Mail/Gmail/INBOX/new | wc -l)
-countK=$(ls /home/arch/Mail/Kernix/INBOX/new | wc -l)
+countG=$(ls /home/perezcri/.mail/gmail/Inbox/new | wc -l)
+countK=$(ls /home/perezcri/.mail/ministere/Inbox/new | wc -l)
 count=$((countG + countK))
+
 
 if [[ -n "$count" && "$count" -gt 0 ]]; then
     echo "  ${count}"

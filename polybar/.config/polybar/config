@@ -119,7 +119,7 @@ font-2 = siji:pixelsize=9;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = watson backlight-acpi pulseaudio1 wlan eth battery weather date powermenu
+modules-right = watson mail backlight-acpi pulseaudio1 wlan eth battery weather date powermenu
 
 tray-position = right
 tray-padding = 6

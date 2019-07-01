@@ -1,7 +1,7 @@
 #!/bin/sh
 
 STATE=`nmcli networking connectivity`
-mailsync="offlineimap -u quiet -q"
+mailsync="mbsync --quiet --all"
 
 if [ $STATE = 'full' ]
 then
