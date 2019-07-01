@@ -1,7 +1,11 @@
 # Sidebar Patch --------------------------------------
-#set sidebar_delim   = '  │'
-set sidebar_visible = yes
-set sidebar_width   = 24
+set sidebar_visible
+set sidebar_short_path
+set sidebar_folder_indent
+set sidebar_width = 25
+set sidebar_divider_char = ' | '
+set sidebar_indent_string = '  ''
+set sidebar_format = "%B %* [%?N?%N / ?%S]"
 color sidebar_new color221 color233
 
 # Sidebar Navigation ---------------------------------
@@ -10,7 +14,7 @@ color sidebar_new color221 color233
 #bind index,pager <right>  sidebar-open
 bind index,pager b sidebar-toggle-visible # b toggles sidebar visibility
 set index_format="%4C %Z %?X?A&-? %{%d/%b/%y} %-12.12L %?M?(#%03M)&(%4c)? %?y?(%.20Y) ?%s"
-set display_filter="$HOME/.dotfiles/tag-mutt/mutt/local-date.py"
+set display_filter="$HOME/.dotfiles/mutt/.mutt/local-date.py"
 
 # Status Bar -----------------------------------------
 set status_chars  = " *%A"
@@ -49,23 +53,27 @@ set sleep_time = 0
 set mbox_type=Maildir
 #set imap_check_subscribed
 
+# Paths
+set folder = "~/.mail"
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/cache/certificates
+set tmpdir = /tmp
+
+# Mailboxes to show in the sidebar.
+mailboxes =ALL-INBOXES
+mailboxes =gmail/Inbox =ministere/Inbox
+mailboxes ="==================="
+mailboxes =gmail
+mailboxes =gmail/archives =gmail/sent =gmail/drafts =gmail/spam =gmail/trash
+mailboxes =ministere
+mailboxes =ministere/archives =ministere/sent =ministere/drafts =ministere/spam =ministere/trash
+
 ## url view
 #macro pager \cu <pipe-entry>'urlview'<enter> 'Follow links with urlview' 
 macro pager \Cu "|urlscan<enter>" "call urlview to open links"
 
-set folder = "~/Mail"
-set spoolfile = "+Gmail/INBOX"
-source ~/.mutt/mailboxes
 
-## Not much
-#set virtual_spoolfile=yes
-#set nm_default_uri="notmuch:///home/arch/Mail" # path to the maildir
-#source ~/.mutt/virtualmailboxes
-#macro index A "<modify-labels>+archive -unread -inbox\\n" "Archive message"
-#macro index c "<change-vfolder>?" "Change to vfolder overview"
-#macro index \\\\ "<vfolder-from-query>" "Search mailbox"
-
-# Linux
 macro index <F8> \
      "<enter-command>unset wait_key<enter><shell-escape>notmuch-mutt --prompt search<enter><change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>" \
      "notmuch: search mail"
@@ -76,24 +84,20 @@ macro index <F6> \
      "<enter-command>unset wait_key<enter><pipe-message>notmuch-mutt tag -inbox<enter>" \
      "notmuch: remove message from inbox"
 
-## Mac
-#macro index S \
-#  "<enter-command>set my_old_pipe_decode=\$pipe_decode my_old_wait_key=\$wait_key nopipe_decode nowait_key<enter>\
-#  <shell-escape>~/Documents/Script/notmuch-mutt -r --prompt search<enter>\
-#  <change-folder-readonly>`echo ${XDG_CACHE_HOME:-$HOME/.cache}/notmuch/mutt/results`<enter>\
-#  <enter-command>set pipe_decode=\$my_old_pipe_decode wait_key=\$my_old_wait_key<enter>" \
-#  "notmuch: search mail"
-## format send
-#set send_charset="us-ascii:utf-8"
+# format
+set send_charset = "utf-8:iso-8859-1:us-ascii"
+set charset = "utf-8"
 set rfc2047_parameters
 
 macro compose v "<edit-from>^Uidentity\_<tab>" "Select from"
 
-folder-hook 'Gmail/*' 'source ~/.mutt/account_gmail'
-folder-hook 'Kernix/*' 'source ~/.mutt/account_kernix'
+set realname      = "Cristian Perez"
+set spoolfile = "+gmail/Inbox"
+folder-hook 'gmail/*' 'source ~/.mutt/account_gmail'
+folder-hook 'ministere/*' 'source ~/.mutt/account_ministere'
 
-macro index,pager <F4>  "<change-folder> =Gmail/INBOX<enter>"  "go Gmail"
-macro index,pager <F5>  "<change-folder> =Kernix/INBOX<enter>"  "go Kernix"
+macro index,pager <F4>  "<change-folder> =gmail/Inbox<enter>"  "go Gmail"
+macro index,pager <F5>  "<change-folder> =ministere/Inbox<enter>"  "go Ministere"
 
 ## Default account
 source "~/.mutt/account_gmail"
@@ -130,19 +134,19 @@ set sort=threads #sort by threads
 set sort_aux = last-date-received
 
 # Fetch mail shortcut
-macro generic,index,pager  <F2>  "<enter-command>unset wait_key<enter><shell-escape>offlineimap -u quiet -q &<enter>"  "Fetch messages"
+macro generic,index,pager  <F2>  "<enter-command>unset wait_key<enter><shell-escape>mbsync --all --quiet &<enter>"  "Fetch messages"
 set print_command="~/Documents/Script/mutt_print.sh"
-bind index,pager u bounce-message
+#bind index,pager u bounce-message
 
 # Pre-fills the "From" address when replying to emails, based on the email a account that received the original mail
 set reverse_name 
 set envelope_from
 
 # Signature
-#set signature="~/.mutt/signature"
+set signature="~/.mutt/signature"
 
 ## Security
-source /usr/share/doc/mutt/samples/gpg.rc
+source /usr/share/doc/mutt/examples/gpg.rc
 set pgp_use_gpg_agent = yes
 set pgp_timeout        = 3600       # how long to cache the pass-phrase
 set crypt_autosign     = yes     # automatically sign all outgoing mail

@@ -1,0 +1,80 @@
+text/html; w3m -I %{charset} -T text/html; copiousoutput;
+#text/html; elinks -dump -dump-color-mode 3 \
+#    dump-charset utf-8 -default-mime-type text/htm %s; \
+#        copiousoutput
+text/html;  /usr/bin/firefox %s >/dev/null 2>&1; needsterminal
+#text/html;  elinks -dump %s; nametemplate=%s.html; copiousoutput
+###text/html;                      ~/.mutt/tiny.pl %s ; copiousoutput ;  nametemplate=%s.html
+###text/plain;                      ~/.mutt/tiny.pl %s 't' ; copiousoutput ; nametemplate=%s.html
+image/*; sxiv %s 
+application/pdf; { set -m \; /bin/mv -T %s %s.mv \; ( zathura %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+audio/* ; /usr/bin/mplayer %s ; copiousoutput
+video/* ; /usr/bin/mplayer %s ; copiousoutput
+text/calendar; mutt-ics; copiousoutput
+application/ics; mutt-ics; copiousoutput 
+
+# Open Office Stuff
+application/vnd.oasis.opendocument.database; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.chart; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.spreadsheet; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.spreadsheet-template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.graphics; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.graphics-template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.presentation; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.presentation-template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.formula; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.text; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.text-master; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.text-template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.oasis.opendocument.text-web; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.base; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.calc; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.calc.template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.draw; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.draw.template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.stardivision.calc; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.stardivision.chart; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.stardivision.draw; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.stardivision.impress; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.stardivision.math; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.stardivision.writer-global; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.stardivision.writer; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.impress; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.impress.template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.math; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.writer; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.writer.global; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.sun.xml.writer.template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+text/csv; { set -m \; /bin/mv -T %s %s.mv \; ( loffice --calc %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+text/spreadsheet; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/x-quattropro; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/x-dbf; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.ms-excel.sheet.macroEnabled.12; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.ms-excel.template.macroEnabled.12; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.openxmlformats-officedocument.spreadsheetml.template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.lotus-1-2-3; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.ms-excel; { set -m \; /bin/mv -T %s %s.mv \; ( soffice --calc %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/msexcel; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/x-dbase; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+text/x-csv; { set -m \; /bin/mv -T %s %s.mv \; ( loffice --calc %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.ms-powerpoint.presentation.macroEnabled.12; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.ms-powerpoint.slideshow.macroEnabled.12; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.ms-powerpoint.template.macroEnabled.12; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.openxmlformats-officedocument.presentationml.presentation; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.openxmlformats-officedocument.presentationml.slideshow; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.openxmlformats-officedocument.presentationml.template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.ms-powerpoint; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/mspowerpoint; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+text/mathml; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/rtf; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/x-extension-txt; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/x-t602; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.wordperfect; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.ms-word.document.macroEnabled.12; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.ms-word.template.macroEnabled.12; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.openxmlformats-officedocument.wordprocessingml.template; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/msword; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/vnd.ms-works; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 
+application/wordperfect; { set -m \; /bin/mv -T %s %s.mv \; ( soffice %s.mv >/dev/null 2>&1 \; /bin/rm %s.mv \; ) & } \; disown -a 

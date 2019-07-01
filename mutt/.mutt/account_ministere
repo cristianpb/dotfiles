@@ -1,0 +1,22 @@
+color status green default
+
+# Set folders
+set spoolfile = "+ministere/Inbox"
+set mbox = "+ministere/archives"
+set postponed = "+ministere/drafts"
+set record = "+ministere/sent"
+set trash = "+ministere/trash"
+
+set from = "cristian.brokate@interieur.gouv.fr"
+# Conf msmtp
+set sendmail="/usr/bin/msmtp -a Ministere"
+set use_from=yes
+set envelope_from=yes
+
+# looks like you must explicitly do this to make sure you
+# don't save local copies of sent mail >:(
+unset record
+
+macro index,pager A \
+  "<save-message>+ministere/archives<enter>"  \
+"move message to the archive"
