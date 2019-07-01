@@ -66,7 +66,7 @@ set breakindent
 set showbreak=\\\\\
 
 " Only syntax highlighting the first 200 characters of each line.
-"set synmaxcol=200
+set synmaxcol=200
 
 " Opening new files via :e, a breeze with TAB expansion.
 set wildmenu
@@ -330,6 +330,10 @@ let g:jedi#max_doc_height = 30
 let g:jedi#smart_auto_mappings = 0
 "map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
+" Work with virtualenvs
+let g:python3_host_prog = '/usr/bin/python3' " Python 3
+let g:python_host_prog = '/usr/bin/python'
+
 """""""""""""""
 "  Ultisnips  "
 """""""""""""""
@@ -396,7 +400,7 @@ let g:gruvbox_termcolors = 16
 
 " Set italics
 "let g:solarized_term_italics=1
-"let g:gruvbox_italic=1
+let g:gruvbox_italic=1
 
 " Set color scheme
 colorscheme gruvbox
@@ -470,3 +474,7 @@ nmap <localleader>t <Plug>(iron-send-motion)
 let g:iron_new_python_repl_hooks='ipython'
 
 command Mail e term://mutt
+
+set termguicolors " Enable true color support.
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
