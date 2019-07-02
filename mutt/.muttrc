@@ -134,7 +134,7 @@ set sort=threads #sort by threads
 set sort_aux = last-date-received
 
 # Fetch mail shortcut
-macro generic,index,pager  <F2>  "<enter-command>unset wait_key<enter><shell-escape>mbsync --all --quiet &<enter>"  "Fetch messages"
+macro generic,index,pager  <F2>  "<enter-command>unset wait_key<enter><shell-escape>notify-send 'Sync all'; mbsync --quiet --quiet --all | xargs notify-send 'All synced' &<enter>"  "Fetch messages"
 set print_command="~/Documents/Script/mutt_print.sh"
 #bind index,pager u bounce-message
 
@@ -142,14 +142,20 @@ set print_command="~/Documents/Script/mutt_print.sh"
 set reverse_name 
 set envelope_from
 
+# Conf msmtp
+set sendmail="/usr/bin/msmtp"
+set use_from=yes
+set envelope_from=yes
+
 # Signature
+set sig_on_top=yes
 set signature="~/.mutt/signature"
 
 ## Security
 source /usr/share/doc/mutt/examples/gpg.rc
 set pgp_use_gpg_agent = yes
 set pgp_timeout        = 3600       # how long to cache the pass-phrase
-set crypt_autosign     = yes     # automatically sign all outgoing mail
+set crypt_autosign     = no     # automatically sign all outgoing mail
 set crypt_replyencrypt = yes # automatically encrypt replies to  encrypted messages
 set pgp_sign_as        = "B212E65B"   # my Key ID
 

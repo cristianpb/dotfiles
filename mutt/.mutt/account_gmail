@@ -8,10 +8,8 @@ set record = "+gmail/sent"
 set trash = "+gmail/trash"
 
 set from = "felipebrokate@gmail.com"
-# Conf msmtp
-set sendmail="/usr/bin/msmtp -a Gmail"
-set use_from=yes
-set envelope_from=yes
+
+macro index <F3> "<enter-command>unset wait_key<enter><shell-escape>notify-send 'Sync gmail'; mbsync --quiet --quiet gmail | xargs notify-send 'Gmail synced' &<enter>" "run mbsync to sync mail for this account"
 
 # looks like you must explicitly do this to make sure you
 # don't save local copies of sent mail >:(

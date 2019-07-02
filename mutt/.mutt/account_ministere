@@ -8,14 +8,8 @@ set record = "+ministere/sent"
 set trash = "+ministere/trash"
 
 set from = "cristian.brokate@interieur.gouv.fr"
-# Conf msmtp
-set sendmail="/usr/bin/msmtp -a Ministere"
-set use_from=yes
-set envelope_from=yes
 
-# looks like you must explicitly do this to make sure you
-# don't save local copies of sent mail >:(
-unset record
+macro index <F3> "<enter-command>unset wait_key<enter><shell-escape>notify-send 'Sync ministere'; mbsync --quiet --quiet ministere | xargs notify-send 'ministere synced' &<enter>" "run mbsync to sync mail for this account"
 
 macro index,pager A \
   "<save-message>+ministere/archives<enter>"  \
