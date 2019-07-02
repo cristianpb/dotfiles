@@ -6,3 +6,4 @@ RefuseManualStop=yes
 [Service]
 Type=oneshot
 ExecStart=/home/perezcri/.dotfiles/checkmail.sh
+ExecStartPost=/usr/bin/notmuch new
