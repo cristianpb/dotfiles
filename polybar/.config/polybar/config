@@ -361,7 +361,7 @@ interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = ${colors.deeppurple}
-label-connected = %essid%
+label-connected = %essid% %local_ip%
 label-connected-foreground=${colors.white}
 
 format-disconnected =
@@ -396,7 +396,7 @@ type = internal/network
 interface = wifi0
 interval = 3.0
 
-label-connected = "%upspeed:7%"
+label-connected =  %upspeed:7%
 format-connected = <label-connected>
 format-connected-prefix =  
 format-connected-foreground=${colors.teal}
@@ -586,7 +586,7 @@ label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
 
 menu-0-0 = lock
-menu-0-0-exec = i3lock -i ~/Images/Wallpaper/wallpaper.png --tiling --dpms --color 000000
+menu-0-0-exec = ~/.dotfiles/autolock.sh lock
 
 [settings]
 screenchange-reload = true
