@@ -156,6 +156,9 @@ alias tdark='cp ~/.config/termite/configSolarizedDark ~/.config/termite/config'
 alias tlight='cp ~/.config/termite/configSolarizedLight ~/.config/termite/config'
 alias tgruv='cp ~/.config/termite/configGruv ~/.config/termite/config' 
 
+# Compatibility for ssh connection
+export TERM=xterm-256color 
+
 ############
 #  Ranger  #
 ############
