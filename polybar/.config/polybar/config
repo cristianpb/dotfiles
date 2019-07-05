@@ -119,7 +119,7 @@ font-2 = siji:pixelsize=9;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = watson mail backlight-acpi pulseaudio1 wlan eth battery weather date powermenu
+modules-right = watson mail backlight-acpi pulseaudio1 wlan eth0 eth1 battery weather date powermenu
 
 tray-position = right
 tray-padding = 6
@@ -356,7 +356,7 @@ bar-used-empty-foreground = #444444
 
 [module/wlan]
 type = internal/network
-interface = wlp4s0
+interface = wifi0
 interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
@@ -374,7 +374,7 @@ ramp-signal-0 =
 ramp-signal-1 =
 ramp-signal-foreground = ${colors.deeppurple}
 
-[module/eth]
+[module/eth0]
 type = internal/network
 interface = net0
 interval = 3.0
@@ -390,10 +390,25 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
+[module/eth1]
+type = internal/network
+interface = net1
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/networkspeedup]
 type = internal/network
-interface = wlp4s0
+interface = net0
 interval = 3.0
 
 label-connected = "%upspeed:7%"
@@ -412,7 +427,7 @@ format-disconnected =
 
 [module/networkspeeddown]
 type = internal/network
-interface = wlp4s0
+interface = net0
 interval = 3.0
 
 label-connected = "%downspeed:7%"
