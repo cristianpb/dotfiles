@@ -191,7 +191,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightnes
 #bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
 
 # Print Screen
-bindsym Print exec scrot ~/Images/`date +%Y-%m-%d_%H:%M:%S`.png
+bindsym Print exec scrot ~/Images/Screenshot/`date +%Y-%m-%d_%H:%M:%S`.png
 
 # Media player controls
 #bindsym XF86AudioPlay exec playerctl play
