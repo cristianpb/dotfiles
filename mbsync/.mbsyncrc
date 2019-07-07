@@ -71,7 +71,7 @@ Channel gmail-archives
 
 IMAPAccount ministere
 # Address to connect to
-Host localhost # icasso22.mel75.si.mi
+Host icasso22.mel75.si.mi
 User cristian.brokate@interieur.gouv.fr
 PassCmd "pass Ministere/Mail"
 # Use SSL
