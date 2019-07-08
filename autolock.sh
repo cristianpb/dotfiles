@@ -52,14 +52,24 @@ dunst() {
   esac
 }
 
+blur() {
+  IMAGE=/tmp/i3lock.png
+  SCREENSHOT="scrot $IMAGE" # 0.46s
+  
+  # Get the screenshot, add the blur and lock the screen with it
+  $SCREENSHOT
+  convert $IMAGE -scale 10% -scale 1000% $IMAGE
+  i3lock -i $IMAGE --nofork -f
+  rm $IMAGE
+  watson stop
+}
+
 case "$cmd" in
   lock)
     dunst stop
 
     # Fork both i3lock and its monitor to avoid blocking xautolock.
-    $HOME/.dotfiles/blur.sh &
-    #i3lock --ignore-empty-password --beep --inactivity-timeout=10 \
-    #  --image="$XDG_CONFIG_HOME/i3/i3lock-img" --nofork &
+    blur &
 
     pid="$!"
     log "Waiting for PID $pid to end..."
