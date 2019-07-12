@@ -148,6 +148,7 @@ set use_from=yes
 set envelope_from=yes
 
 # Signature
+set sig_on_top=yes
 set signature="~/.mutt/signature"
 
 ## Security
