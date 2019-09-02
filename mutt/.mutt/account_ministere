@@ -1,5 +1,11 @@
 color status green default
 
+# Name to use in header
+set realname      = "Cristian Brokate"
+
+# Signature
+set signature="~/.mutt/signature_ministere"
+
 # Set folders
 set spoolfile = "+ministere/Inbox"
 set mbox = "+ministere/archives"

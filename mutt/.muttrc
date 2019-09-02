@@ -91,7 +91,6 @@ set rfc2047_parameters
 
 macro compose v "<edit-from>^Uidentity\_<tab>" "Select from"
 
-set realname      = "Cristian Perez"
 set spoolfile = "+gmail/Inbox"
 folder-hook 'gmail/*' 'source ~/.mutt/account_gmail'
 folder-hook 'ministere/*' 'source ~/.mutt/account_ministere'
@@ -149,13 +148,12 @@ set envelope_from=yes
 
 # Signature
 set sig_on_top=yes
-set signature="~/.mutt/signature"
 
 ## Security
 source /usr/share/doc/mutt/samples/gpg.rc
 set pgp_use_gpg_agent = yes
 set pgp_timeout        = 3600       # how long to cache the pass-phrase
-set crypt_autosign     = yes     # automatically sign all outgoing mail
+set crypt_autosign     = no     # automatically sign all outgoing mail
 set crypt_replyencrypt = yes # automatically encrypt replies to  encrypted messages
 set pgp_sign_as        = "B212E65B"   # my Key ID
 
