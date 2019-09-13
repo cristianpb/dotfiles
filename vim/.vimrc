@@ -350,8 +350,10 @@ let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 " Create own snips
 set runtimepath+=~/.vim/my-snippets
 
-" Directory for own snips
-let g:UltiSnipsSnippetsDir='~/.vim/my-snippets'
+" Directory for own snips 
+" mkdir ~/.vim/my-snippets
+" touch ~/.vim/my-snippets/markdown.snippets
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "my-snippets"]
 
 """"""""""""""""
 "  Easy align  "
