@@ -12,7 +12,6 @@ Fetch dotfiles from github:
 
 ```
 git clone https://github.com/cristianpb/dotfiles ~/.dotfiles
-cd ~/.dotfiles || exit
 ```
 
 Manually install files:
@@ -29,3 +28,7 @@ do
     ( stow "$d"  )
 done
 ```
+
+## Dependencies
+
+`stow neovim pynvim bash-completion ruby`
