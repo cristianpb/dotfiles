@@ -164,13 +164,6 @@ export TERM=xterm-256color
 # Disable loading of global config
 export RANGER_LOAD_DEFAULT_RC=FALSE
 
-#########################
-#  Virtual Env Wrapper  #
-#########################
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/bin/virtualenvwrapper.sh
-
 ############
 #  Others  #
 ############
@@ -181,9 +174,7 @@ alias milab='~/go/bin/slack-term -token "$SLACK_MILAB_TOKEN"'
 alias eig='~/go/bin/slack-term -token "$SLACK_EIG_TOKEN"'
 alias graf='grafana-server --config=/home/arch/.config/grafana/grafana.ini --homepath=/usr/share/grafana'
 
-export PATH=/home/arch/.local/bin:$PATH
-# Nicky for chrome
-#CHROME_PATH="/usr/bin/google-chrome-unstable" node test_nick.js
+export PATH=/home/$HOME/.local/bin:$PATH
 
 # Use bash-completion, if available
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
