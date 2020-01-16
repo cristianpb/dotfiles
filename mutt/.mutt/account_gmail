@@ -1,5 +1,8 @@
 color status cyan default
 
+# Name to use in header
+set realname      = "Cristian Perez"
+
 # Set folders
 set spoolfile = "+gmail/Inbox"
 set mbox = "+gmail/archives"
