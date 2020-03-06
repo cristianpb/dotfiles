@@ -149,11 +149,23 @@ nmap <Leader>se :setlocal spell! spelllang=en_gb<CR>
 inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 """""""""""""""
-"  Shortcuts  "
+"  Gramarous  "
 """""""""""""""
 
-map <F8> : !w <bar> ./% <CR> " Compile
-nnoremap <F5> :w <CR> :!make <CR> " Makefile
+" Use global languatetool
+let g:grammarous#languagetool_cmd = '/usr/bin/languagetool'
+
+" Open window on first error
+let g:grammarous#show_first_error = 1
+
+" Ose location list for errors
+let g:grammarous#use_location_list = 1
+
+" Use spelllang as language
+let g:grammarous#use_vim_spelllang = 1
+
+" Shortcuts
+nmap <F5> <Plug>(grammarous-fixit)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -181,6 +193,7 @@ let g:deoplete#enable_at_startup = 1
 Plug 'zchee/deoplete-jedi'
 Plug 'fszymanski/deoplete-emoji'
 Plug 'hkupty/iron.nvim'
+Plug 'rhysd/vim-grammarous'
 Plug 'davidhalter/jedi-vim'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
