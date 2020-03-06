@@ -182,16 +182,6 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'lifepillar/vim-solarized8'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-Plug 'zchee/deoplete-jedi'
-Plug 'fszymanski/deoplete-emoji'
 Plug 'hkupty/iron.nvim'
 Plug 'rhysd/vim-grammarous'
 Plug 'davidhalter/jedi-vim'
@@ -202,7 +192,6 @@ Plug 'jalvesaq/Nvim-R' " R - vim
 Plug 'lervag/vimtex' " Latex suite that replace gerw/vim-latex-suite
 Plug 'majutsushi/tagbar' " Ctags <F6>
 Plug 'pangloss/vim-javascript' "Js hightlight
-Plug 'carlitux/deoplete-ternjs'
 "Plug 'roxma/vim-paste-easy' " Avoid indent break when paste
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File manager <F3>
 Plug 'w0rp/ale' " Asynchronous linter <leader>sc
@@ -210,11 +199,10 @@ Plug 'sirver/ultisnips' " Snippets
     Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive' " Git-vim
 Plug 'tpope/vim-surround'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons' " Icons to vim
 "Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
-Plug 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
 Plug 'othree/html5.vim' " Hightlight
 Plug 'luochen1990/rainbow' " Parentheses highlight <leader>R
 Plug 'leafgarland/typescript-vim' " Typescript lighting
