@@ -1,3 +1,4 @@
 {
-  "coc.source.emoji.filetypes":  ["markdown", "gitcommit"]
+  "coc.source.emoji.filetypes":  ["markdown", "gitcommit"],
+  "python.jediEnabled": false
 }
