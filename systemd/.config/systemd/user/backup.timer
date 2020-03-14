@@ -1,0 +1,10 @@
+[Unit]
+Description=Backup data every day if possible
+
+[Timer]
+Persistent=false
+OnCalendar=*-*-* 22:00:00
+Unit=backup.service
+
+[Install]
+WantedBy=default.target

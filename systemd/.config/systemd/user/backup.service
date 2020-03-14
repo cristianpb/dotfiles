@@ -1,0 +1,7 @@
+[Unit]
+Description=Backs up files
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/rsync %h/./Documents/Papeles/ -avzh --quiet --dry-run raspimov:/mnt/arch/home/arch/Documents/Papeles/
+ExecStart=/usr/bin/rsync %h/./Images/Dibujos/ -avzh --quiet --dry-run raspimov:/mnt/arch/home/arch/Pictures/Dibujos/
