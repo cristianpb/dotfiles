@@ -66,7 +66,7 @@ set breakindent
 set showbreak=\\\\\
 
 " Only syntax highlighting the first 200 characters of each line.
-set synmaxcol=200
+"set synmaxcol=200
 
 " Opening new files via :e, a breeze with TAB expansion.
 set wildmenu
@@ -145,13 +145,28 @@ nmap <Leader>sf :setlocal spell! spelllang=fr<CR>
 nmap <Leader>sl :setlocal spell! spelllang=es<CR>
 nmap <Leader>se :setlocal spell! spelllang=en_gb<CR>
 
+" Automatically correct spell with first suggestion
+inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 """""""""""""""
-"  Shortcuts  "
+"  Gramarous  "
 """""""""""""""
 
-map <F8> : !w <bar> ./% <CR> " Compile
-nnoremap <F5> :w <CR> :!make <CR> " Makefile
+" Use global languatetool
+"let g:grammarous#languagetool_cmd = '/snap/bin/languagetool'
+let g:grammarous#languagetool_cmd = 'java -jar /home/perezcri/Téléchargements/LanguageTool-4.8/languagetool-commandline.jar'
+
+" Open window on first error
+let g:grammarous#show_first_error = 1
+
+" Ose location list for errors
+let g:grammarous#use_location_list = 1
+
+" Use spelllang as language
+let g:grammarous#use_vim_spelllang = 1
+
+" Shortcuts
+nmap <F5> <Plug>(grammarous-fixit)
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -168,47 +183,150 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'airblade/vim-gitgutter'
 Plug 'lifepillar/vim-solarized8'
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-Plug 'zchee/deoplete-jedi'
-Plug 'fszymanski/deoplete-emoji'
 Plug 'hkupty/iron.nvim'
+Plug 'rhysd/vim-grammarous'
 Plug 'davidhalter/jedi-vim'
 Plug 'edkolev/promptline.vim'
 Plug 'edkolev/tmuxline.vim'
-Plug 'itchyny/calendar.vim'
 Plug 'jalvesaq/Nvim-R' " R - vim
-"Plug 'jgors/vimux-ipy'
 "Plug 'junegunn/vim-easy-align' " Align text <Shift><Enter>
 Plug 'lervag/vimtex' " Latex suite that replace gerw/vim-latex-suite
 Plug 'majutsushi/tagbar' " Ctags <F6>
 Plug 'pangloss/vim-javascript' "Js hightlight
-Plug 'roxma/vim-paste-easy' " Avoid indent break when paste
+"Plug 'roxma/vim-paste-easy' " Avoid indent break when paste
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File manager <F3>
 Plug 'w0rp/ale' " Asynchronous linter <leader>sc
-Plug 'sirver/ultisnips' " Snippets
-    Plug 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive' " Git-vim
 Plug 'tpope/vim-surround'
+Plug 'evanleck/vim-svelte'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'Vimjas/vim-python-pep8-indent' " Better python indent
-"Plug 'ryanoasis/vim-devicons' " Icons to vim
-Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
-Plug 'christoomey/vim-tmux-navigator' " Seamlesss motion tmux-vim <C-j>
 Plug 'othree/html5.vim' " Hightlight
 Plug 'luochen1990/rainbow' " Parentheses highlight <leader>R
 Plug 'leafgarland/typescript-vim' " Typescript lighting
-"Plug 'quramy/tsuquyomi'
+"Plug 'quramy/tsuquyomi' "Special linter for Typescript
 Plug 'vimwiki/vimwiki' " Vimwiki notes <leader>ww
-Plug 'ervandew/supertab'
 call plug#end()
+
+
+""""""""""""""""""""""
+"  CoC  "
+""""""""""""""""""""""
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Introduce function text object
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for selections ranges.
+" NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" coc-tsserver, coc-python are the examples of servers that support it.
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
 """"""""""""""""""""
 "  NerdTreeToogle  "
@@ -232,17 +350,28 @@ nmap <silent> <F3> :NERDTreeToggle<CR>
 """""""""""""
 "  Airline  "
 """""""""""""
-" Dont use whitespace
-let g:airline#extensions#whitespace#enabled = 0
 
-" Use tabline
+"Disable vim-airline integration:
+let g:airline#extensions#coc#enabled = 1
+
+"Change error symbol:
+let airline#extensions#coc#error_symbol = 'Error:'
+
+"Change warning symbol:
+let airline#extensions#coc#warning_symbol = 'Warning:'
+
+"Change error format:
+let airline#extensions#coc#stl_format_err = '%E{[%e(#%fe)]}'
+
+"Change warning format:
+let airline#extensions#coc#stl_format_warn = '%W{[%w(#%fw)]}'
+
+" Use tabline (for buffers)
 let g:airline#extensions#tabline#enabled = 1
 
-" Use branch
-let g:airline#extensions#branch#enabled=1
-
-" Use hunks
-let g:airline#extensions#hunks#enabled=0
+" Show terminals in tabline
+let g:airline#extensions#tabline#ignore_bufadd_pat =
+  \ 'gundo|undotree|vimfiler|tagbar|nerd_tree|startify|!'
 
 " Use powerline fonts
 let g:airline_powerline_fonts = 1
@@ -283,11 +412,11 @@ let g:promptline_preset = {
 """""""""""""""""""""""""""
 "  Nvim-R: use R and vim  "
 """""""""""""""""""""""""""
-" Default pdf viewer 
+" Default pdf viewer
 let R_pdfviewer = 'zathura'
 
 " tmux and R
-let R_in_buffer = 0 
+let R_in_buffer = 0
 
 " Dont use R.app (mac) or Rstudio for graphic
 let R_applescript = 0
@@ -314,7 +443,7 @@ let python_highlight_all = 1
 
 " Completions command
 "let g:jedi#completions_command = '<C-N>'
-let g:jedi#completions_enabled = 0 
+let g:jedi#completions_enabled = 0
 
 " See usages of a variable
 let g:jedi#usages_command = '<leader>z'
@@ -331,25 +460,37 @@ let g:jedi#smart_auto_mappings = 0
 "map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 " Work with virtualenvs
-let g:python3_host_prog = '/usr/bin/python3' " Python 3
-let g:python_host_prog = '/usr/bin/python'
+let g:python3_host_prog = '/bin/python3' " Python 3
 
-"""""""""""""""
-"  Ultisnips  "
-"""""""""""""""
-" Edit in vertical split
-let g:UltiSnipsEditSplit='vertical' " If you want :UltiSnipsEdit to split your window.
 
-" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+""""""""""""""""""""""
+"  Snippets  "
+""""""""""""""""""""""
 
-" Create own snips
-set runtimepath+=~/.vim/my-snippets
+" Use <C-l> for trigger snippet expand.
+imap <C-l> <Plug>(coc-snippets-expand)
 
-" Directory for own snips
-let g:UltiSnipsSnippetsDir='~/.vim/my-snippets'
+" Use <C-j> for select text for visual placeholder of snippet.
+vmap <C-j> <Plug>(coc-snippets-select)
+
+" Use <C-k> for jump to previous placeholder, it's default of coc.nvim
+let g:coc_snippet_prev = '<c-k>'
+
+" Use <C-j> for both expand and jump (make expand higher priority.)
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 """"""""""""""""
 "  Easy align  "
@@ -360,7 +501,7 @@ vmap <Enter> <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Ale: requires flake8 for python and vint for vim lighting (pip install 
+"  Ale: requires flake8 for python and vint for vim lighting (pip install
 "  vim-vint  "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle ALE with <leader>sc
@@ -372,10 +513,12 @@ let g:ale_enabled = 0
 " Do compleition
 let g:ale_completion_enabled = 1
 
+let g:ale_linters = {'python': ['flake8', 'mypy']}
+
 " Use fixers
 "let g:ale_fixers = {
 "\   'javascript': ['eslint'],
-"\   'python': ['flake8'],
+"\   'python': ['autopep8', 'yapf'],
 "\   'vim': ['vint'],
 "\}
 
@@ -390,6 +533,7 @@ nmap <F6> :TagbarToggle<CR>
 """""""""""
 " Black theme
 set background=dark
+"set background=light
 
 " Add underline syntax details
 syntax enable
@@ -421,12 +565,6 @@ let g:gitgutter_enabled=0
 " Activate using <leader>d
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
-""""""""""""""
-"  Calendar  "
-""""""""""""""
-" Sync to google calendar
-"let g:calendar_google_calendar = 1
-
 """"""""""""
 "  Js vim  "
 """"""""""""
@@ -440,7 +578,7 @@ let g:javascript_plugin_flow = 1
 " Configuration
 let g:vimwiki_list = [{'path': '~/Documents/vimwiki', 'template_path': '~/Documents/vimwiki/templates/',
           \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.wiki',
-          \ 'path_html': '~/Documents/vimwiki/site_html/', 'custom_wiki2html': 'vimwiki_markdown',
+          \ 'path_html': '~/Documents/vimwiki/site_html/', 'custom_wiki2html': '',
           \ 'template_ext': '.tpl'}]
 
 " Transform to html
@@ -451,7 +589,7 @@ let g:vimwiki_table_mappings = 0
 "  Rainbow Parentheses  "
 """""""""""""""""""""""""
 " 0 if you want to enable it later via :RainbowToggle
-let g:rainbow_active = 0 
+let g:rainbow_active = 0
 
 " Toggle rainbow with <leader>R
 nmap <leader>R :RainbowToggle<cr>
