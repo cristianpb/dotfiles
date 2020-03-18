@@ -67,7 +67,7 @@ mailboxes ="==================="
 mailboxes =gmail
 mailboxes =gmail/archives =gmail/sent =gmail/drafts =gmail/spam =gmail/trash
 mailboxes =ministere
-mailboxes =ministere/archives =ministere/sent =ministere/drafts =ministere/spam =ministere/trash
+mailboxes =ministere/backup =ministere/sent =ministere/drafts =ministere/spam =ministere/trash =ministere/datalab =ministere/selfim =ministere/entrepot
 
 ## url view
 #macro pager \cu <pipe-entry>'urlview'<enter> 'Follow links with urlview' 
@@ -91,7 +91,6 @@ set rfc2047_parameters
 
 macro compose v "<edit-from>^Uidentity\_<tab>" "Select from"
 
-set realname      = "Cristian Perez"
 set spoolfile = "+gmail/Inbox"
 folder-hook 'gmail/*' 'source ~/.mutt/account_gmail'
 folder-hook 'ministere/*' 'source ~/.mutt/account_ministere'
@@ -136,7 +135,7 @@ set sort_aux = last-date-received
 # Fetch mail shortcut
 macro generic,index,pager  <F2>  "<enter-command>unset wait_key<enter><shell-escape>notify-send 'Sync all'; mbsync --quiet --quiet --all | xargs notify-send 'All synced' &<enter>"  "Fetch messages"
 set print_command="~/Documents/Script/mutt_print.sh"
-#bind index,pager u bounce-message
+bind index,pager U bounce-message
 
 # Pre-fills the "From" address when replying to emails, based on the email a account that received the original mail
 set reverse_name 

@@ -72,11 +72,13 @@ Channel gmail-archives
 IMAPAccount ministere
 # Address to connect to
 Host icasso22.mel75.si.mi
+#Host localhost
 User cristian.brokate@interieur.gouv.fr
-PassCmd "pass Ministere/Mail"
+PassCmd "pass Ministere/Mail/cristian.brokate"
 # Use SSL
 SSLType IMAPS
 Port 993
+#Port 1993
 # openssl s_client -connect localhost:1993 -showcerts 2>&1 < /dev/null | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | cat > ministere.crt
 CertificateFile ~/.mutt/certificates/ministere.crt
 
@@ -94,9 +96,9 @@ Master :ministere-remote:
 Slave :ministere-local:
 Patterns "INBOX"
 
-Channel ministere-sent
-Master :ministere-remote:"Sent"
-Slave :ministere-local:sent
+#Channel ministere-sent
+#Master :ministere-remote:"Sent"
+#Slave :ministere-local:sent
 
 Channel ministere-drafts
 Master :ministere-remote:"Drafts"
@@ -114,13 +116,28 @@ Channel ministere-archives
 Master :ministere-remote:"Archives"
 Slave :ministere-local:archives
 
+Channel ministere-datalab
+Master :ministere-remote:"Bo&AO4-tes partag&AOk-es/datalab"
+Slave :ministere-local:datalab
+
+Channel ministere-entrepot
+Master :ministere-remote:"Bo&AO4-tes partag&AOk-es/offre-entrepot"
+Slave :ministere-local:entrepot
+
+Channel ministere-selfim
+Master :ministere-remote:"Bo&AO4-tes partag&AOk-es/selfim-support"
+Slave :ministere-local:selfim
+
 Group ministere
 Channel ministere-inbox
 Channel ministere-drafts
 Channel ministere-spam
 Channel ministere-trash
-Channel ministere-sent
+#Channel ministere-sent
 Channel ministere-archives
+Channel ministere-datalab
+Channel ministere-selfim
+Channel ministere-entrepot
 
 # ministere mailboxes:
 # Archives/
