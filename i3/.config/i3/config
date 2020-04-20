@@ -22,7 +22,7 @@ bindsym $mod+Shift+A kill
 #  Rofi program launcher  #
 ###########################
 # start passmenu
-bindsym $mod+i exec passmenu
+bindsym $mod+i exec ~/.dotfiles/passmenu
 # start watsondmenu
 bindsym $mod+w exec ~/.dotfiles/watson_dmenu 
 bindsym $mod+Tab exec --no-startup-id rofi -show window
@@ -210,7 +210,7 @@ bindsym XF86KbdBrightnessUp exec "~/.config/i3/leds_up.sh"
 bindsym XF86Display exec arandr
 
 # Wallpaper!
-exec_always feh --bg-scale ~/Images/Wallpaper/wallpaper.jpg
+exec_always feh --bg-scale ~/Pictures/Wallpaper/wallpaper.jpg
 
 # Startup programs
 exec --no-startup-id nm-applet
