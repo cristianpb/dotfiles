@@ -184,8 +184,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec amixer sset Capture toggle # mute mic key
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
@@ -202,9 +202,6 @@ bindsym $mod+F2 exec mpc prev
 bindsym $mod+F3 exec mpc next
 bindsym $mod+F1 exec mpc toggle
 
-# Keyboard Brightness
-bindsym XF86KbdBrightnessDown exec "~/.config/i3/leds_down.sh"
-bindsym XF86KbdBrightnessUp exec "~/.config/i3/leds_up.sh"
 
 # Display
 bindsym XF86Display exec arandr
@@ -220,5 +217,5 @@ exec --no-startup-id udiskie
 exec --no-startup-id compton
 exec --no-startup-id dunst
 exec --no-startup-id xautolock
-#exec $HOME/.dotfiles/DualMonitor.sh
+exec --no-startup-id redshift
 exec "sh -c 'sleep 300; exec ~/.dotfiles/BingDownloadImage.sh'"

@@ -119,7 +119,7 @@ font-2 = siji:pixelsize=9;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = mail backlight-acpi pulseaudio1 wlan eth0 eth1 battery weather date
+modules-right = xbacklight pulseaudio1 wlan eth0 eth1 battery weather date
 
 tray-position = right
 tray-padding = 6
@@ -312,10 +312,33 @@ bar-empty = ─
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
-[module/backlight-acpi]
-inherit = module/xbacklight
+[module/backlight]
 type = internal/backlight
 card = intel_backlight
+enable-scroll = true
+
+; Available tags:
+;   <label> (default)
+;   <ramp>
+;   <bar>
+format = <ramp> <bar>
+
+; Available tokens:
+;   %percentage% (default)
+label = %percentage%%
+
+; Only applies if <ramp> is used
+ramp-0 = 🌕
+ramp-1 = 🌔
+ramp-2 = 🌓
+ramp-3 = 🌒
+ramp-4 = 🌑
+
+; Only applies if <bar> is used
+bar-width = 10
+bar-indicator = |
+bar-fill = ─
+bar-empty = ─
 
 [module/cpu]
 type = internal/cpu
@@ -361,7 +384,7 @@ interval = 3.0
 
 format-connected = <ramp-signal> <label-connected>
 format-connected-underline = ${colors.deeppurple}
-label-connected = %essid%
+label-connected = %essid% %local_ip%
 label-connected-foreground=${colors.white}
 
 format-disconnected =
