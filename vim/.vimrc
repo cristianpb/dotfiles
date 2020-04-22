@@ -374,7 +374,7 @@ let g:airline#extensions#tabline#ignore_bufadd_pat =
   \ 'gundo|undotree|vimfiler|tagbar|nerd_tree|startify|!'
 
 " Use powerline fonts
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
 
 " Theme
 "let g:airline_theme='solarized'
