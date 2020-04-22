@@ -343,6 +343,22 @@ nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 
+" CoC Settings
+let g:coc_global_extensions = [
+      \'coc-actions',
+      \'coc-emoji',
+      \'coc-git',
+      \'coc-highlight',
+      \'coc-json',
+      \'coc-python',
+      \'coc-snippets',
+      \'coc-svelte',
+      \'coc-tsserver',
+      \'coc-html',
+      \'coc-markdownlint',
+      \'coc-css'
+      \]
+
 """"""""""""""""""""
 "  NerdTreeToogle  "
 """"""""""""""""""""
@@ -570,15 +586,6 @@ colorscheme gruvbox
 """"""""""""""
 " When doing Gdiff make a vertical split by default
 set diffopt+=vertical
-
-"""""""""""""""""""""""""""
-"  Git gutter (git diff)  "
-"""""""""""""""""""""""""""
-" Not enable by default
-let g:gitgutter_enabled=0
-
-" Activate using <leader>d
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
 
 """"""""""""
 "  Js vim  "
