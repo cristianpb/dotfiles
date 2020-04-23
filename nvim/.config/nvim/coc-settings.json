@@ -1,7 +1,9 @@
 {
   "coc.source.emoji.filetypes":  ["markdown", "gitcommit", "vimwiki", "mail"],
   "snippets.extends": {
-    "vimwiki": ["markdown"]
+    "vimwiki": ["markdown"],
+    "typescript": ["javascript"],
+    "svelte": ["javascript", "html"]
   },
   "python.jediEnabled": false
 }
