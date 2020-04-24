@@ -104,6 +104,10 @@ PATH="$HOME/.local/bin:$PATH"
 alias python='python3'
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/Devel
+if [[ ! -e $HOME/.local/bin/virtualenvwrapper.sh ]]; then
+    mkdir -p $HOME/.local/bin
+    touch $HOME/.local/bin/virtualenvwrapper.sh
+fi
 source $HOME/.local/bin/virtualenvwrapper.sh
 
 ############
@@ -114,7 +118,9 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # Source API tokens
-source ~/.dotfiles/APIs
+if [[ -e $HOME/.dotfiles/APIs ]]; then
+    source $HOME/.dotfiles/APIs
+fi
 
 alias milab='~/go/bin/slack-term -token "$SLACK_MILAB_TOKEN"'
 alias eig='~/go/bin/slack-term -token "$SLACK_EIG_TOKEN"'
