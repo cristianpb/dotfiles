@@ -42,23 +42,6 @@ Xautolock.detectsleep: true
 Xautolock.secure: true
 Xautolock.noclose: true
 
-!!-------------------------------------------------------------------------------
-!! Xft settings
-!!-------------------------------------------------------------------------------
-!
-!Xft.dpi:                    96
-!Xft.antialias:              false
-!Xft.rgba:                   rgb
-!Xft.hinting:                true
-!Xft.hintstyle:              hintslight
-
-!-------------------------------------------------------------------------------
-! URxvt settings
-! Colours lifted from Solarized (http://ethanschoonover.com/solarized)
-! More info at:
-! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
-!-------------------------------------------------------------------------------
-
 URxvt.depth:                32
 URxvt.geometry:             64x18
 URxvt.transparent:          false
@@ -100,27 +83,52 @@ URxvt*foreground: #F8F8F2
 
 URxvt*colorUL: #86a2b0
 
-! black
-URxvt*color0  : #2E3436
-URxvt*color8  : #555753
-! red
-URxvt*color1  : #CC0000
-URxvt*color9  : #EF2929
-! green
-URxvt*color2  : #A6E22E
-URxvt*color10 : #8AE234
-! yellow
-URxvt*color3  : #E6DB74
-URxvt*color11 : #75715E
-! blue
-URxvt*color4  : #3465A4
-URxvt*color12 : #729FCF
-! magenta
-URxvt*color5  : #75507B
-URxvt*color13 : #AD7FA8
-! cyan
-URxvt*color6  : #06989A
-URxvt*color14 : #66D9EF
-! white
-URxvt*color7  : #D3D7CF
-URxvt*color15 : #EEEEEC
+!! Transparency (0-1):
+st.alpha: 0.92
+
+!! Set a default font and font size as below:
+st.font: Ubuntu Mono-11;
+
+! st.termname: st-256color
+! st.borderpx: 2
+
+!! Set the background, foreground and cursor colors as below:
+*.background: #282828
+*.foreground: white
+*.cursorColor: white
+
+!! gruvbox: */
+*.color0: #1d2021
+*.color1: #cc241d
+*.color2: #98971a
+*.color3: #d79921
+*.color4: #458588
+*.color5: #b16286
+*.color6: #689d6a
+*.color7: #a89984
+*.color8: #928374
+*.color9: #fb4934
+*.color10: #b8bb26
+*.color11: #fabd2f
+*.color12: #83a598
+*.color13: #d3869b
+*.color14: #8ec07c
+*.color15: #ebdbb2
+
+/* !! gruvbox light: */
+/* *.color0: #fbf1c7 */
+/* *.color1: #cc241d */
+/* *.color2: #98971a */
+/* *.color3: #d79921 */
+/* *.color4: #458588 */
+/* *.color5: #b16286 */
+/* *.color6: #689d6a */
+/* *.color7: #7c6f64 */
+/* *.color8: #928374 */
+/* *.color9: #9d0006 */
+/* *.color10: #79740e */
+/* *.color11: #b57614 */
+/* *.color12: #076678 */
+/* *.color13: #8f3f71 */
+/* *.color14: #427b58 */
+/* *.color15: #3c3836 */
