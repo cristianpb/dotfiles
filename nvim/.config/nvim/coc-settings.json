@@ -5,5 +5,8 @@
     "typescript": ["javascript"],
     "svelte": ["javascript", "html"]
   },
+  "markdownlint.config": {
+    "no-trailing-spaces": false
+  },
   "python.jediEnabled": false
 }
