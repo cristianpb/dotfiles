@@ -93,45 +93,45 @@ st.font: Ubuntu Mono-11;
 ! st.borderpx: 2
 
 !! gruvbox: */
-!*.background: #282828
-!*.foreground: #ebdbb2
-!*.cursorColor: #ebdbb2
+*.background: #282828
+*.foreground: #ebdbb2
+*.cursorColor: #ebdbb2
 
-!*.color0: #1d2021
-!*.color1: #cc241d
-!*.color2: #98971a
-!*.color3: #d79921
-!*.color4: #458588
-!*.color5: #b16286
-!*.color6: #689d6a
-!*.color7: #a89984
-!*.color8: #928374
-!*.color9: #fb4934
-!*.color10: #b8bb26
-!*.color11: #fabd2f
-!*.color12: #83a598
-!*.color13: #d3869b
-!*.color14: #8ec07c
-!*.color15: #ebdbb2
-
-/* !! gruvbox light: */
-*.background: #ebdbb2
-*.foreground: #282828
-*.cursorColor: #282828
-
-*.color0: #fbf1c7
+*.color0: #1d2021
 *.color1: #cc241d
 *.color2: #98971a
 *.color3: #d79921
 *.color4: #458588
 *.color5: #b16286
 *.color6: #689d6a
-*.color7: #7c6f64
+*.color7: #a89984
 *.color8: #928374
-*.color9: #9d0006
-*.color10: #79740e
-*.color11: #b57614
-*.color12: #076678
-*.color13: #8f3f71
-*.color14: #427b58
-*.color15: #3c3836
+*.color9: #fb4934
+*.color10: #b8bb26
+*.color11: #fabd2f
+*.color12: #83a598
+*.color13: #d3869b
+*.color14: #8ec07c
+*.color15: #ebdbb2
+
+/* !! gruvbox light: */
+!*.background: #ebdbb2
+!*.foreground: #282828
+!*.cursorColor: #282828
+
+!*.color0: #fbf1c7
+!*.color1: #cc241d
+!*.color2: #98971a
+!*.color3: #d79921
+!*.color4: #458588
+!*.color5: #b16286
+!*.color6: #689d6a
+!*.color7: #7c6f64
+!*.color8: #928374
+!*.color9: #9d0006
+!*.color10: #79740e
+!*.color11: #b57614
+!*.color12: #076678
+!*.color13: #8f3f71
+!*.color14: #427b58
+!*.color15: #3c3836
