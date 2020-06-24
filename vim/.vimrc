@@ -121,6 +121,7 @@ setlocal fo+=aw
 au FileType mail setlocal sw=2 sts=2 textwidth=0 wrapmargin=0 wrap linebreak nolist
 au FileType vimwiki  setlocal tabstop=2 shiftwidth=2 expandtab
 au FileType javascript  setlocal tabstop=2 shiftwidth=2 expandtab
+au FileType svelte  setlocal tabstop=2 shiftwidth=2 expandtab
 au FileType json  setlocal tabstop=2 shiftwidth=2 expandtab
 au FileType typescript  setlocal tabstop=2 shiftwidth=2 expandtab
 au FileType markdown  setlocal tabstop=2 shiftwidth=2 expandtab
@@ -198,10 +199,10 @@ Plug 'w0rp/ale' " Asynchronous linter <leader>sc
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive' " Git-vim
 Plug 'tpope/vim-surround'
+Plug 'evanleck/vim-svelte'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-"Plug 'easymotion/vim-easymotion' " Simple motion <leader><leader>w
 Plug 'othree/html5.vim' " Hightlight
 Plug 'luochen1990/rainbow' " Parentheses highlight <leader>R
 Plug 'leafgarland/typescript-vim' " Typescript lighting
@@ -304,10 +305,24 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
+
+function! StatusDiagnostic() abort
+    let info = get(b:, 'coc_diagnostic_info', {})
+    if empty(info) | return '' | endif
+    let msgs = []
+    if get(info, 'error', 0)
+        call add(msgs, 'E' . info['error'])
+    endif
+    if get(info, 'warning', 0)
+        call add(msgs, 'W' . info['warning'])
+    endif
+    return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
+endfunction
+
 " Add (Neo)Vim's native statusline support.
 " NOTE: Please see `:h coc-status` for integrations with external plugins that
 " provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{StatusDiagnostic()}
 
 " Mappings using CoCList:
 " Show all diagnostics.
@@ -326,6 +341,22 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+" CoC Settings
+let g:coc_global_extensions = [
+      \'coc-actions',
+      \'coc-emoji',
+      \'coc-git',
+      \'coc-highlight',
+      \'coc-json',
+      \'coc-python',
+      \'coc-snippets',
+      \'coc-svelte',
+      \'coc-tsserver',
+      \'coc-html',
+      \'coc-markdownlint',
+      \'coc-css'
+      \]
 
 """"""""""""""""""""
 "  NerdTreeToogle  "
@@ -555,15 +586,6 @@ colorscheme gruvbox
 " When doing Gdiff make a vertical split by default
 set diffopt+=vertical
 
-"""""""""""""""""""""""""""
-"  Git gutter (git diff)  "
-"""""""""""""""""""""""""""
-" Not enable by default
-let g:gitgutter_enabled=0
-
-" Activate using <leader>d
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
-
 """"""""""""
 "  Js vim  "
 """"""""""""
@@ -593,7 +615,6 @@ let g:rainbow_active = 0
 " Toggle rainbow with <leader>R
 nmap <leader>R :RainbowToggle<cr>
 
-
 """"""""""""
 "  Neovim  "
 """"""""""""
@@ -605,6 +626,7 @@ if has('nvim')
     autocmd TermOpen * set bufhidden=hide
     au TermOpen * setlocal nonumber norelativenumber
     :hi! TermCursorNC ctermfg=15 guifg=#fdf6e3 ctermbg=14 guibg=#93a1a1 cterm=NONE gui=NONE
+    "autocmd BufWinEnter,WinEnter term://* startinsert
 endif
 
 nmap <localleader>t <Plug>(iron-send-motion)
