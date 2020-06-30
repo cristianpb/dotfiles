@@ -181,7 +181,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
-Plug 'airblade/vim-gitgutter'
 Plug 'lifepillar/vim-solarized8'
 Plug 'hkupty/iron.nvim'
 Plug 'rhysd/vim-grammarous'
@@ -195,7 +194,6 @@ Plug 'majutsushi/tagbar' " Ctags <F6>
 Plug 'pangloss/vim-javascript' "Js hightlight
 "Plug 'roxma/vim-paste-easy' " Avoid indent break when paste
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File manager <F3>
-Plug 'w0rp/ale' " Asynchronous linter <leader>sc
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive' " Git-vim
 Plug 'tpope/vim-surround'
@@ -529,28 +527,6 @@ let g:coc_snippet_next = '<tab>'
 vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Ale: requires flake8 for python and vint for vim lighting (pip install
-"  vim-vint  "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Toggle ALE with <leader>sc
-nnoremap <leader>sc :ALEToggle<CR>
-
-" Not enable by default
-let g:ale_enabled = 0
-
-" Do compleition
-let g:ale_completion_enabled = 1
-
-let g:ale_linters = {'python': ['flake8', 'mypy']}
-
-" Use fixers
-"let g:ale_fixers = {
-"\   'javascript': ['eslint'],
-"\   'python': ['autopep8', 'yapf'],
-"\   'vim': ['vint'],
-"\}
 
 """"""""""""
 "  Tagbar  "
