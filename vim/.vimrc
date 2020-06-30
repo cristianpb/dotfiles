@@ -597,13 +597,21 @@ let g:javascript_plugin_flow = 1
 "  Vimwiki  "
 """""""""""""
 " Configuration
-let g:vimwiki_list = [{'path': '~/Documents/vimwiki', 'template_path': '~/Documents/vimwiki/templates/',
-          \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.wiki',
-          \ 'path_html': '~/Documents/vimwiki/site_html/', 'custom_wiki2html': '',
-          \ 'template_ext': '.tpl'}]
+let g:vimwiki_list = [{
+  \ 'auto_export': 1,
+  \ 'automatic_nested_syntaxes':1,
+  \ 'path_html': '$HOME/Documents/vimwiki/_site',
+  \ 'path': '$HOME/Documents/vimwiki/content',
+  \ 'template_path': '$HOME/Documents/vimwiki/templates/',
+  \ 'syntax': 'markdown',
+  \ 'ext':'.md',
+  \ 'template_default':'markdown',
+  \ 'custom_wiki2html': '$HOME/.dotfiles/wiki2html.sh',
+  \ 'template_ext':'.html'
+\}]
 
 " Transform to html
-nmap <silent> <leader>wah :VimwikiAll2HTML<cr>
+nmap <silent> <leader>wah :Vimwiki2HTML<cr>
 let g:vimwiki_table_mappings = 0
 
 """""""""""""""""""""""""
