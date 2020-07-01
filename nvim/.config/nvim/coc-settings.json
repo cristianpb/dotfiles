@@ -1,4 +1,12 @@
 {
-  "coc.source.emoji.filetypes":  ["markdown", "gitcommit"],
+  "coc.source.emoji.filetypes":  ["markdown", "gitcommit", "vimwiki", "mail"],
+  "snippets.extends": {
+    "vimwiki": ["markdown"],
+    "typescript": ["javascript"],
+    "svelte": ["javascript", "html"]
+  },
+  "markdownlint.config": {
+    "no-trailing-spaces": false
+  },
   "python.jediEnabled": false
 }
