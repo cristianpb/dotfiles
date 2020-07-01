@@ -588,6 +588,8 @@ let g:vimwiki_list = [{
 
 " Transform to html
 nmap <silent> <leader>wah :Vimwiki2HTML<cr>
+nmap <silent> <leader>wb :Vimwiki2HTMLBrowse<cr>
+nmap <silent> <leader>wp :Vimwiki2HTMLBrowse<cr>
 let g:vimwiki_table_mappings = 0
 
 """""""""""""""""""""""""
