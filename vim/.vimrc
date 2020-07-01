@@ -182,7 +182,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
-Plug 'airblade/vim-gitgutter'
 Plug 'lifepillar/vim-solarized8'
 Plug 'hkupty/iron.nvim'
 Plug 'rhysd/vim-grammarous'
@@ -196,7 +195,6 @@ Plug 'majutsushi/tagbar' " Ctags <F6>
 Plug 'pangloss/vim-javascript' "Js hightlight
 "Plug 'roxma/vim-paste-easy' " Avoid indent break when paste
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File manager <F3>
-Plug 'w0rp/ale' " Asynchronous linter <leader>sc
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive' " Git-vim
 Plug 'tpope/vim-surround'
@@ -598,13 +596,21 @@ let g:javascript_plugin_flow = 1
 "  Vimwiki  "
 """""""""""""
 " Configuration
-let g:vimwiki_list = [{'path': '~/Documents/vimwiki', 'template_path': '~/Documents/vimwiki/templates/',
-          \ 'template_default': 'default', 'syntax': 'markdown', 'ext': '.wiki',
-          \ 'path_html': '~/Documents/vimwiki/site_html/', 'custom_wiki2html': '',
-          \ 'template_ext': '.tpl'}]
+let g:vimwiki_list = [{
+  \ 'auto_export': 1,
+  \ 'automatic_nested_syntaxes':1,
+  \ 'path_html': '$HOME/Documents/vimwiki/_site',
+  \ 'path': '$HOME/Documents/vimwiki/content',
+  \ 'template_path': '$HOME/Documents/vimwiki/templates/',
+  \ 'syntax': 'markdown',
+  \ 'ext':'.md',
+  \ 'template_default':'markdown',
+  \ 'custom_wiki2html': '$HOME/.dotfiles/wiki2html.sh',
+  \ 'template_ext':'.html'
+\}]
 
 " Transform to html
-nmap <silent> <leader>wah :VimwikiAll2HTML<cr>
+nmap <silent> <leader>wah :Vimwiki2HTML<cr>
 let g:vimwiki_table_mappings = 0
 
 """""""""""""""""""""""""
