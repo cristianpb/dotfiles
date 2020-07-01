@@ -1,0 +1,137 @@
+! Enable the extended coloring options
+rofi.color-enabled: true
+!                  bg       border   separator
+rofi.color-window: #282828, #a89984, #a89984
+!                  bg       fg       bg-alt   hl-bg    hl-fg
+rofi.color-normal: #282828, #ebdbb2, #32302f, #665c54, #fbf1c7
+rofi.color-active: #d79921, #282828, #d79921, #fabd2f, #282828
+rofi.color-urgent: #cc241d, #282828, #cc241d, #fb4934, #282828
+
+rofi.separator-style: solid
+rofi.sidebar-mode: true
+rofi.bw: 1
+rofi.columns: 1
+rofi.padding: 16
+
+rofi.yoffset: 0
+rofi.fake-transparency: false
+rofi.location: 0
+rofi.width: 50
+rofi.font: Hasklig 12
+rofi.lines: 15
+rofi.fixed-num-lines: true
+
+xscreensaver.splash: false
+xscreensaver.Dialog.foreground: #ebdbb2
+xscreensaver.Dialog.background: #282828
+xscreensaver.Dialog.topShadowColor: #0a0a0a
+xscreensaver.Dialog.bottomShadowColor: #161616
+xscreensaver.Dialog.Button.foreground: #ebdbb2
+xscreensaver.Dialog.Button.background: #282828
+xscreensaver.Dialog.borderWidth: 0
+xscreensaver.Dialog.internalBorderWidth: 0
+xscreensaver.passwd.thermometer.background: #282828
+xscreensaver.passwd.thermometer.foreground: #fbf1c7
+xscreensaver.passwd.thermometer.width: 8
+
+Xautolock.time: 5
+Xautolock.locker: $HOME/.dotfiles/autolock.sh lock
+Xautolock.notify: 30
+Xautolock.notifier: $HOME/.dotfiles/autolock.sh notify
+Xautolock.detectsleep: true
+Xautolock.secure: true
+Xautolock.noclose: true
+
+URxvt.depth:                32
+URxvt.geometry:             64x18
+URxvt.transparent:          false
+URxvt.fading:               0
+! URxvt.urgentOnBell:         true
+! URxvt.visualBell:           true
+URxvt.loginShell:           true
+URxvt.saveLines:            1000
+URxvt.internalBorder:       3
+URxvt.lineSpace:            0
+
+! Fonts
+!URxvt*font: xft:Ubuntu Mono:size=11,xft:Hasklig:size=11
+!URxvt*boldFont: xft:Ubuntu Mono:bold:size=11,xft:Hasklig:bold:size=11
+
+! Fix font space
+URxvt*letterSpace: -1
+
+! Scrollbar
+URxvt.scrollStyle:          rxvt
+URxvt.scrollBar:            false
+
+! Perl extensions
+URxvt.perl-ext-common:      default,matcher
+URxvt.matcher.button:       1
+URxvt.urlLauncher:          google-chrome
+
+! Cursor
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          #657b83
+URxvt.cursorUnderline:      false
+
+! Pointer
+URxvt.pointerBlank:         true
+
+!urxvt color scheme:
+URxvt*background: #2D2D2D
+URxvt*foreground: #F8F8F2
+
+URxvt*colorUL: #86a2b0
+
+!! Transparency (0-1):
+st.alpha: 0.92
+
+!! Set a default font and font size as below:
+st.font: Deja Vu Sans Mono-10;
+
+! st.termname: st-256color
+st.borderpx: 0
+
+!! gruvbox: */
+*.background: #282828
+*.foreground: #ebdbb2
+*.cursorColor: #ebdbb2
+
+*.color0: #1d2021
+*.color1: #cc241d
+*.color2: #98971a
+*.color3: #d79921
+*.color4: #458588
+*.color5: #b16286
+*.color6: #689d6a
+*.color7: #a89984
+*.color8: #928374
+*.color9: #fb4934
+*.color10: #b8bb26
+*.color11: #fabd2f
+*.color12: #83a598
+*.color13: #d3869b
+*.color14: #8ec07c
+*.color15: #ebdbb2
+
+/* !! gruvbox light: */
+!*.background: #ebdbb2
+!*.foreground: #282828
+!*.cursorColor: #282828
+
+!*.color0: #fbf1c7
+!*.color1: #cc241d
+!*.color2: #98971a
+!*.color3: #d79921
+!*.color4: #458588
+!*.color5: #b16286
+!*.color6: #689d6a
+!*.color7: #7c6f64
+!*.color8: #928374
+!*.color9: #9d0006
+!*.color10: #79740e
+!*.color11: #b57614
+!*.color12: #076678
+!*.color13: #8f3f71
+!*.color14: #427b58
+!*.color15: #3c3836
