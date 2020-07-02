@@ -90,7 +90,7 @@ st.alpha: 0.92
 st.font: Ubuntu Mono-11;
 
 ! st.termname: st-256color
-! st.borderpx: 2
+st.borderpx: 0
 
 !! gruvbox: */
 *.background: #282828
