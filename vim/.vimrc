@@ -529,28 +529,6 @@ vmap <Enter> <Plug>(EasyAlign)
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"  Ale: requires flake8 for python and vint for vim lighting (pip install
-"  vim-vint  "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Toggle ALE with <leader>sc
-nnoremap <leader>sc :ALEToggle<CR>
-
-" Not enable by default
-let g:ale_enabled = 0
-
-" Do compleition
-let g:ale_completion_enabled = 1
-
-let g:ale_linters = {'python': ['flake8', 'mypy']}
-
-" Use fixers
-"let g:ale_fixers = {
-"\   'javascript': ['eslint'],
-"\   'python': ['autopep8', 'yapf'],
-"\   'vim': ['vint'],
-"\}
-
 """"""""""""
 "  Tagbar  "
 """"""""""""
