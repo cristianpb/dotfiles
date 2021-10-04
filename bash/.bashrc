@@ -156,13 +156,19 @@ alias tlight='cp ~/.config/termite/configSolarizedLight ~/.config/termite/config
 alias tgruv='cp ~/.config/termite/configGruv ~/.config/termite/config' 
 
 # Compatibility for ssh connection
-export TERM=xterm-256color 
+#export TERM=xterm-256color 
 
 ############
 #  Ranger  #
 ############
 # Disable loading of global config
 export RANGER_LOAD_DEFAULT_RC=FALSE
+
+#########
+#  NVM  #
+#########
+
+source /usr/share/nvm/init-nvm.sh
 
 ############
 #  Others  #
