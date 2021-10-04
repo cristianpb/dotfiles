@@ -1,5 +1,5 @@
 #!/bin/bash
-action=$(echo -e "Lock Screen\nLogout\nShutdown\nScreenshot\nReboot" | rofi -dmenu -p "power:")
+action=$(echo -e "Lock Screen\nLogout\nShutdown\nSuspend\nScreenshot\nReboot" | rofi -dmenu -p "power:")
 
 if [[ "$action" == "Lock Screen" ]]
 then
@@ -14,6 +14,11 @@ fi
 if [[ "$action" == "Shutdown" ]]
 then
     shutdown now
+fi
+
+if [[ "$action" == "Suspend" ]]
+then
+    systemctl suspend
 fi
 
 if [[ "$action" == "Screenshot" ]]
