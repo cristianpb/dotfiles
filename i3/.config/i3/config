@@ -13,7 +13,8 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec st
 
 # kill focused window
 bindsym $mod+Shift+A kill
@@ -124,7 +125,7 @@ bindsym $mod+Shift+agrave move container to workspace $workspace10
 # Assign apps to workspaces
 assign [class="Rhythmbox"] $workspace10
 for_window [class="Spotify"] move to workspace $workspace10
-assign [class="Firefox"] $workspace2
+assign [class="firefox"] $workspace2
 assign [class="Chromium"] $workspace3
 
 # reload the configuration file
@@ -210,7 +211,7 @@ bindsym XF86KbdBrightnessUp exec "~/.config/i3/leds_up.sh"
 bindsym XF86Display exec "arandr"
 
 # Wallpaper!
-exec_always feh --bg-scale ~/Images/Wallpaper/wallpaper.jpg
+exec_always feh --bg-scale ~/Pictures/Wallpaper/wallpaper.jpg
 
 # Startup programs
 exec --no-startup-id nm-applet
@@ -219,4 +220,6 @@ exec --no-startup-id unclutter
 exec --no-startup-id udiskie
 exec --no-startup-id compton
 exec --no-startup-id dunst
+exec --no-startup-id autorandr
+exec --no-startup-id redshift -l 48.85341:2.3488 &
 exec "sh -c 'sleep 300; exec ~/.dotfiles/BingDownloadImage.sh'"
