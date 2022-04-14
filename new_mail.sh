@@ -1,8 +1,7 @@
 #!/bin/bash
 
-countG=$(ls /home/perezcri/.mail/gmail/Inbox/new | wc -l)
-countK=$(ls /home/perezcri/.mail/ministere/Inbox/new | wc -l)
-count=$((countG + countK))
+countG=$(ls /home/ubuntu/.mail/gmail/Inbox/new | wc -l)
+count=$((countG))
 
 
 if [[ -n "$count" && "$count" -gt 0 ]]; then
