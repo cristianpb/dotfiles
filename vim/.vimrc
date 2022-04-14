@@ -155,7 +155,7 @@ inoremap <C-l> <c-g>u<Esc>[s1z=`]a<c-g>u
 
 " Use global languatetool
 "let g:grammarous#languagetool_cmd = '/snap/bin/languagetool'
-let g:grammarous#languagetool_cmd = 'java -jar /home/perezcri/Téléchargements/LanguageTool-4.8/languagetool-commandline.jar'
+let g:grammarous#languagetool_cmd = 'java -jar /home/ubuntu/Downloads/LanguageTool-4.8/languagetool-commandline.jar'
 
 " Open window on first error
 let g:grammarous#show_first_error = 1
@@ -198,6 +198,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }  " File manager <F3>
 Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive' " Git-vim
 Plug 'tpope/vim-surround'
+Plug 'github/copilot.vim'
 Plug 'evanleck/vim-svelte'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
@@ -348,7 +349,7 @@ let g:coc_global_extensions = [
       \'coc-git',
       \'coc-highlight',
       \'coc-json',
-      \'coc-python',
+      \'coc-pyright',
       \'coc-snippets',
       \'coc-svelte',
       \'coc-tsserver',
@@ -589,6 +590,8 @@ let g:vimwiki_list = [{
 
 " Transform to html
 nmap <silent> <leader>wah :Vimwiki2HTML<cr>
+nmap <silent> <leader>wb :Vimwiki2HTMLBrowse<cr>
+nmap <silent> <leader>wp :Vimwiki2HTMLBrowse<cr>
 let g:vimwiki_table_mappings = 0
 
 """""""""""""""""""""""""
