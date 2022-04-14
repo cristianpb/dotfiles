@@ -75,15 +75,6 @@ export EDITOR=nvim
 alias vi='nvim'
 alias vim='nvim'
 
-##########
-#  Ruby  #
-##########
-# Export ruby gems
-PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-
-# Install locally gems
-export GEM_HOME=$(ruby -e 'print Gem.user_dir')
-
 ###############
 #  gpg-agent  #
 ###############
