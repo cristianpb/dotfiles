@@ -13,7 +13,10 @@ focus_follows_mouse no
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec st
+## Default
+# bindsym $mod+Return exec i3-sensible-terminal
+## Alacritty
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+A kill
@@ -26,7 +29,7 @@ bindsym $mod+i exec ~/.dotfiles/passmenu
 # start watsondmenu
 bindsym $mod+w exec ~/.dotfiles/watson_dmenu 
 bindsym $mod+Tab exec --no-startup-id rofi -show window
-bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 bindsym $mod+Shift+q exec ~/.config/i3/rofi_powermenu.sh
 #bindsym XF86WakeUp exec ~/.config/i3/rofi_powermenu.sh
@@ -125,6 +128,7 @@ bindsym $mod+Shift+agrave move container to workspace $workspace10
 assign [class="Rhythmbox"] $workspace10
 for_window [class="Spotify"] move to workspace $workspace10
 assign [class="Firefox"] $workspace2
+assign [class="firefox"] $workspace2
 assign [class="Chromium"] $workspace3
 
 # reload the configuration file
@@ -184,8 +188,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec amixer sset Capture toggle # mute mic key
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec light -A 5 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 5 # decrease screen brightness
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
@@ -202,6 +206,9 @@ bindsym $mod+F2 exec mpc prev
 bindsym $mod+F3 exec mpc next
 bindsym $mod+F1 exec mpc toggle
 
+# Keyboard Brightness
+bindsym XF86KbdBrightnessDown exec "~/.config/i3/leds_down.sh"
+bindsym XF86KbdBrightnessUp exec "~/.config/i3/leds_up.sh"
 
 # Display
 bindsym XF86Display exec arandr
@@ -218,4 +225,5 @@ exec --no-startup-id compton
 exec --no-startup-id dunst
 exec --no-startup-id xautolock
 exec --no-startup-id redshift
+exec --no-startup-id autorandr
 exec "sh -c 'sleep 300; exec ~/.dotfiles/BingDownloadImage.sh'"
