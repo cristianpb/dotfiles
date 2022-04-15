@@ -7,7 +7,7 @@ IMAPAccount gmail
 # Address to connect to
 Host imap.gmail.com
 User felipebrokate@gmail.com
-PassCmd "pass Mail/gmail"
+PassCmd "pass Mail/gmail-mbsync"
 # Use SSL
 SSLType IMAPS
 #AuthMechs XOAUTH2
