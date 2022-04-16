@@ -52,42 +52,6 @@ amber6 = #FFB300
 amber7 = #FFA000
 amber8 = #FF8F00
 
-[bar/bottom]
-bottom = true
-override-redirect = true
-wm-restack = i3
-
-monitor = ${env:MONITOR:}
-width = 100%
-height = 15
-;offset-x = 1%
-;offset-y = 1%
-radius = 0
-fixed-center = false
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 1
-line-color = #f00
-
-border-size = 1
-#border-color = #00000000
-border-color = #222
-
-padding-left = 0
-padding-right = 0
-
-module-margin-left = 1
-module-margin-right = 2
-
-font-0 = fixed:pixelsize=9;1
-font-1 = FontAwesome:pixelsize=9;2
-font-2 = siji:pixelsize=9;1
-
-modules-left = volume mpd
-modules-center = 
-modules-right = filesystem cpu memory networkspeedup networkspeeddown battery1
-
 [bar/top]
 monitor = ${env:MONITOR:}
 width = 100%
@@ -119,7 +83,7 @@ font-2 = siji:pixelsize=9;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = mail xbacklight pulseaudio1 wlan eth battery weather date powermenu
+modules-right = mail filesystem cpu memory networkspeedup networkspeeddown networkspeedup1 networkspeeddown1 networkspeedup2 networkspeeddown2 xbacklight pulseaudio1 wlan eth eth1 battery battery1 weather date powermenu
 
 tray-position = right
 tray-padding = 6
@@ -141,7 +105,7 @@ tray-background = #222
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:80:...%
+label = %title:0:40:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -295,20 +259,18 @@ label-foreground = ${colors.lime}
 format-underline = ${colors.lime}
 
 ; Only applies if <ramp> is used
-ramp-0 = 🌕
-ramp-1 = 🌔
-ramp-2 = 🌓
-ramp-3 = 🌒
-ramp-4 = 🌑
+ramp-0 = .
+ramp-1 = o
+ramp-2 = O
 
-bar-width = 10
+bar-width = 8
 bar-indicator = |
 bar-indicator-foreground = #ff
 bar-indicator-font = 2
-bar-fill = ─
+bar-fill = -
 bar-fill-font = 2
 bar-fill-foreground = ${colors.lime}
-bar-empty = ─
+bar-empty = -
 bar-empty-font = 2
 bar-empty-foreground = ${colors.foreground-alt}
 
@@ -390,6 +352,22 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
+[module/eth1]
+type = internal/network
+interface = net1
+interval = 3.0
+
+format-connected-underline = #55aa55
+format-connected-prefix = " "
+format-connected-prefix-foreground = ${colors.foreground-alt}
+label-connected = %local_ip%
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
 
 [module/networkspeedup]
 type = internal/network
@@ -421,6 +399,80 @@ format-connected = <label-connected>
 format-connected-prefix = 
 format-connected-foreground=${colors.red}
 format-connected-underline = ${colors.deeppurple}
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/networkspeedup1]
+type = internal/network
+interface = net0
+interval = 3.0
+
+label-connected =  %upspeed:7%
+format-connected = <label-connected>
+format-connected-prefix =  
+format-connected-foreground=${colors.teal}
+format-connected-underline = #55aa55
+label-connected-foreground=${colors.white}
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+
+[module/networkspeeddown1]
+type = internal/network
+interface = net0
+interval = 3.0
+
+label-connected = "%downspeed:7%"
+label-connected-foreground=${colors.white}
+format-connected = <label-connected>
+format-connected-prefix = 
+format-connected-foreground=${colors.red}
+format-connected-underline = #55aa55
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/networkspeedup2]
+type = internal/network
+interface = net1
+interval = 3.0
+
+label-connected =  %upspeed:7%
+format-connected = <label-connected>
+format-connected-prefix =  
+format-connected-foreground=${colors.teal}
+format-connected-underline = #55aa55
+label-connected-foreground=${colors.white}
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+
+[module/networkspeeddown2]
+type = internal/network
+interface = net1
+interval = 3.0
+
+label-connected = "%downspeed:7%"
+label-connected-foreground=${colors.white}
+format-connected = <label-connected>
+format-connected-prefix = 
+format-connected-foreground=${colors.red}
+format-connected-underline = #55aa55
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -488,6 +540,7 @@ type = internal/battery
 battery = BAT0
 adapter = AC0
 full-at = 98
+low-at = 4
 time-format = %_H:%M
 
 format-charging = <animation-charging> <label-charging>
@@ -518,12 +571,19 @@ animation-charging-4 = 
 animation-charging-foreground = ${colors.amber4}
 animation-charging-framerate = 750
 
+format-low = <label-low> <animation-low>
+label-low = %percentage%% 
+format-low-underline = ${self.format-charging-underline}
+animation-low-0 = !
+animation-low-1 = 
+animation-low-framerate = 500
 
 [module/battery1]
 type = internal/battery
 battery = BAT1
 adapter = AC0
 full-at = 98
+low-at = 4
 time-format = %_H:%M
 
 format-charging = <animation-charging> <label-charging>
@@ -553,6 +613,13 @@ animation-charging-3 = 
 animation-charging-4 = 
 animation-charging-foreground = ${colors.amber4}
 animation-charging-framerate = 750
+
+format-low = <label-low> <animation-low>
+label-low = %percentage%% 
+format-low-underline = ${self.format-charging-underline}
+animation-low-0 = !
+animation-low-1 = 
+animation-low-framerate = 500
 
 [module/temperature]
 type = internal/temperature
@@ -597,7 +664,6 @@ screenchange-reload = true
 
 [global/wm]
 margin-top = 1
-margin-bottom = 1
 
 [module/watson]
 type = custom/script
