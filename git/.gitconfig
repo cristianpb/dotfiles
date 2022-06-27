@@ -26,8 +26,5 @@
   branch = 1
   short = 1
 [user]
-  email = felipebrokate@gmail.com
-  name = cristianpb
-  signingkey = B212E65B
-[commit]
-  gpgsign = true
+  email = cb@localhost
+  name = cb
