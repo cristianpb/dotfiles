@@ -86,7 +86,7 @@ font-2 = siji:pixelsize=9;1
 
 modules-left = volume
 modules-center = 
-modules-right = filesystem cpu memory networkspeedup networkspeeddown battery1
+modules-right = filesystem cpu memory networkspeedup-wifi0 networkspeeddown-wifi0 networkspeedup-net0 networkspeeddown-net0 networkspeedup-net1 networkspeeddown-net1 battery1
 
 [bar/top]
 monitor = ${env:MONITOR:}
@@ -119,7 +119,7 @@ font-2 = siji:pixelsize=9;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = xbacklight mail pulseaudio1 wlan eth0 eth1 battery weather date
+modules-right = filesystem cpu memory networkspeedup-wifi0 networkspeeddown-wifi0 networkspeedup-net0 networkspeeddown-net0 networkspeedup-net1 networkspeeddown-net1 backlight mail pulseaudio1 wlan eth0 eth1 battery date
 
 tray-position = right
 tray-padding = 6
@@ -141,7 +141,7 @@ tray-background = #222
 
 [module/xwindow]
 type = internal/xwindow
-label = %title:0:80:...%
+label = %title:0:40:...%
 
 [module/xkeyboard]
 type = internal/xkeyboard
@@ -367,7 +367,7 @@ label = RAM %percentage_used%%
 format = <label> <bar-used>
 
 bar-used-indicator =
-bar-used-width = 10
+bar-used-width = 8
 bar-used-foreground-0 = #55aa55
 bar-used-foreground-1 = #557755
 bar-used-foreground-2 = #f5a70a
@@ -429,9 +429,9 @@ format-disconnected =
 ;label-disconnected = %ifname% disconnected
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
-[module/networkspeedup]
+[module/networkspeedup-wifi0]
 type = internal/network
-interface = net0
+interface = wifi0
 interval = 3.0
 
 label-connected = "%upspeed:7%"
@@ -448,7 +448,44 @@ format-disconnected =
 ;label-disconnected-foreground = ${colors.foreground-alt}
 
 
-[module/networkspeeddown]
+[module/networkspeeddown-wifi0]
+type = internal/network
+interface = wifi0
+interval = 3.0
+
+label-connected = "%downspeed:7%"
+label-connected-foreground=${colors.white}
+format-connected = <label-connected>
+format-connected-prefix = 
+format-connected-foreground=${colors.red}
+format-connected-underline = ${colors.deeppurple}
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/networkspeedup-net0]
+type = internal/network
+interface = net0
+interval = 3.0
+
+label-connected = "%upspeed:7%"
+format-connected = <label-connected>
+format-connected-prefix =  
+format-connected-foreground=${colors.teal}
+format-connected-underline = #55aa55
+label-connected-foreground=${colors.white}
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+
+[module/networkspeeddown-net0]
 type = internal/network
 interface = net0
 interval = 3.0
@@ -458,7 +495,44 @@ label-connected-foreground=${colors.white}
 format-connected = <label-connected>
 format-connected-prefix = 
 format-connected-foreground=${colors.red}
-format-connected-underline = ${colors.deeppurple}
+format-connected-underline = #55aa55
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+[module/networkspeedup-net1]
+type = internal/network
+interface = net1
+interval = 3.0
+
+label-connected = "%upspeed:7%"
+format-connected = <label-connected>
+format-connected-prefix =  
+format-connected-foreground=${colors.teal}
+format-connected-underline = #55aa55
+label-connected-foreground=${colors.white}
+
+format-disconnected =
+;format-disconnected = <label-disconnected>
+;format-disconnected-underline = ${self.format-connected-underline}
+;label-disconnected = %ifname% disconnected
+;label-disconnected-foreground = ${colors.foreground-alt}
+
+
+[module/networkspeeddown-net1]
+type = internal/network
+interface = net1
+interval = 3.0
+
+label-connected = "%downspeed:7%"
+label-connected-foreground=${colors.white}
+format-connected = <label-connected>
+format-connected-prefix = 
+format-connected-foreground=${colors.red}
+format-connected-underline = #55aa55
 
 format-disconnected =
 ;format-disconnected = <label-disconnected>
@@ -665,12 +739,53 @@ format-underline = ${colors.red}
 format-prefix-foreground = ${colors.foreground-alt}
 exec = ~/.config/i3/IconicWeather.sh "EUR|FR|FR623|Paris"
 
+[module/alsa]
+type = internal/alsa
+
+; Soundcard to be used
+; Usually in the format hw:# where # is the card number
+; You can find the different card numbers in `/proc/asound/cards`
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+
+; Name of the master, speaker and headphone mixers
+; Use the following command to list available mixer controls:
+; $ amixer scontrols | sed -nr "s/.*'([[:alnum:]]+)'.*/\1/p"
+; If master, speaker or headphone-soundcard isn't the default, 
+; use `amixer -c # scontrols` instead where # is the number 
+; of the master, speaker or headphone soundcard respectively
+;
+; Default: Master
+master-mixer = Master
+
+; Optionally define speaker and headphone mixers
+; Default: none
+speaker-mixer = Speaker
+; Default: none
+headphone-mixer = Headphone
+
+; NOTE: This is required if headphone_mixer is defined
+; Use the following command to list available device controls
+; $ amixer controls | sed -r "/CARD/\!d; s/.*=([0-9]+).*name='([^']+)'.*/printf '%3.0f: %s\n' '\1' '\2'/e" | sort
+; You may also need to use `amixer -c # controls` as above for the mixer names
+; Default: none
+headphone-id = 9
+
+; Use volume mapping (similar to amixer -M and alsamixer), where the increase in volume is linear to the ear
+; Default: false
+mapped = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
 [module/pulseaudio1]
 type = internal/pulseaudio
 
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
 ; If not, uses default sink
-sink = bluez_sink.FC_58_FA_10_B4_7F.a2dp_sink
+#sink = bluez_sink.FC_58_FA_10_B4_7F.a2dp_sink
 
 ; Available tags:
 ;   <label-volume> (default)
