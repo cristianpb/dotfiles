@@ -126,15 +126,6 @@ alias vim='nvim'
 export PATH=/opt/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
 
-##########
-#  Ruby  #
-##########
-# Export ruby gems
-PATH="$(ruby -e 'print Gem.user_dir')/bin:$PATH"
-
-# Install locally gems
-export GEM_HOME=$(ruby -e 'print Gem.user_dir')
-
 ###############
 #  gpg-agent  #
 ###############
