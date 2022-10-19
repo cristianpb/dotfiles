@@ -31,4 +31,4 @@ done
 
 ## Dependencies
 
-`stow neovim pynvim bash-completion ruby`
+`stow neovim pynvim bash-completion`
