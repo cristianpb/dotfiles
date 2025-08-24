@@ -23,13 +23,17 @@ bindsym $mod+Shift+A kill
 #  Rofi program launcher  #
 ###########################
 # start passmenu
-bindsym $mod+i exec passmenu
+bindsym $mod+i exec rofi-pass
 # start watsondmenu
 bindsym $mod+w exec ~/.dotfiles/watson_dmenu 
 bindsym $mod+Tab exec --no-startup-id rofi -show window
 bindsym $mod+d exec --no-startup-id rofi -show drun -show-icons
 bindsym $mod+Shift+d exec --no-startup-id rofi -show run
 bindsym $mod+Shift+q exec ~/.config/i3/rofi_powermenu.sh
+bindsym $mod+Shift+u exec ~/.local/bin/keepmenu
+bindsym Control+space exec dunstctl close
+bindsym Control+Shift+space exec dunstctl close-all
+bindsym Control+egrave exec dunstctl history-pop
 #bindsym XF86WakeUp exec ~/.config/i3/rofi_powermenu.sh
 
 # change focus
@@ -87,16 +91,16 @@ bindsym $mod+q focus parent
 ################
 
 # Custom workspaces names
-set $workspace1 "1  "
-set $workspace2 "2  "
-set $workspace3 "3  "
-set $workspace4 "4  "
-set $workspace5 "5  "
-set $workspace6 "6  "
-set $workspace7 "7  "
-set $workspace8 "8  "
-set $workspace9 "9  "
-set $workspace10 "10  "
+set $workspace1 "1 "
+set $workspace2 "2 "
+set $workspace3 "3 "
+set $workspace4 "4 "
+set $workspace5 "5 "
+set $workspace6 "6 "
+set $workspace7 "7 "
+set $workspace8 "8 "
+set $workspace9 "9 "
+set $workspace10 "10 "
 
 # switch to workspace
 bindsym $mod+ampersand workspace $workspace1
@@ -179,8 +183,8 @@ new_window 1pixel
 bindsym Mod4+Control+l exec $HOME/.dotfiles/autolock.sh lock
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id $HOME/.config/i3/sound_change.sh && pactl set-sink-volume @DEFAULT_SINK@ +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id $HOME/.config/i3/sound_change.sh && pactl set-sink-volume @DEFAULT_SINK@ -5% #decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle # mute sound
 bindsym XF86AudioMicMute exec amixer sset Capture toggle # mute mic key
 
@@ -192,7 +196,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightnes
 #bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
 
 # Print Screen
-bindsym Print exec scrot ~/Images/Screenshot/`date +%Y-%m-%d_%H:%M:%S`.png
+bindsym Print exec flameshot full -p ~/Pictures/Screenshots/`date +%Y-%m-%d_%H:%M:%S`.png
 
 # Media player controls
 #bindsym XF86AudioPlay exec playerctl play
@@ -208,7 +212,8 @@ bindsym XF86KbdBrightnessDown exec "~/.config/i3/leds_down.sh"
 bindsym XF86KbdBrightnessUp exec "~/.config/i3/leds_up.sh"
 
 # Display
-bindsym XF86Display exec "arandr"
+bindsym XF86Display exec "autorandr -c"
+bindsym $mod+F8 exec "autorandr -c"
 
 # Wallpaper!
 exec_always feh --bg-scale ~/Pictures/Wallpaper/wallpaper.jpg
@@ -220,6 +225,7 @@ exec --no-startup-id unclutter
 exec --no-startup-id udiskie
 exec --no-startup-id compton
 exec --no-startup-id dunst
-exec --no-startup-id autorandr
+exec --no-startup-id xautolock
+exec --no-startup-id autorandr -c
 exec --no-startup-id redshift -l 48.85341:2.3488 &
-exec "sh -c 'sleep 300; exec ~/.dotfiles/BingDownloadImage.sh'"
+exec "sh -c 'sleep 300; exec ~/.dotfiles/BingDownloadImage.sh && feh --bg-scale ~/Pictures/Wallpaper/wallpaper.jpg'"
