@@ -5,5 +5,5 @@ RefuseManualStop=yes
 
 [Service]
 Type=oneshot
-ExecStart=/home/arch/.dotfiles/checkmail.sh
+ExecStart=%h/.dotfiles/checkmail.sh
 ExecStartPost=/usr/bin/notmuch new

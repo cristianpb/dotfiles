@@ -5,7 +5,7 @@ After=mpd.service
 [Service]
 Type=simple
 Restart=always
-ExecStart=/usr/bin/node /home/arch/Documents/node/MPCParty/server.js
+ExecStart=/usr/bin/node %h/Documents/node/MPCParty/server.js
 
 [Install]
 WantedBy=default.target

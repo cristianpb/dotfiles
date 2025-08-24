@@ -2,7 +2,7 @@
 Description=Grafana service
 
 [Service]
-ExecStart=/usr/bin/grafana-server --config "/home/arch/.config/grafana/grafana.ini" --homepath "/usr/share/grafana"
+ExecStart=/usr/bin/grafana-server --config "%h/.config/grafana/grafana.ini" --homepath "/usr/share/grafana"
 ExecStop=/usr/bin/pkill grafana-server
 
 [Install]
