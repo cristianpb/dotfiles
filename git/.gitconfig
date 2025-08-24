@@ -20,14 +20,16 @@
   recommit = "!f() { git commit --amend --no-edit; }; f"
 #[merge]
 #  ff = only
+[pull]
+  rebase = true
 [push]
   default = current
 [status]
   branch = 1
   short = 1
 [user]
-  email = felipebrokate@gmail.com
+  email = 18708179+cristianpb@users.noreply.github.com
   name = cristianpb
-  signingkey = B212E65B
+  signingkey = 12B63BB95CBF4D90F5EBC02613BD3280B582F924
 [commit]
   gpgsign = true
