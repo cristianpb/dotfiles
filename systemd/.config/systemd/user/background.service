@@ -1,0 +1,10 @@
+[Unit]
+Description=Change screen image
+RefuseManualStart=no
+RefuseManualStop=yes
+
+[Service]
+Environment="DISPLAY=:0"
+Type=oneshot
+ExecStart=/usr/bin/bash %h/.dotfiles/BingDownloadImage.sh
+ExecStartPost=/usr/bin/feh --bg-scale %h/Pictures/Wallpaper/wallpaper.jpg

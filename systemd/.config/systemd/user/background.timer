@@ -1,0 +1,13 @@
+[Unit]
+Description=Change background every day
+RefuseManualStart=no
+RefuseManualStop=no
+
+[Timer]
+Persistent=false
+OnBootSec=5min
+OnUnitActiveSec=1d
+Unit=background.service
+
+[Install]
+WantedBy=default.target
