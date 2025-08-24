@@ -15,4 +15,4 @@ URL=($(curl -s 'http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mkt=
 ImageURL="http://www.bing.com"/$URL"_"$Resolution".jpg"
 echo "Downloading Bing image to: $Directory"
 curl -so "$Directory"/$FileName "$ImageURL"
-convert "$Directory"/$FileName "$Directory"/$FileNamepng
+magick "$Directory"/$FileName "$Directory"/$FileNamepng
