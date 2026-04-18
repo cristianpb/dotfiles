@@ -23,7 +23,7 @@ bindsym $mod+Shift+A kill
 #  Rofi program launcher  #
 ###########################
 # start passmenu
-bindsym $mod+i exec rofi-pass
+bindsym $mod+i exec ~/.dotfiles/rofi-pass
 # start watsondmenu
 bindsym $mod+w exec ~/.dotfiles/watson_dmenu 
 bindsym $mod+Tab exec --no-startup-id rofi -show window
@@ -61,10 +61,10 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-#bindsym $mod+% split h
+bindsym $mod+Shift+b split h
 
 # split in vertical orientation
-#bindsym $mod+" split v
+bindsym $mod+Shift+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -168,16 +168,16 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#############
-#  polybar  #
-#############
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+##############
+#   waybar   #
+##############
+exec_always --no-startup-id waybar
 
 ###############################
 #  Custom Keyboard Shortcuts  #
 ###############################
 # Disable title and border
-new_window 1pixel
+default_border pixel 1
 
 # Lock screen. --dpms option will turn off all displays right after locking.
 bindsym Mod4+Control+l exec $HOME/.dotfiles/autolock.sh lock
@@ -189,8 +189,8 @@ bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ to
 bindsym XF86AudioMicMute exec amixer sset Capture toggle # mute mic key
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%-
 
 # Touchpad controls
 #bindsym XF86TouchpadToggle exec ~/.config/i3/toggletouchpad.sh # toggle touchpad
@@ -215,8 +215,6 @@ bindsym XF86KbdBrightnessUp exec "~/.config/i3/leds_up.sh"
 bindsym XF86Display exec "autorandr -c"
 bindsym $mod+F8 exec "autorandr -c"
 
-# Wallpaper!
-exec_always feh --bg-scale ~/Pictures/Wallpaper/wallpaper.jpg
 
 # Startup programs
 exec --no-startup-id nm-applet

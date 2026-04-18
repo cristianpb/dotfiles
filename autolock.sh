@@ -54,14 +54,13 @@ dunst() {
 
 blur() {
   IMAGE=/tmp/i3lock.png
-  SCREENSHOT="scrot $IMAGE" # 0.46s
+  SCREENSHOT="grim $IMAGE" # 0.46s
   
   # Get the screenshot, add the blur and lock the screen with it
   $SCREENSHOT
   convert $IMAGE -scale 10% -scale 1000% $IMAGE
-  i3lock -i $IMAGE --nofork -f
+  swaylock -i $IMAGE
   rm $IMAGE
-  watson stop
 }
 
 case "$cmd" in

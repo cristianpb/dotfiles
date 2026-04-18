@@ -1,0 +1,769 @@
+#!/usr/bin/bash
+
+# rofi-pass
+# (c) 2015 Rasmus Steinke <rasi@xssn.at>
+# Maintained by seme4eg <418@duck.com> since 2024
+
+###############################################################################
+#              Config defaults (in case user doesn't copies one)              #
+###############################################################################
+
+# Set alternative password store dirs. Use ":" to separate multiple roots.
+# Can be switched at runtime with with corresponding hotkeys
+# ROOTS=/path/to/root_one:/path/to/root_two
+
+# You can define password store env vars here and they will be sourced in
+# the script and applied to all pass commands called. Like:
+# PASSWORD_STORE_CLIP_TIME=30
+# PASSWORD_STORE_GENERATED_LENGTH=13
+
+# Same way you can define other env vars that pass is using:
+# EDITOR='vim -x'
+# BROWSER= # default: xdg-open
+
+# Fields to be used
+URL_FIELD='url'
+USERNAME_FIELD='user'
+AUTOTYPE_FIELD='autotype'
+
+BACK_OPTION='← back'
+
+# delay to be used for :delay keyword
+delay=2
+# rofi-pass needs to close itself before it can type passwords. Set delay here.
+wait=0.2
+# delay between keypresses when typing (in ms)
+type_delay=12
+
+## Options for generating new password entries
+# open new password entries in editor
+edit_new_pass="true"
+# set to ':basename' for user field to be set to password basename
+default_user="$(whoami)"
+# users that you will see as an option to choose when creating new password.
+# Space separated.
+users_list=""
+
+## Misc settings
+
+default_autotype="user :tab pass"
+auto_enter='false'
+notify='false'
+
+# default shortcuts
+help="Alt+h"
+
+kb_type_field="Alt+t"
+kb_type_pass="Alt+p"
+kb_type_user="Alt+n"
+kb_type_otp="Alt+o"
+kb_autotype="Alt+a"
+
+kb_copy_field="Alt+C"
+kb_copy_pass="Alt+P"
+kb_copy_user="Alt+N"
+kb_copy_otp="Alt+O"
+
+kb_insert="Alt+i"
+kb_show="Alt+Return"
+
+# Actions
+kb_move="Alt+m"
+kb_remove="Alt+x"
+kb_edit="Alt+e"
+kb_generate="Alt+I"
+
+kb_browse_url="Alt+U"
+kb_qrcode="Alt+q"
+kb_switch_root="Alt+bracketleft" # [
+
+# --- Customisable functions ---
+
+_rofi() { rofi -no-auto-select -i -dmenu "$@"; }
+
+_notify() { notify-send -e "rofi-pass" "$1"; }
+
+# Function that runs on successful password store change.
+# I personally use it for syncing my pass to other machines.
+# Define in config file as a sh/bash func.
+_store_changed_hook() {
+	:
+}
+
+_generate_pass() { pass generate --clip --in-place "$@" >/dev/null; }
+
+_get_otp() { pass otp "$@"; }
+
+###############################################################################
+#                               Action functions                              #
+###############################################################################
+
+main_menu() {
+	args=(
+		# Same sequence as in above config section !
+		-kb-custom-1 "$help"
+
+		-kb-custom-2 "$kb_type_field"
+		-kb-custom-3 "$kb_type_pass"
+		-kb-custom-4 "$kb_type_user"
+		-kb-custom-5 "$kb_type_otp"
+		-kb-custom-6 "$kb_autotype"
+
+		-kb-custom-7 "$kb_copy_field"
+		-kb-custom-8 "$kb_copy_pass"
+		-kb-custom-9 "$kb_copy_user"
+		-kb-custom-10 "$kb_copy_otp"
+
+		-kb-custom-11 "$kb_insert"
+		-kb-custom-12 "$kb_show"
+
+		-kb-custom-13 "$kb_move"
+		-kb-custom-14 "$kb_remove"
+		-kb-custom-15 "$kb_edit"
+		-kb-custom-16 "$kb_generate"
+
+		-kb-custom-17 "$kb_browse_url"
+		-kb-custom-18 "$kb_qrcode"
+		-kb-custom-19 "$kb_switch_root"
+		# 19 custom keybinds is max, custom statuses form rofi can be from 10 to 28
+	)
+
+	local placeholder
+	placeholder=$(wrap_placeholder "Current store: $PASSWORD_STORE_DIR")
+	args+=(-theme-str "$placeholder")
+
+	local passentry
+	passentry="$(passls | _rofi "${args[@]}")"
+
+	rofi_exit=$?
+
+	# Actions that do not need the entry.
+	# The exit code for -kb-custom-X is X+9.
+	case $rofi_exit in
+		1) exit ;;
+		10)
+			help_menu
+			return
+			;;
+		28) # next root
+			roots_length=${#roots[@]}
+			root_index=$(((root_index - 1 + roots_length) % roots_length))
+			PASSWORD_STORE_DIR=${roots[$root_index]}
+			main_menu
+			return
+			;;
+	esac
+
+	declare -A fields_map
+	populate_fields_map "$passentry"
+
+	# Actions that do need the entry
+	# The exit code for -kb-custom-X is X+9.
+	case "${rofi_exit}" in
+		0) entry_menu "$passentry" ;;
+		11) _type "$passentry" menu ;;
+		12) _type "$passentry" pass ;;
+		13) _type "$passentry" "$USERNAME_FIELD" ;;
+		14) _type "$passentry" OTP ;;
+		15) _type "$passentry" "$AUTOTYPE_FIELD" ;;
+
+		16) _copy menu "$passentry" ;;
+		17) _copy pass "$passentry" ;;
+		18) _copy $USERNAME_FIELD "$passentry" ;;
+		19) _copy OTP "$passentry" ;;
+
+		20) insert_entry ;;
+		21) show_entry ;;
+
+		22) move_entry "$passentry" ;;
+		23) remove_entry "$passentry" ;;
+		24) edit_entry "$passentry" ;;
+		25) generate_pass "$passentry" ;;
+
+		26) browse_url "$passentry" ;;
+		27) generate_qr "$passentry" ;;
+		*)
+			unset fields_map
+			exit
+			;;
+	esac
+
+}
+
+entry_menu() {
+	local passentry="$1"
+
+	local show="Show ($kb_show)"
+	local type_menu="Type field / autotype ($kb_type_field)"
+	local copy_menu="Copy field ($kb_copy_field)"
+	local rename="Rename ($kb_move)"
+	local copy="Copy entry"
+	local delete="Delete ($kb_remove)"
+	local edit="Edit ($kb_edit)"
+	local generate="Generate new password ($kb_generate)"
+	# REVIEW: does this functionality really need keybinding?
+	local gen_qr="Generate QRCode ($kb_qrcode)"
+	local browse="Browse URL ($kb_browse_url)"
+
+	actions=("$type_menu" "$show" "$copy_menu" "$rename" "$copy" "$delete" "$edit"
+		"$generate")
+
+	args=(
+		-kb-custom-1 "$kb_show"
+		-kb-custom-2 "$kb_type_field"
+		-kb-custom-3 "$kb_copy_field"
+		-kb-custom-4 "$kb_move"
+		-kb-custom-5 "$kb_remove"
+		-kb-custom-6 "$kb_edit"
+		-kb-custom-7 "$kb_generate"
+	)
+
+	if pass "$passentry" | grep "${URL_FIELD}: "; then
+		actions+=("$browse")
+		args+=(-kb-custom-8 "$kb_browse_url")
+	fi
+
+	if command -v qrencode &>/dev/null; then
+		actions+=("$gen_qr")
+		args+=(-kb-custom-9 "$kb_qrcode")
+	fi
+
+	# need to add back button the last
+	actions+=("$BACK_OPTION")
+
+	local placeholder
+	placeholder=$(wrap_placeholder "Choose action (displayed hotkeys also work from main menu)")
+	args+=(-theme-str "$placeholder")
+
+	local action
+	action=$(printf '%s\n' "${actions[@]}" | _rofi "${args[@]}")
+
+	rofi_exit=$?
+
+	# pressed keybinding is more important than selected entry
+	[ "$rofi_exit" -ne 0 ] && action="$rofi_exit"
+
+	case $action in
+		10 | "$show") show_entry ;;
+		11 | "$type_menu") _type "$passentry" menu ;;
+		12 | "$copy_menu") _copy menu "$passentry" ;;
+		13 | "$rename") move_entry "$passentry" ;;
+		"$copy") copy_entry "$passentry" ;;
+		14 | "$delete") remove_entry "$passentry" ;;
+		15 | "$edit") edit_entry "$passentry" ;;
+		16 | "$generate") generate_pass "$passentry" ;;
+		17 | "$browse") browse_url "$passentry" ;;
+		18 | "$gen_qr") generate_qr "$passentry" ;;
+		"$BACK_OPTION") main_menu ;;
+		*) exit ;;
+	esac
+}
+
+# Use func() () so the inner vars & funcs remain within this subshell
+_type() {
+	local passentry="$1"
+	local field="$2"
+
+	[[ -z "${fields_map["${AUTOTYPE_FIELD}"]}" && -n $default_autotype ]] &&
+		fields_map["${AUTOTYPE_FIELD}"]="${default_autotype}"
+
+	_wtype() {
+		sleep $wait              # delay before executing the typing sequence
+		wtype -d ${type_delay} - # delay before every key type
+	}
+
+	autotype() {
+		# hold key for 50ms. Sometimes 'wtype -k "$1"' is too fast for programs
+		wpress_key() { wtype -P "$1" -s 50 -p "$1"; }
+
+		for word in ${fields_map["$AUTOTYPE_FIELD"]}; do
+			case "$word" in
+				":tab") wpress_key Tab ;;
+				":space") wpress_key space ;;
+				":delay" | ":sleep") sleep "${delay}" ;;
+				":enter") wpress_key Return ;;
+				":otp" | "otp") printf '%s' "$(_get_otp "$passentry")" | _wtype ;;
+				"pass") printf '%s' "${fields_map[pass]}" | _wtype ;;
+				"path")
+					printf '%s' "${passentry}" | rev | cut -d'/' -f1 | rev | _wtype
+					;;
+				# Also handles non-existant fields prompt by just entering nothing
+				*) printf '%s' "${fields_map[${word}]}" | _wtype ;;
+			esac
+		done
+
+		[[ ${auto_enter} == "true" ]] && wpress_key Return
+	}
+
+	case "$field" in
+		# doubt anyone will ever have 'menu' field in their pass file
+		"menu")
+      local sorted_fields=("${AUTOTYPE_FIELD}")
+      mapfile -t -O "${#sorted_fields[@]}" sorted_fields < <(get_sorted_fields)
+
+			placeholder=$(wrap_placeholder "Field to autotype")
+			help_content="Global hotkeys: Pass ($kb_type_pass), User ($kb_type_user), OTP ($kb_type_otp), autotype ($kb_autotype)"
+			field=$(printf '%s\n' "${sorted_fields[@]}" |
+				_rofi -theme-str "$placeholder" -mesg "$help_content")
+			assert_status $?
+
+			_type "$passentry" "$field"
+			;;
+		"$USERNAME_FIELD") printf '%s' "${fields_map[${USERNAME_FIELD}]}" | _wtype ;;
+		pass) printf '%s' "${fields_map[pass]}" | _wtype ;;
+		OTP) printf '%s' "$(_get_otp "$passentry")" | _wtype ;;
+		"$AUTOTYPE_FIELD") autotype ;;
+		*) printf '%s' "${fields_map[${field}]}" | _wtype ;;
+	esac
+}
+
+_copy() {
+	local field="$1"
+	local passentry="$2" # is not always passed
+
+	case $field in
+		# i doubt anyone will have 'menu' field in their password file
+		menu)
+			local sorted_fields=()
+			mapfile -t sorted_fields < <(get_sorted_fields)
+			placeholder=$(wrap_placeholder "Field to copy")
+			help_content="Global hotkeys: Pass ($kb_copy_pass), User ($kb_copy_user), OTP ($kb_copy_otp)"
+			field=$(printf '%s\n' "${sorted_fields[@]}" | sort |
+				_rofi -theme-str "$placeholder" -mesg "$help_content")
+
+			assert_status $?
+
+			_copy "$field" "$passentry"
+			;;
+		pass)
+			pass -c "$passentry"
+			notify_w "Copied $field field\n_clearing in ${PASSWORD_STORE_CLIP_TIME:-45} seconds"
+			;;
+		OTP) _get_otp -c "$passentry" ;;
+		*) printf '%s' "${fields_map[$field]}" | wl-copy &&
+			notify_w "Copied $field field" ;;
+	esac
+}
+
+move_entry() {
+	placeholder=$(wrap_placeholder "New path for $1")
+	path=$(passls | _rofi -format 'f' -theme-str "$placeholder")
+	assert_status $?
+	echo "PASSWORD_STORE_DIR=${roots[$root_index]} pass mv -f $1 $path"
+
+	notify_w "Moving $1 to $path ..."
+	if pass mv "$1" "$path"; then
+		notify_w "Successfully moved $1 to $path"
+		(_store_changed_hook) &
+	else
+		notify_w "Failed to move $1 to $path"
+	fi
+}
+
+copy_entry() {
+	local placeholder
+	placeholder=$(wrap_placeholder "Path for $1 copy")
+	path=$(passls | _rofi -theme-str "$placeholder")
+	assert_status $?
+
+	notify_w "Copying $1 to $path ..."
+	if pass cp "$1" "$path"; then
+		notify_w "Successfully copied $1 to $path"
+	else
+		notify_w "Failed copying $1 to $path"
+	fi
+}
+
+remove_entry() {
+	local ask_content=("yes" "no")
+	local placeholder
+	placeholder=$(wrap_placeholder "Delete $1?")
+	ask=$(printf '%s\n' "${ask_content[@]}" | _rofi -theme-str "$placeholder")
+	assert_status $?
+
+	case $ask in
+		"yes")
+			notify_w "Deleting $1 ..."
+			# need subshell in case some people have post-commit hook setup in pass
+			# to not wait for it to finish
+			(
+				if pass rm --force "$1"; then
+					notify_w "Successfully deleted $1"
+					(_store_changed_hook) &
+				else
+					notify_w "Failed to delete $1"
+				fi
+			) &
+			;;
+		*) main_menu ;;
+	esac
+}
+
+edit_entry() {
+	notify_w "Updating $1 ..."
+	if pass edit "${1}"; then
+		notify_w "Successfully updated $1"
+		(_store_changed_hook) &
+	else
+		notify_w "Failed to update $1"
+	fi
+}
+
+generate_pass() {
+	local passentry="$1"
+	# pass anything as 2nd arg to suppress all notifications of this func
+	local silent="$2"
+
+	placeholder=$(wrap_placeholder "Password length (leave empty for pass default):")
+	length=$(printf '%s' "" | _rofi -theme-str "$placeholder")
+	# don't 'exit' in this function since there are some cleanups than need to be
+	# done if this function fails
+	[ "$?" -eq 1 ] && return 1
+
+	placeholder=$(wrap_placeholder "Use symbols?")
+	yesno=("yes" "no")
+	usesymbols=$(printf '%s\n' "${yesno[@]}" | _rofi -theme-str "$placeholder")
+	[ "$?" -eq 1 ] && return 1
+
+	# compose args for generate command
+	local -a args
+	[ "$usesymbols" == "no" ] && args+=("-n")
+	args+=("$passentry" "$length")
+
+	[ -z "$silent" ] && notify_w "Generating passwrod for $passentry ..."
+
+	if _generate_pass "${args[@]}"; then
+		if [ -z "$silent" ]; then
+			notify_w "Successfully generated password for $passentry"
+			(_store_changed_hook) &
+		fi
+	else
+		[ -z "$silent" ] && notify_w "Failed to generate password for $passentry"
+		return 1
+	fi
+
+	return 0
+}
+
+show_entry() {
+	local content
+	local -a lines
+	for key in "${!fields_map[@]}"; do lines+=("${key}: ${fields_map[$key]}"); done
+
+	content=("$(printf '%s\n' "${lines[@]}")" "$BACK_OPTION")
+	placeholder=$(wrap_placeholder "Enter: copy entry to clipboard")
+	selection=$(printf '%s\n' "${content[@]}" | _rofi -theme-str "$placeholder" -p "> ")
+	assert_status $?
+
+	field=$(printf '%s' "$selection" | cut -d':' -f 1)
+
+	case $field in
+		"$BACK_OPTION") main_menu ;;
+		*) _copy "$field" ;;
+	esac
+
+	exit
+}
+
+insert_entry() {
+	clipboard=$(wl-paste)
+	# -format 'f' to count only user input and not what he pressed 'enter' on
+	local rofi_args=(-format 'f' -theme-str "$placeholder" -p "> ")
+
+	if ! is_valid_url "$clipboard"; then
+		help_content="Hint: Copy URL to clipboard before calling this menu."
+		rofi_args+=(-mesg "${help_content}")
+	fi
+
+	# needs to be checked here since this f-n may be called directly from 'main'
+	cd "$PASSWORD_STORE_DIR" || exit
+
+	placeholder=$(wrap_placeholder "Enter name, must be unique ...")
+	path=$(passls | _rofi "${rofi_args[@]}")
+	assert_status $?
+
+	if [ -z "$path" ]; then
+		notify_w "No empty path allowed"
+		insert_entry
+		exit
+	fi
+
+	local _user="$default_user"
+	[[ "$_user" == ":basename" ]] && _user="$(basename "$path")"
+
+	users=("$_user" "${USER}")
+	if [ -n "$users_list" ]; then
+		original_ifs="$IFS"
+		IFS=' ' read -r -a split_array <<<"$users_list"
+		users+=("${split_array[@]}")
+		IFS="$original_ifs"
+	fi
+	placeholder=$(wrap_placeholder "Enter username ...")
+	user=$(printf '%s\n' "${users[@]}" | _rofi -theme-str "$placeholder")
+	assert_status $?
+
+	local -a additional_content
+
+	if is_valid_url "$clipboard"; then
+		placeholder=$(wrap_placeholder "Edit the url from clipboard (Control+Space to edit)")
+		url=$(printf '%s' "$clipboard" | _rofi -format 'f' -theme-str "$placeholder")
+		assert_status $?
+		[ -z "$url" ] && url="$clipboard"
+		additional_content=("${URL_FIELD}: ${url}")
+	fi
+
+	placeholder=$(wrap_placeholder "Type password or hit Enter to generate one")
+	pw=$(printf '%s' "Generate" | _rofi -password -theme-str "$placeholder")
+	assert_status $?
+
+	pass_content=("${pw}" "${USERNAME_FIELD}: ${user}" "${additional_content[@]}")
+
+	notify_w "Creating password entry $path ..."
+	printf '%s\n' "${pass_content[@]}" | pass insert -m "${path}" >/dev/null &
+
+	if [ $? == 0 ]; then
+		if [[ $pw == "Generate" ]]; then
+			if ! generate_pass "$path" silent; then
+				# remove created entry on failure in generating
+				pass rm --force "$path" &
+				notify_w "Interrupted, no password entry was created"
+				exit
+			fi
+		fi
+		[[ $edit_new_pass == "true" ]] && pass edit "${path}"
+		notify_w "Password entry $path successfully inserted"
+		(_store_changed_hook) &
+	else
+		notify_w "Failed to insert new password entry $path. Is password store initialized?"
+	fi
+}
+
+# never used it, cuz i am first opening site and only then seek for password
+# dunno, maybe thing ain't needed at all
+browse_url() {
+	local passentry="$1"
+	url=$(pass "$passentry" | grep "${URL_FIELD}: " | cut -d' ' -f 2)
+	if [ -z "$url" ]; then
+		printf '%s\n' "No $URL_FIELD field in $passentry" | _rofi
+		assert_status $?
+		main_menu
+	fi
+	$BROWSER "$url"
+}
+
+generate_qr() {
+	local passentry="$1"
+	local qrcode_path="$HOME/.cache/rofi/temp_pass_qr.png"
+
+	if ! command -v qrencode &>/dev/null; then
+		printf '%s\n' "qrencode not found" | _rofi
+		assert_status $?
+		main_menu
+	fi
+
+	pass "$passentry" | head -n 1 |
+		qrencode -t png -o "$qrcode_path" -l H -s 25 -m 2 --dpi=192 -v 8
+
+	_rofi -theme-str "
+entry{enabled:false;}
+textbox-prompt-colon{str:\"\";}
+window{
+  border-radius:6mm; padding:1mm; width:100mm; height:100mm;
+  background-image:url(\"$qrcode_path\",both);
+}"
+	rm -f "$qrcode_path"
+}
+
+help_menu() {
+	local placeholder
+	placeholder=$(wrap_placeholder "Hint: All hotkeys are configurable in config file")
+	_rofi -theme-str "$placeholder" -mesg "Press Return to exit this menu" <<-EOM
+		${kb_type_field}: Type field / autotype
+		${kb_type_pass}: Type password
+		${kb_type_user}: Type username
+		${kb_type_otp}: Type OTP
+		${kb_autotype}: Autotype based on '$AUTOTYPE_FIELD' field contents (defaults to '$default_autotype')
+		---
+		${kb_copy_field}: Copy field ..
+		${kb_copy_pass}: Copy password
+		${kb_copy_user}: Copy username
+		---
+		${kb_insert}: Insert new entry
+		${kb_show}: Show entry
+		---
+		${kb_move}: Rename entry
+		${kb_remove}: Delete entry
+		${kb_edit}: Edit entry
+		${kb_generate}: Generate entry
+		---
+		${kb_browse_url}: Browse URL
+		${kb_qrcode}: Generate and display qrcode
+		${kb_switch_root}: Switch password store root
+	EOM
+
+	assert_status $?
+
+	main_menu
+}
+
+###############################################################################
+#                               Helper functions                              #
+###############################################################################
+
+# convenience _notify wrapper to skip all those checks everywhere
+notify_w() { notify_on && _notify "$1"; }
+
+notify_on() { [[ $notify == "true" ]]; }
+
+assert_status() { [ "$1" -eq 1 ] && exit; }
+
+# Is called only in main_menu, populates 'fields_map' var that is visible to all
+# function that main_menu calls.
+populate_fields_map() {
+	local passentry="$1"
+
+	# check if user propmt exists in the store
+	output=$(pass show "$passentry" 2>&1)
+	[ "$?" -eq 1 ] && notify_w "$output" && exit
+
+	# get an array of password file fields like url: user: and custom ones
+	local -a password_temp
+	mapfile -t password_temp <<<"$output"
+
+	fields_map["pass"]=${password_temp[0]}
+
+	# checks if the first field ($1) of the input line ends with a colon (:$) or
+	# if the line contains the string otpauth://. If either condition is true,
+	# the action block associated with this condition is executed
+	fields=$(printf '%s\n' "${password_temp[@]:1}" |
+		awk '$1 ~ /:$/ || /otpauth:\/\// {$1=$1;print}')
+	unset password_temp
+
+	if [[ -n $fields ]]; then
+		while read -r line; do
+			unset _id _val
+			case "$line" in
+				"otpauth://"*)
+					_id=OTP
+					_val="configured"
+					;;
+				*)
+					_id="${line%%: *}"
+					_val="${line#* }"
+					;;
+			esac
+
+			[[ -n "$_id" ]] && fields_map["${_id}"]=${_val}
+		done < <(printf '%s\n' "$fields")
+	fi
+
+	if [[ -z "${fields_map["${USERNAME_FIELD}"]}" && -n $default_user ]]; then
+		if [[ "$default_user" == ":basename" ]]; then
+			fields_map["${USERNAME_FIELD}"]="$(basename "$passentry")"
+		else
+			fields_map["${USERNAME_FIELD}"]="${default_user}"
+		fi
+	fi
+
+}
+
+is_valid_url() {
+	# Regular expression pattern to match a valid URL
+	url_regex="^http[s]?|ftp):\/\/.*$"
+	[[ $1 =~ $url_regex ]]
+}
+
+# get all password files and output as newline-delimited text
+passls() {
+	cd "$PASSWORD_STORE_DIR" || return 1
+
+	mapfile -d '' pw_list < <(find -L . -name '*.gpg' -print0)
+	pw_list=("${pw_list[@]#./}")
+	printf '%s\n' "${pw_list[@]%.gpg}" | sort | grep -v "^$"
+	return 0
+}
+
+# FIXME: how to move the '-theme-str' part in this funciton
+wrap_placeholder() { echo "#entry { placeholder: \"$1\"; }"; }
+
+# Returns sorted keys for current password entry with 'autotype' key removed.
+# Fields like 'user', 'url', etc
+get_sorted_fields() {
+	local -a keys=("${!fields_map[@]}")
+	# remove autotype field from keys array
+	keys=("${keys[@]/$AUTOTYPE_FIELD/}")
+	# grep out empty strings cuz command above doesn't update indecies
+	printf '%s\n' "${keys[@]}" | sort | grep -v "^$"
+}
+
+help_msg() {
+	cat <<'EOF'
+	Usage:
+	rofi-pass [command]
+
+	Commands:
+	--insert         insert new entry to password store
+	--roots          set custom root directories (colon separated)
+EOF
+}
+
+###############################################################################
+#                             Main function logic                             #
+###############################################################################
+
+# sources the first config file with a valid path
+load_config() {
+	local config_dir=${XDG_CONFIG_HOME:-$HOME/.config}
+	local -a configs=(
+		"$ROFI_PASS_CONFIG"
+		"$config_dir/rofi-pass/config"
+		"/etc/rofi-pass.conf"
+	)
+
+	for config in "${configs[@]}"; do
+		# '-n' is needed in case ROFI_PASS_CONFIG is not set
+		if [[ -n "$config" && -f "$config" ]]; then
+			source "$config"
+			return
+		fi
+	done
+}
+
+populate_roots() {
+	local IFS=:
+
+	# Precedense: flag -> config -> pass DIR var -> default $HOME/.password-store
+	if [[ "$1" == "--root" && -n "$2" ]]; then
+		read -r -a roots <<<"$2"
+	elif [[ -n "$ROOTS" ]]; then # config var
+		read -r -a roots <<<"$ROOTS"
+	elif [[ -n $PASSWORD_STORE_DIR ]]; then
+		roots=("$PASSWORD_STORE_DIR")
+	else
+		# NOTE: need to hardcode at least one default root since we need to cd
+		# somewhere to find all password entries
+		roots=("$HOME/.password-store")
+	fi
+}
+
+main() {
+	load_config
+
+	# check for BROWSER variable, use xdg-open as fallback
+	[[ -z $BROWSER ]] && BROWSER=xdg-open
+
+	declare -a roots
+	declare root_index=0
+	populate_roots "$@"
+	PASSWORD_STORE_DIR=${roots[$root_index]}
+
+	case $1 in
+		--insert) insert_entry ;;
+		--help | -h) help_msg ;;
+		*) main_menu ;;
+	esac
+}
+
+main "$@"
+
+exit

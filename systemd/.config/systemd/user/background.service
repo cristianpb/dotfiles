@@ -4,7 +4,8 @@ RefuseManualStart=no
 RefuseManualStop=yes
 
 [Service]
-Environment="DISPLAY=:0"
+#Environment="DISPLAY=:0"
+#Environment="WAYLAND_DISPLAY=wayland-1"
 Type=oneshot
 ExecStart=/usr/bin/bash %h/.dotfiles/BingDownloadImage.sh
-ExecStartPost=/usr/bin/feh --bg-scale %h/Pictures/Wallpaper/wallpaper.jpg
+ExecStartPost=/usr/bin/swaymsg -s $SWAYSOCK "output * bg %h/Pictures/Wallpaper/wallpaper.jpg  fill"
