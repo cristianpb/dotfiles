@@ -225,5 +225,5 @@ exec --no-startup-id compton
 exec --no-startup-id dunst
 exec --no-startup-id xautolock
 exec --no-startup-id autorandr -c
-exec --no-startup-id redshift -l 48.85341:2.3488 &
+exec --no-startup-id gammastep -l 48.85341:2.3488 -t 6500:3500 -b 1.0:0.8 &
 exec "sh -c 'sleep 300; exec ~/.dotfiles/BingDownloadImage.sh && feh --bg-scale ~/Pictures/Wallpaper/wallpaper.jpg'"
