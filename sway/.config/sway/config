@@ -37,5 +37,10 @@ input type:keyboard {
     xkb_layout "fr"
 }
 
+bindsym Alt+Tab workspace prev_on_output
+for_window [app_id=.*] focus
+assign [app_id="firefox"] "2 "
+assign [app_id="chromium"] "3 "
+
 include /etc/sway/config.d/*
 include ~/.config/i3/config
